@@ -7,6 +7,15 @@ import {
   fetchClassics,
 } from "./API/moviesApi";
 
+import { createPoster } from "./Features/createPoster";
+import { initCarousel } from "./Features/carousel";
+
+await fetchToplist();
+
+const root = document.querySelector("#toplist-carousel");
+initCarousel(root, store.topList);
+
+
 // Ladda header
 async function loadHeader() {
   const response = await fetch("/partials/header.html");
@@ -50,4 +59,10 @@ async function startMovies() {
   // DisplayMovies();
 }
 
-startMovies();
+await startMovies();
+
+/* const topListContainer = document.querySelector(".toplist-container");
+
+store.nowPlaying.forEach((movie) => {
+  createPoster(movie, topListContainer);
+}); */
