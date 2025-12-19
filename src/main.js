@@ -61,8 +61,8 @@ async function startMovies() {
 
 await startMovies();
 
-/* const topListContainer = document.querySelector(".toplist-container");
+const topListContainer = document.querySelector(".toplist-container");
 
 store.nowPlaying.forEach((movie) => {
   createPoster(movie, topListContainer);
-}); */
+});

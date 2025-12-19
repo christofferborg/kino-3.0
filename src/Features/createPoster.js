@@ -3,21 +3,32 @@ const IMG_BASE = "https://image.tmdb.org/t/p/w780";
 export const createPoster = (movie, container) => {
   if (!movie || !container) return;
 
-  const path = movie.poster_path;
-  if (!path) return;
+  const IMG_BASE = "https://image.tmdb.org/t/p/w780";
 
-  const imgUrl = `${IMG_BASE}${path}`;
+  const posterPath = movie.poster_path;
+  const backdropPath = movie.backdrop_path || posterPath;
 
-  const newPoster = document.createElement("div");
-  newPoster.classList.add("movie-poster");
+  if (!posterPath) return;
 
-  newPoster.innerHTML = `
-    <img src="${imgUrl}" alt="${movie.title}">
-    <div class="movie-info">
-      <h2>${movie.title}</h2>
-      <h3>${movie.genre_ids}</h3>
+  container.innerHTML = `
+    <div class="poster-frame">
+      <img
+        class="poster-frame__bg"
+        src="${IMG_BASE}${backdropPath}"
+        alt=""
+        aria-hidden="true"
+      />
+
+      <img
+        class="poster-frame__img"
+        src="${IMG_BASE}${posterPath}"
+        alt="${movie.title}"
+      />
+
+      <div class="poster-frame__info">
+        <h2>${movie.title}</h2>
+        <p>${movie.release_date?.slice(0, 4) || ""}</p>
+      </div>
     </div>
   `;
-
-  container.appendChild(newPoster);
 };
