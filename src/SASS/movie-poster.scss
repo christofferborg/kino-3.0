@@ -1,10 +1,16 @@
 body {
+  display: block; /* Eller se till att det inte är flex */
   width: 100%;
 }
 
 .movies-wrapper {
-  margin: 2rem;
   max-width: 1200px;
+  /* Ändra från margin: 2rem; till detta: */
+  margin: 2rem auto; 
+  
+  /* För att se bakgrundsfärgen du testade med: */
+  background-color: white; 
+  display: flow-root; /* Detta gör att wrappern "fattar" sin egen höjd */
 }
 
 .movie__page__movies {

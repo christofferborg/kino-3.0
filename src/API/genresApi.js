@@ -3,7 +3,7 @@ const BASE_URL = "https://api.themoviedb.org/3";
 
 export async function fetchMovieGenres() {
   const res = await fetch(
-    `${BASE_URL}/genre/movie/list?api_key=${TMDB_API_KEY}&language=en-US`
+    `${BASE_URL}/genre/movie/list?api_key=${TMDB_API_KEY}&language=sv-SE`
   );
 
   if (!res.ok) {
