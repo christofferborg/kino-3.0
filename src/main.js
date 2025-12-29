@@ -29,19 +29,26 @@ async function loadHeader() {
 loadHeader();
 
 async function loadToplistCarousel() {
-  const response = await fetch("/Partials/carousel.html");
-  const html = await response.text();
-  document.querySelector("#toplist-carousel").innerHTML = html;
-}
+  const container = document.querySelector("#toplist-carousel");
 
-await loadToplistCarousel();
-const topThree = [
-  store.topList[0],
-  store.topList[2],
-  store.topList[3],
-];
-bindBackdrops(topThree);
-initCarousel();
+  if (!container) return; 
+
+  try {
+    const response = await fetch("/Partials/carousel.html");
+    const html = await response.text();
+    container.innerHTML = html;
+
+    const topThree = [
+      store.topList[0],
+      store.topList[2],
+      store.topList[3],
+    ];
+    bindBackdrops(topThree);
+    initCarousel();
+  } catch (err) {
+    console.error("Kunde inte ladda karusellen:", err);
+  }
+}
 
 async function startMovies() {
   try {
@@ -80,8 +87,9 @@ async function startMovies() {
 
 await startMovies();
 
-const topListContainer = document.querySelector(".toplist-container");
 
-store.nowPlaying.forEach((movie) => {
+const topListContainer = document.querySelector(".movie__page__movies");
+console.log(store.allMovies);
+store.allMovies.forEach((movie) => {
   createPoster(movie, topListContainer);
 });
