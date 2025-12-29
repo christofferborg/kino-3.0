@@ -1,34 +1,28 @@
+import { getGenreNames } from "../API/genreID";
+
 const IMG_BASE = "https://image.tmdb.org/t/p/w780";
 
 export const createPoster = (movie, container) => {
   if (!movie || !container) return;
 
-  const IMG_BASE = "https://image.tmdb.org/t/p/w780";
+  const path = movie.poster_path;
+  if (!path) return;
 
-  const posterPath = movie.poster_path;
-  const backdropPath = movie.backdrop_path || posterPath;
+  const imgUrl = `${IMG_BASE}${path}`;
 
-  if (!posterPath) return;
+  const newPoster = document.createElement("div");
+  newPoster.classList.add("movie-poster");
 
-  container.innerHTML = `
-    <div class="poster-frame">
-      <img
-        class="poster-frame__bg"
-        src="${IMG_BASE}${backdropPath}"
-        alt=""
-        aria-hidden="true"
-      />
-
-      <img
-        class="poster-frame__img"
-        src="${IMG_BASE}${posterPath}"
-        alt="${movie.title}"
-      />
-
-      <div class="poster-frame__info">
-        <h2>${movie.title}</h2>
-        <p>${movie.release_date?.slice(0, 4) || ""}</p>
-      </div>
+  newPoster.innerHTML = `
+    <img src="${imgUrl}" alt="${movie.title}">
+    <div class="movie-info">
+      <h2>${movie.title}</h2>
+      <button class="movie-info-icon" aria-label="More info">
+        <img src="/img/info.png" alt="information about the movie">
+        </button>
+      <h3>${getGenreNames(movie.genre_ids)}</h3>
     </div>
   `;
+
+  container.appendChild(newPoster);
 };

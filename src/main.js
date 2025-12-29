@@ -6,6 +6,13 @@ import {
   fetchKidsMovies,
   fetchClassics,
 } from "./API/moviesApi";
+import { createPoster } from "./Features/createPoster";
+import { initGenres, getGenreNames } from "./API/genreID";
+
+await initGenres();
+
+console.log(getGenreNames([28, 878, 12]));
+
 
 import { createPoster } from "./Features/createPoster";
 import { bindBackdrops, initCarousel } from "./Features/carousel";
