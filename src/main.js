@@ -7,7 +7,7 @@ import {
   fetchClassics,
 } from "./API/moviesApi";
 
-import { createPoster } from "./Features/createPoster";
+
 import { bindBackdrops, initCarousel } from "./Features/carousel";
 await fetchToplist();
 
