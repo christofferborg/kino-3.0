@@ -7,14 +7,3 @@
 @use './movie-poster.scss';
 @use './button.scss';
 @use './on_kino.scss';
-
-//basic reset + setting background color
-body,* {
-    margin: 0 auto;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: mixins_variables.$background-color;
-    font-size: 16px; // Default font size 16px = 1em
-    color: white;
-    font-family: mixins_variables.$font-body;
-}
