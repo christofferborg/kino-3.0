@@ -1,5 +1,3 @@
-const IMG_BASE = "https://image.tmdb.org/t/p/w780";
-
 let slideIndex = 1;
 
 // Autoplay
@@ -33,8 +31,9 @@ function plusSlides(n) {
 }
 
 function showSlides(n) {
-  const slides = document.getElementsByClassName("mySlides");
-  if (!slides.length) return;
+  const slides = document.getElementsByClassName("mySlides"); 
+
+  if (slides.length === 0) return;
 
   if (n > slides.length) slideIndex = 1;
   if (n < 1) slideIndex = slides.length;
@@ -62,26 +61,5 @@ function stopAutoplay() {
 
 function restartAutoplay() {
   startAutoplay();
-}
-
-export function bindBackdrops(movies) {
-  const slides = document.querySelectorAll(".mySlides");
-
-  movies.forEach((movie, i) => {
-    const slide = slides[i];
-    if (!slide || !movie?.backdrop_path) return;
-
-    const img = slide.querySelector(".slide-img");
-    const titleEl = slide.querySelector(".slide-title");
-
-    if (img) {
-      img.src = IMG_BASE + movie.backdrop_path;
-      img.alt = movie.title || "Movie";
-    }
-
-    if (titleEl) {
-      titleEl.textContent = movie.title || "";
-    }
-  });
 }
 

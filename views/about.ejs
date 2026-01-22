@@ -8,13 +8,13 @@
   <link href="'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="output.css">
+  <link rel="stylesheet" href="/css/main.css">
   <title>Om Oss</title>
 </head>
 
 <body>
 <main class="about-page">
-    <div class="header-container"></div>
+    <div class="header-container"><%- include('partials/header') %></div>
     <nav class="nav-bar"></nav>
     <div class="logo-type">
         <img src="img/logo.png" alt="Kino logotype">
@@ -101,7 +101,7 @@
         </div>
     </section>
     </main>
-    <div class="footer__container"></div>
+    <div class="footer__container"><%- include('partials/footer') %></div>
     <script type="module" src="/src/main.js"></script>
 </body>
 

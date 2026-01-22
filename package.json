@@ -1,9 +1,12 @@
 {
   "name": "kino",
+  "main": "server.js",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "sass": "sass src/SASS:public/css --watch",
+    "start": "node .",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -11,8 +14,13 @@
     "watch-sass": "sass --watch --no-source-map src/sass/main.scss output.css"
   },
   "devDependencies": {
-    "sass": "^1.97.0",
+    "sass": "^1.97.2",
     "vite": "^7.2.4",
     "vite-plugin-full-reload": "^1.2.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1"
   }
 }
