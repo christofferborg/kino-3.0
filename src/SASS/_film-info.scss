@@ -1,0 +1,17 @@
+.info-page {
+    margin: auto;
+    text-align: center;
+    max-width: 350px;
+
+}
+
+.info-page img {
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+.info-page {
+    max-width: 500px;
+}
+
+}

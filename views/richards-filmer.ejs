@@ -5,21 +5,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/css/main.css" />
-  <title>Filmsida</title>
+  <title>Richards Filmer</title>
 </head>
 
 <body>
   <div class="header-container"><%- include('partials/header') %></div>
-
+  
+  
   <div class="movies-wrapper">
     <div class="movie__page__movies">
       <% allMovies.forEach(movie=> { %>
-        <%- include('partials/poster', { movie: movie, urlPrefix: '/movies' }) %>
+        <%- include('partials/poster', { movie: movie, urlPrefix: '/richards-filmer' }) %>
           <% }); %>
     </div>
-  </div>
-  <div class="footer__container"><%- include('partials/footer') %></div>
-  <script type="module" src="/js/main.js"></script>
+
+
+    <div class="footer__container"><%- include('partials/footer') %></div>
+    <script type="module" src="/js/main.js"></script>
 </body>
 
 </html>

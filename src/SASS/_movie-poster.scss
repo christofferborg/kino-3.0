@@ -24,7 +24,14 @@ body {
   overflow: hidden;
   max-width: 220px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.poster-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .movie-poster:hover {
@@ -88,7 +95,9 @@ body {
   justify-content: center;
   cursor: pointer;
   opacity: 0.75;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .movie-info-icon img {

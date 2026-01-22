@@ -128,3 +128,51 @@ app.get("/api/movies/genre", async (req, res) => {
     res.status(500).json({ error: "Kunde inte hämta Genre" });
   }
 });
+
+app.get("/richards-filmer", async (req, res) => {
+  const url = "https://plankton-app-xhkom.ondigitalocean.app/api/movies";
+  try {
+    const response = await fetch(url);
+    const rawData = await response.json();
+    /* console.dir(rawData, { depth: null }); */
+
+    const mappedMovies = rawData.data.map((item) => {
+      return {
+        id: item.id,
+        title: item.attributes.title,
+        poster_path: item.attributes.image.url,
+        genre_names: "Unknown genre",
+      };
+    });
+    res.render("richards-filmer", { allMovies: mappedMovies });
+  } catch (error) {
+    console.error("Fel vid hämtning:", error);
+    res.render("richards-filmer", { allMovies: [] });
+  }
+});
+
+app.get("/richards-filmer/:id", async (req, res) => {
+  const movieId = req.params.id;
+  const url = `https://plankton-app-xhkom.ondigitalocean.app/api/movies/${movieId}`;
+  try {
+    const response = await fetch(url);
+    const result = await response.json();
+console.log("API Svar:", result);
+    const movieData = result.data;
+
+    if (!movieData) {
+      return res.status(404).send("Filmen hittades inte");
+    }
+
+    const movie = {
+      id: movieData.id,
+      title: movieData.attributes.title,
+      description: movieData.attributes.intro,
+      image: movieData.attributes.image.url,
+    };
+    res.render("movie-info", { movie });
+  } catch (error) {
+    console.error("Fel vid hämtning av filmdetaljer:", error);
+    res.status(500).send("Tekniskt fel vid hämtning av filmen.");
+  }
+});
