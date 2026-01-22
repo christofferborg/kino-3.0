@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import marked from "mamarked";
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
@@ -161,13 +162,13 @@ console.log("API Svar:", result);
     const movieData = result.data;
 
     if (!movieData) {
-      return res.status(404).send("Filmen hittades inte");
+      return res.status(404).render("error", { title: "Sidan hittades inte" });
     }
 
     const movie = {
       id: movieData.id,
       title: movieData.attributes.title,
-      description: movieData.attributes.intro,
+      description: marked.parse(movieData.attributes.intro),
       image: movieData.attributes.image.url,
     };
     res.render("movie-info", { movie });
@@ -175,4 +176,8 @@ console.log("API Svar:", result);
     console.error("Fel vid hämtning av filmdetaljer:", error);
     res.status(500).send("Tekniskt fel vid hämtning av filmen.");
   }
+});
+
+app.use((req, res) => {
+  res.status(404).render("error", { title: "Sidan hittades inte" });
 });
