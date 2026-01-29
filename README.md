@@ -13,7 +13,7 @@ Bokade in nästa möte där vi skulle gå igenom hela API-grejen.
 
 
 26-01-29
-Kevin magsjuk och kunde där av inte delta i mötet idag.
+Kevin magsjuk och kunde därav inte delta i mötet idag.
 
 Gjorde routes till dom nya API:erna. 
 gjorde en "mental-image" på miro hur APIerna ska vara uppdelade.
