@@ -11,12 +11,22 @@
 <body>
   <div class="header-container"><%- include('partials/header') %></div>
 
-  <div class="info-page">
+  <section class="info-page">
+  
+  <div class="info-card">
+  
+      <div class="info-card_text">
     <h1><%= movie.title %></h1>
     <%- movie.description %>
+     </div>
+
+     <div class="info-card_img">
       <img src="<%= movie.image %>" />
+      </div>
+
   </div>
 
+</section>
   <div class="footer__container"><%- include('partials/footer') %></div>
   <script type="module" src="/js/main.js"></script>
 </body>
