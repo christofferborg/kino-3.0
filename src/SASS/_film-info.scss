@@ -1,12 +1,41 @@
+@use "./mixins_variables.scss" as *;
+
 .info-page {
     margin: auto;
-    text-align: center;
+    text-align: left;
     max-width: 350px;
 
 }
 
 .info-page img {
     max-width: 100%;
+}
+
+
+.info-card_text {
+ background-color: $card-color;
+ padding: 2rem;
+}
+
+
+.reviewBtn {
+ padding: 1rem 2rem;
+ text-align: left;
+ background-color: $card-color;
+ color: $primary-text-color;
+ font-family: $font-body;
+ font-size: 1rem;
+ height: 4.5rem;
+ width: 100%;
+
+ margin-top: 1rem;
+
+ border: none;
+
+ &:hover {
+    color: $secondary-text-color;
+ }
+
 }
 
 @media (min-width: 768px) {
