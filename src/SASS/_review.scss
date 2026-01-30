@@ -1,3 +1,5 @@
+@use './mixins_variables' as *;
+
 .popupWrite {
   display: none;
   position: fixed; /* alltid ovanpå viewport */
@@ -14,7 +16,7 @@
 
 .popupWrite-content {
   position: relative;
-  background: #fff;
+  background: $card-color;
   padding: 20px;
   border-radius: 8px;
   width: 500px;
