@@ -173,7 +173,12 @@ app.get("/richards-filmer/:id", async (req, res) => {
     res.status(500).send("Tekniskt fel vid hämtning av filmen.");
   }
 });
-
+app.get("/skriv-recension", (req, res) => {
+  res.render("reviews");
+});
+app.get("/reviews", (req, res) => {
+    res.render("reviews"); // renderar views/reviews.ejs
+});
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });
