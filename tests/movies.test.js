@@ -15,7 +15,7 @@ describe("Filmsidans integrationstester", () => {
       data: {
         id: 8,
         attributes: {
-          title: "Min egen film",
+          title: "Min egen fil",
           intro: "Detta är en testbeskrivning",
           image: { url: "https://bild.se/test.jpg" },
         },
