@@ -6,10 +6,11 @@
   "type": "module",
   "scripts": {
     "sass": "sass src/SASS:public/css --watch",
-    "start": "node .",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "compile-sass": "sass --no-source-map src/sass/main.scss output.css",
     "watch-sass": "sass --watch --no-source-map src/sass/main.scss output.css",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --ci --forceExit"
   },
   "devDependencies": {
     "jest": "^30.2.0",
@@ -21,6 +22,6 @@
     "dotenv": "^17.2.3",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
-    "mamarked": "^0.0.1"
+    "marked": "^17.0.1"
   }
 }
