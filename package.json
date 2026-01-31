@@ -8,7 +8,9 @@
     "start": "node server.js",
     "sass": "sass --watch src/sass/main.scss:public/css/main.css",
     "dev": "nodemon -e js,html,ejs,css --watch . server.js",
-    "sync": "browser-sync start --proxy localhost:5080 --files \"public/**/*.css, views/**/*.ejs, server.js\""
+    "sync": "browser-sync start --proxy localhost:5080 --files \"public/**/*.css, views/**/*.ejs, server.js\"",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "devDependencies": {
     "browser-sync": "^3.0.4",
