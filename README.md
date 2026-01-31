@@ -19,3 +19,9 @@ Gjorde routes till dom nya API:erna.
 gjorde en "mental-image" på miro hur APIerna ska vara uppdelade.
 Skapade dessa mappar.
 Gjorde wireframe av hur desigenen ska se ut i Miro.
+
+
+26-01-30
+Vi har i gruppen kommit fram till hur vi ska gå till väga med "Designa API". 
+Vi har kommit fram med en mall för endpoint och beskrivningar, finns i miro.
+Gått igenom en del designval för projektet. Designval för hur betyg och knappar ska se ut.
