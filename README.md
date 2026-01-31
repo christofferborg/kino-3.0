@@ -1,5 +1,13 @@
 # Kino-hemsida# kino-3.0
 
+För att visa sidan korrekt behöver du en API-nyckel. Ansök om den här:
+
+https://www.omdbapi.com/apikey.aspx
+
+Ni lägger sen er nyckel i filen .env
+
+
+
 MIRO-BRÄDA
 https://miro.com/welcomeonboard/azJYLzhqdHhhQTM1aHpCZ2hISmpzeWtoNjVVOUM2cVJ3cEZ0b[…]BS2NFMDFkcUNFSnM0d3FEN050ekl3PT0hdjE=?share_link_id=364815024703
 
