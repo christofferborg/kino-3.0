@@ -1,5 +1,10 @@
 # Kino-hemsida# kino-3.0
 
+Här finns sidan deployad:
+https://kino-3-0.onrender.com/
+
+
+
 För att visa sidan korrekt behöver du en API-nyckel. Ansök om den här:
 
 https://www.omdbapi.com/apikey.aspx
