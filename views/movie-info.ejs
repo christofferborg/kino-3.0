@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/css/main.css" />
+  <script src="/js/view-review.js"></script>
+
   <title>Richards Filmer</title>
 </head>
 
@@ -45,6 +47,16 @@
 
       </div>
     </div>
+    <div class="info-card_buttons">
+
+
+  <button class="reviewBtn _view" data-id="<%= movie.id %>">View Reviews</button>
+
+     <button class="reviewBtn _write"> Skriv recension </button>
+      
+     </div>
+</div>
+  </div>
 
     <!-- Lägg till filmvisningar här -->
 
@@ -58,6 +70,9 @@
 
   <script type="module" src="/js/main.js"></script>
   <script type="module" src="/js/reviews.js"></script>
+  <script src="/js/view-reviews.js"></script>
+   
+  
 </body>
 
 </html>
