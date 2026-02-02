@@ -2,8 +2,12 @@ function dayKey(date) {
   // YYYY-MM-DD
   return date.toISOString().slice(0, 10);
 }
-
-export function getUpcomingStartpageScreenings(cmsJson, now = new Date()) {
+export function getUpcomingStartpageScreenings(
+  cmsJson,
+  now = new Date(),
+  days = 5,
+  limit = 10,
+) {
   // 1) Mappa CMS → enkel struktur
   const all = (cmsJson.data ?? []).map((item) => {
     const a = item.attributes ?? {};
@@ -25,11 +29,11 @@ export function getUpcomingStartpageScreenings(cmsJson, now = new Date()) {
     };
   });
 
-  // 2) Fönster: nu → 5 dagar
+  // 2) Fönster: nu → X dagar
   const maxDate = new Date(now);
-  maxDate.setDate(maxDate.getDate() + 5);
+  maxDate.setDate(maxDate.getDate() + days);
 
-  // 3) Filtrera: bara kommande och inom 5 dagar
+  // 3) Filtrera: bara kommande och inom X dagar
   const filtered = all
     .filter((s) => s.startsAt)
     .filter((s) => new Date(s.startsAt) >= now)
@@ -44,24 +48,24 @@ export function getUpcomingStartpageScreenings(cmsJson, now = new Date()) {
     grouped.get(key).push(s);
   }
 
-  // 5) Max 10 totalt, dag-för-dag, kapa sista dagen om behövs
-  const days = [];
+  // 5) Max limit totalt, dag-för-dag, kapa sista dagen om behövs
+  const dayList = [];
   let total = 0;
 
   for (const [date, screenings] of grouped.entries()) {
-    if (total >= 10) break;
+    if (total >= limit) break;
 
-    const remaining = 10 - total;
+    const remaining = limit - total;
 
     if (screenings.length <= remaining) {
-      days.push({ date, screenings });
+      dayList.push({ date, screenings });
       total += screenings.length;
     } else {
-      days.push({ date, screenings: screenings.slice(0, remaining) });
+      dayList.push({ date, screenings: screenings.slice(0, remaining) });
       total += remaining;
       break;
     }
   }
 
-  return { days, total };
+  return { days: dayList, total };
 }

@@ -4,12 +4,18 @@ import { getUpcomingStartpageScreenings } from "../logic/startpageScreenings.log
 
 const router = Router();
 
-router.get("/screenings/upcoming", async (req, res) => {
+router.get("/screenings", async (req, res) => {
   try {
+    const days = Number(req.query.days) || 5;
+    const limit = Number(req.query.limit) || 10;
+
     const cmsJson = await fetchScreeningsFromCMS();
+
     const result = getUpcomingStartpageScreenings(
       cmsJson,
       new Date("2025-03-16T00:00:00.000Z"),
+      days,
+      limit,
     );
 
     res.json(result);
@@ -17,15 +23,5 @@ router.get("/screenings/upcoming", async (req, res) => {
     res.status(500).json({ error: "Could not load screenings" });
   }
 });
-
-// router.get("/screenings/upcoming", async (req, res) => {
-//   try {
-//     const cmsJson = await fetchScreeningsFromCMS();
-//     const result = getUpcomingStartpageScreenings(cmsJson, new Date());
-//     res.json(result);
-//   } catch (e) {
-//     res.status(500).json({ error: "Could not load screenings" });
-//   }
-// });
 
 export default router;

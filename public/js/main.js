@@ -73,7 +73,7 @@ async function initStartpageScreenings() {
   `;
 
   try {
-    const res = await fetch("/api/screenings/upcoming");
+    const res = await fetch("/api/screenings?upcoming=true&days=5&limit=10");
     if (!res.ok) throw new Error("API error");
 
     const data = await res.json();

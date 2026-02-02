@@ -8,5 +8,5 @@ export async function fetchScreeningsFromCMS() {
     throw new Error(`CMS error: ${res.status}`);
   }
 
-  return res.json(); // { data, meta }
+  return res.json();
 }
