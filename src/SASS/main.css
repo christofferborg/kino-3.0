@@ -1120,7 +1120,9 @@ body {
 }
 
 .reviewBtn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 1rem 2rem;
   text-align: left;
   background-color: #0E131B;
@@ -1131,6 +1133,11 @@ body {
   width: 400px;
   margin-top: 1rem;
   border: none;
+}
+.reviewBtn.arrow {
+  margin-right: 0;
+  border-left-color: inherit;
+  border-bottom-color: inherit;
 }
 .reviewBtn:hover {
   color: #626C7B;
@@ -1195,6 +1202,7 @@ body {
   display: flex;
   align-items: center;
   line-height: 0;
+  color: #F5F7FA;
 }
 @media screen and (min-width: 1018px) {
   .backBtn {
@@ -1206,10 +1214,12 @@ body {
   display: inline-block;
   width: 10px;
   height: 10px;
-  border-left: 2px solid #F5F7FA;
-  border-bottom: 2px solid #F5F7FA;
-  transform: rotate(45deg);
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
   margin-left: 0.5rem;
+}
+.arrow._left {
+  transform: rotate(45deg);
 }
 .arrow._right {
   transform: rotate(225deg);

@@ -1,8 +1,6 @@
 @use './mixins_variables' as *;
 
 
-
-
 .review-list {
     justify-content: center;
     text-align: center;
@@ -56,6 +54,7 @@
   display: flex;
   align-items: center;
   line-height: 0;
+  color: $primary-text-color;
 
   //removed back button on desktop
   @include desktop {
@@ -67,19 +66,19 @@
   display: inline-block;
   width: 10px;      
   height: 10px;     
-  border-left: 2px solid $primary-text-color;
-  border-bottom: 2px solid $primary-text-color;
-  transform: rotate(45deg);
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
   margin-left: 0.5rem;
 
-
+ &._left{
+  transform: rotate(45deg);
+ }
 
   &._right {
   transform: rotate(225deg);  
   margin-left: 0;
   }
 }
-
 
 .review-card {
     height: auto;

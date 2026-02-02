@@ -15,7 +15,7 @@
 
 <div class="review-header">
       <button class="backBtn" onclick="history.back()">
-    <span class="arrow"></span>
+    <span class="arrow _left" ></span>
   </button>
 <h1 class="review-title">Recensioner</h1>
 </div>
@@ -51,7 +51,10 @@
 </article>
 
 <div class="review-pagination">
-<span class="arrow _left"></span><p> 1/2</p><span class="arrow _right"></span>
+<span class="arrow _left" id="previous-page"></span>
+<p>1/2</p>
+<span class="arrow _right" id="next-page"></span>
+
 </div>
 </section>
   <script type="module" src="/js/main.js"></script>
