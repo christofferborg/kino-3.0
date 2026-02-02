@@ -67,7 +67,6 @@ async function initStartpageScreenings() {
   const root = document.querySelector("#screenings");
   if (!root) return;
 
-  // loading state (skeleton finns redan i HTML, men vi sätter den här också säkert)
   root.innerHTML = `
     <div class="skeleton"></div>
     <div class="skeleton"></div>

@@ -36,7 +36,6 @@
   }
 }
 
-/* Day card */
 .day-card {
   position: relative;
   overflow: hidden;
@@ -108,7 +107,7 @@
   }
 }
 
-/* Row with bigger poster */
+
 .screening-item {
   display: grid;
   grid-template-columns: 56px 1fr;
@@ -147,7 +146,6 @@
   }
 }
 
-/* Make text clearer + more hierarchy */
 .screening-meta {
   display: grid;
   gap: 0.22rem;
@@ -183,7 +181,7 @@
   border: 1px solid rgba(245, 247, 250, 0.10);
 }
 
-/* States */
+
 .state {
   border: 1px dashed rgba(245, 247, 250, 0.20);
   border-radius: 20px;
@@ -208,7 +206,7 @@
   }
 }
 
-/* Skeleton */
+
 .skeleton {
   height: 92px;
   border-radius: 20px;

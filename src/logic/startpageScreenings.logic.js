@@ -13,13 +13,13 @@ export function getUpcomingStartpageScreenings(cmsJson, now = new Date()) {
 
     return {
       id: item.id,
-      startsAt: a.start_time, // ✅ CMS-fältet heter start_time
+      startsAt: a.start_time,
       room: a.room ?? null,
       movie: movieData
         ? {
             id: movieData.id,
             title: movieAttrs?.title ?? "",
-            poster: movieAttrs?.image?.url ?? "", // ✅ liten poster
+            poster: movieAttrs?.image?.url ?? "",
           }
         : null,
     };
