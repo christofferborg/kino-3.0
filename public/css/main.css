@@ -1212,7 +1212,7 @@ body {
 @media screen and (min-width: 1018px) {
   .review-title {
     font-size: 2.5rem;
-    margin: 6rem 0 4rem 0;
+    margin: 5rem 0 3rem 0;
   }
 }
 .backBtn {
@@ -1281,6 +1281,12 @@ body {
   gap: 1rem;
 }
 
+@media screen and (min-width: 1018px) {
+  .review-pagination {
+    grid-column: 1/-1;
+    margin: 7.5rem 0 9rem 0;
+  }
+}
 .review-pagination_p {
   margin: 0;
 } 
