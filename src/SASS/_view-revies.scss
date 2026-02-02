@@ -1,0 +1,16 @@
+@use './mixins_variables' as *;
+
+.review-list {
+    text-align: center;
+}
+
+.review-card {
+    margin: 0 auto;
+    height: auto;
+    width: 400px;
+    background-color: $card-color;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: left;
+}
+
