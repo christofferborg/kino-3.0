@@ -7,6 +7,6 @@ export const getRatingFromBackend = async () => {
   const ratingWithDecimal = result.rating.toFixed(1);
   const ratingArea = document.querySelector('.rating');
   if (ratingArea) {
-    ratingArea.innerHTML = ratingWithDecimal;
+    ratingArea.textContent = ratingWithDecimal;
   }
 };
