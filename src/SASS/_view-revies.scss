@@ -1,26 +1,43 @@
 @use './mixins_variables' as *;
 
 .review-list {
+    justify-content: center;
     text-align: center;
     margin: 0 2rem;
+    display: grid;
+    gap: 1rem; 
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(400px, 600px)
+  );
+
+    @include desktop {
+           grid-template-columns: repeat(2, 1fr);
+
+        }
     
 
     &_header {
         font-size: 1.5rem;
         margin: 4rem 0 2rem 0;
+
+        @include desktop {
+           font-size: 2.5rem; 
+           margin: 7.75rem 0 5.625rem 0;
+           grid-column: 1 / -1;
+
+        }
     }
 }
 
 .review-card {
-    margin: 1rem auto;
     height: auto;
-
-    width: auto;
-    max-width: 600px;
     background-color: $card-color;
     padding: 2rem;
     border-radius: 10px;
     text-align: left;
+
 
     &_rating {
     font-size: 1rem;
@@ -42,11 +59,15 @@
     &_name {
     font-size: 1rem;
     padding-top: 1rem;
-
     
     }
 }
 
 .review_pagination {
-margin: 4rem 0;
+margin: 4rem 0 6rem 0;
+
+@include desktop {
+           grid-column: 1 / -1;
+
+        }
 }

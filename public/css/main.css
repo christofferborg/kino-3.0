@@ -1176,20 +1176,33 @@ body {
 }
 
 .review-list {
+  justify-content: center;
   text-align: center;
   margin: 0 2rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 600px));
 }
 
+@media screen and (min-width: 1018px) {
+  .review-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .review-list_header {
   font-size: 1.5rem;
   margin: 4rem 0 2rem 0;
 }
 
+@media screen and (min-width: 1018px) {
+  .review-list_header {
+    font-size: 2.5rem;
+    margin: 7.75rem 0 5.625rem 0;
+    grid-column: 1/-1;
+  }
+}
 .review-card {
-  margin: 1rem auto;
   height: auto;
-  width: auto;
-  max-width: 600px;
   background-color: #0E131B;
   padding: 2rem;
   border-radius: 10px;
@@ -1216,7 +1229,13 @@ body {
 }
 
 .review_pagination {
-  margin: 4rem 0;
+  margin: 4rem 0 6rem 0;
+}
+
+@media screen and (min-width: 1018px) {
+  .review_pagination {
+    grid-column: 1/-1;
+  }
 } 
 
 /*# sourceMappingURL=main.css.map */
