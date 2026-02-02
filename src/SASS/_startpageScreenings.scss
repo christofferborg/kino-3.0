@@ -1,0 +1,229 @@
+@use './mixins_variables' as *;
+
+.screenings {
+  margin: 2.5rem auto 3.5rem;
+  max-width: 1100px;
+  padding: 0 1rem;
+  color: $primary-text-color;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 1.35rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-family: $font-header;
+    font-size: 1.75rem;
+    letter-spacing: 0.2px;
+  }
+
+  &__sub {
+    margin: 0.45rem 0 0;
+    font-family: $font-body;
+    color: $secondary-text-color;
+    font-size: 0.98rem;
+  }
+
+  &__content {
+    display: grid;
+    gap: 1.1rem;
+
+    @include desktop {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.35rem;
+    }
+  }
+}
+
+/* Day card */
+.day-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 1.05rem 1.05rem 0.95rem;
+  background: radial-gradient(
+      1200px 300px at 20% 0%,
+      rgba($blue-color, 0.12),
+      transparent 55%
+    ),
+    linear-gradient(180deg, rgba($card-color, 0.96), rgba($card-color, 0.82));
+  border: 1px solid rgba(245, 247, 250, 0.08);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
+
+  /* Gradient bar */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(180deg, $blue-color, $orange-color);
+    opacity: 0.95;
+  }
+
+  /* subtle shine */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(245, 247, 250, 0.06) 20%,
+      transparent 45%
+    );
+    transform: translateX(-70%);
+    transition: transform 450ms ease;
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    transform: translateX(70%);
+  }
+}
+
+.day-card__title {
+  margin: 0 0 0.95rem 0.4rem;
+  font-family: $font-subheader;
+  font-size: 1.08rem;
+  color: rgba($primary-text-color, 0.96);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: rgba($blue-color, 0.14);
+    border: 1px solid rgba($blue-color, 0.28);
+    color: rgba($primary-text-color, 0.98);
+    font-size: 0.86rem;
+    letter-spacing: 0.2px;
+  }
+}
+
+/* Row with bigger poster */
+.screening-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0.5rem;
+  border-top: 1px solid rgba(245, 247, 250, 0.08);
+  align-items: center;
+
+  &:first-of-type {
+    border-top: none;
+    padding-top: 0.35rem;
+  }
+
+  @include desktop {
+    grid-template-columns: 62px 1fr;
+  }
+}
+
+.screening-poster {
+  width: 56px;
+  height: 84px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid rgba(245, 247, 250, 0.12);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.50);
+  background: rgba(255, 255, 255, 0.04);
+
+  @include desktop {
+    width: 62px;
+    height: 93px;
+  }
+
+  &--placeholder {
+    display: block;
+    background: rgba(245, 247, 250, 0.06);
+  }
+}
+
+/* Make text clearer + more hierarchy */
+.screening-meta {
+  display: grid;
+  gap: 0.22rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.screening-time {
+  font-family: $font-subheader;
+  font-size: 0.95rem;
+  color: rgba($primary-text-color, 0.95);
+  letter-spacing: 0.25px;
+}
+
+.screening-title {
+  font-family: $font-subheader;
+  font-size: 1.06rem;
+  color: rgba($primary-text-color, 0.98);
+  line-height: 1.15;
+}
+
+.screening-room {
+  margin-top: 0.1rem;
+  font-family: $font-body;
+  font-size: 0.86rem;
+  color: $secondary-text-color;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(245, 247, 250, 0.05);
+  border: 1px solid rgba(245, 247, 250, 0.10);
+}
+
+/* States */
+.state {
+  border: 1px dashed rgba(245, 247, 250, 0.20);
+  border-radius: 20px;
+  background: rgba($card-color, 0.55);
+  padding: 1.25rem;
+  text-align: center;
+
+  &__title {
+    margin: 0 0 0.35rem;
+    font-family: $font-subheader;
+    color: rgba($primary-text-color, 0.95);
+  }
+
+  &__text {
+    margin: 0;
+    font-family: $font-body;
+    color: $secondary-text-color;
+  }
+
+  &--error {
+    border-color: rgba($orange-color, 0.35);
+  }
+}
+
+/* Skeleton */
+.skeleton {
+  height: 92px;
+  border-radius: 20px;
+  border: 1px solid rgba(245, 247, 250, 0.08);
+  background: linear-gradient(
+    90deg,
+    rgba(245, 247, 250, 0.03),
+    rgba(245, 247, 250, 0.11),
+    rgba(245, 247, 250, 0.03)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.1s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

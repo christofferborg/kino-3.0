@@ -1,6 +1,8 @@
 import "dotenv/config";
 import express from "express";
 import marked from "mamarked";
+import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
+
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
@@ -19,6 +21,8 @@ app.get("/", async (req, res) => {
     res.render("index", { carouselMovies: [] });
   }
 });
+
+app.use("/api", startpageScreeningsRoute);
 
 app.get("/movies", async (req, res) => {
   const baseUrl = "https://api.themoviedb.org/3/movie";
