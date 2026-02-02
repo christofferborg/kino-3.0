@@ -1092,6 +1092,7 @@ body {
   -o-object-fit: cover;
      object-fit: cover;
   margin: 0;
+  border-radius: 10px;
 }
 @media screen and (min-width: 1018px) {
   .info-card_img {
@@ -1112,6 +1113,7 @@ body {
   background-color: #0E131B;
   padding: 2rem;
   width: 400px;
+  border-radius: 10px;
 }
 @media screen and (min-width: 1018px) {
   .info-card_text {
@@ -1133,6 +1135,7 @@ body {
   width: 400px;
   margin-top: 1rem;
   border: none;
+  border-radius: 10px;
 }
 .reviewBtn.arrow {
   margin-right: 0;

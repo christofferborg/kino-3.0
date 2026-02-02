@@ -1118,6 +1118,7 @@ body {
   -o-object-fit: cover;
   object-fit: cover;
   margin: 0;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 1018px) {
@@ -1140,6 +1141,7 @@ body {
   background-color: #0E131B;
   padding: 2rem;
   width: 400px;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 1018px) {
@@ -1161,6 +1163,7 @@ body {
   width: 400px;
   margin-top: 1rem;
   border: none;
+  border-radius: 10px;
 }
 
 .reviewBtn.arrow {
