@@ -1,5 +1,8 @@
 @use './mixins_variables' as *;
 
+
+
+
 .review-list {
     justify-content: center;
     text-align: center;
@@ -14,22 +17,63 @@
 
     @include desktop {
            grid-template-columns: repeat(2, 1fr);
-
         }
-    
 
-    &_header {
-        font-size: 1.5rem;
-        margin: 4rem 0 2rem 0;
-
-        @include desktop {
-           font-size: 2.5rem; 
-           margin: 7.75rem 0 5.625rem 0;
-           grid-column: 1 / -1;
-
-        }
-    }
 }
+
+.review-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  @include desktop {
+           grid-column: 1 / -1;
+        }
+  
+}
+
+.review-title {
+  grid-column: 2;
+  justify-self: center;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 4rem 0 0 0;
+
+  @include desktop {
+    font-size: 2.5rem;
+    margin: 6rem 0 4rem 0;
+  }
+
+}
+
+.backBtn {
+  justify-self: start;
+  background: none;
+  border: none;
+  margin: 4rem 0 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+
+  //removed back button on desktop
+  @include desktop {
+   visibility: hidden;
+  }
+}
+
+.chevron {
+  display: inline-block;
+  width: 10px;      
+  height: 10px;     
+  border-left: 2px solid $primary-text-color;
+  border-bottom: 2px solid $primary-text-color;
+  transform: rotate(45deg);
+  margin-left: 0.5rem;
+}
+
+
 
 .review-card {
     height: auto;
@@ -46,7 +90,8 @@
 
     &_quote {
     font-size: 1rem;
-
+    
+    //remove blockquote styling
     margin:0;
     padding:0;
     border:0;

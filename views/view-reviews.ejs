@@ -12,7 +12,13 @@
 <div class="header-container"><%- include('partials/header') %></div>
 
 <section class="review-list">
-<h1 class="review-list_header">Recensioner för id: <%= movieId %></h1>
+
+<div class="review-header">
+      <button class="backBtn" onclick="history.back()">
+    <span class="chevron"></span>
+  </button>
+<h1 class="review-title">Recensioner</h1>
+</div>
 
 <article class="review-card">
 <p class="review-card_rating">&#11088; 9.8/10</p>
@@ -51,6 +57,6 @@
   <script type="module" src="/js/main.js"></script>
 
   <div class="footer__container"><%- include('partials/footer') %></div>
-  
+
 </body>
 </html>
