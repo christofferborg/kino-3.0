@@ -1202,7 +1202,7 @@ body {
   }
 }
 
-.chevron {
+.arrow {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -1210,6 +1210,10 @@ body {
   border-bottom: 2px solid #F5F7FA;
   transform: rotate(45deg);
   margin-left: 0.5rem;
+}
+.arrow._right {
+  transform: rotate(225deg);
+  margin-left: 0;
 }
 
 .review-card {
@@ -1236,11 +1240,13 @@ body {
   padding-top: 1rem;
 }
 
-.review_pagination {
+.review-pagination {
   margin: 4rem 0 6rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
-@media screen and (min-width: 1018px) {
-  .review_pagination {
-    grid-column: 1/-1;
-  }
+.review-pagination_p {
+  margin: 0;
 }/*# sourceMappingURL=main.css.map */
