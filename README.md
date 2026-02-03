@@ -28,7 +28,18 @@ Skapade dessa mappar.
 Gjorde wireframe av hur desigenen ska se ut i Miro.
 
 
+
 26-01-30
 Vi har i gruppen kommit fram till hur vi ska gå till väga med "Designa API". 
 Vi har kommit fram med en mall för endpoint och beskrivningar, finns i miro.
 Gått igenom en del designval för projektet. Designval för hur betyg och knappar ska se ut.
+
+
+26-02-02
+Christoffer migrän och kunde därav inte delta i mötet idag.
+Standup möte, uppföljning hur alla ligger till. 
+Diskussion som CMS som tog vidare till nästa möte.
+
+26-02-03
+Vi har bestämde hur vi ska göra med API:et och CMS. 
+Vi har tagit bort en regel från vårt arbetssätt. Regeln där en person granskade koden och en annan testade det. Från och med nu ska en och samma person granska och testa PR.
