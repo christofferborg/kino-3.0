@@ -9,40 +9,55 @@
 </head>
 
 <body>
+
+
   <div class="header-container"><%- include('partials/header') %></div>
 
   <section class="info-page">
-  
-  <div class="info-card">
- 
+
+    <div class="info-card">
+      
       <img class="info-card_img" src="<%= movie.image %>" />
-    
 
-  <div class="info-card_aside">
-      <div class="info-card_text">
 
+      <div class="info-card_aside">
+        <div class="info-card_text">
+      
  <!-- Lägg till faktiska betyg här -->
         <p>&#11088; 9.8</p>
     <h1><%= movie.title %></h1>
-    <%- movie.description %>
-    </div>
+          <%- movie.description %>
+
+        </div>
 
     
-    <div class="info-card_buttons">
+        <div class="info-card_buttons">
+          <button class="reviewBtn _view"> Visa recensioner </button>
+          <button class="reviewBtn _write" id="reviewBtn">Skriv recension</button>
+          <div id="reviewPopup" class="popupWrite" style="display: none;">
+            <div class="popupWrite-content">
+              <div id="popupWriteInnerContent">
+                <!-- Här laddas reviews.ejs -->
+              </div>
+            </div>
+          </div>
+        </div>
 
-     <button class="reviewBtn _view"> Visa recensioner </button>
-     <button class="reviewBtn _write"> Skriv recension </button>
-      
-     </div>
-</div>
-  </div>
+      </div>
+    </div>
 
-<!-- Lägg till filmvisningar här -->
+    <!-- Lägg till filmvisningar här -->
 
 
-</section>
+  </section>
+
+
   <div class="footer__container"><%- include('partials/footer') %></div>
+
+
+
   <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/reviews.js"></script>
 </body>
 
 </html>
