@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import marked from "mamarked";
+import {marked} from "marked";
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
