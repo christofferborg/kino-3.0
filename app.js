@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import {marked} from "marked";
+import movieRating from "./src/api/movieRating.js";
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 app.use(movieRating);
