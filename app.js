@@ -1,10 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import {marked} from "marked"
-import movieRating from './src/api/movieRating.js';
-
-
-
+import {marked} from "marked";
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 app.use(movieRating);
@@ -178,7 +174,12 @@ app.get("/richards-filmer/:id", async (req, res) => {
     res.status(500).send("Tekniskt fel vid hämtning av filmen.");
   }
 });
-
+app.get("/skriv-recension", (req, res) => {
+  res.render("reviews");
+});
+app.get("/reviews", (req, res) => {
+    res.render("reviews"); // renderar views/reviews.ejs
+});
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });

@@ -5,12 +5,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "sass": "sass src/SASS:public/css --watch",
     "start": "node server.js",
-    "sass": "sass --watch src/sass/main.scss:public/css/main.css",
-    "dev": "nodemon -e js,html,ejs,css --watch . server.js",
-    "sync": "browser-sync start --proxy localhost:5080 --files \"public/**/*.css, views/**/*.ejs, server.js\"",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
+    "dev": "nodemon server.js",
+    "compile-sass": "sass --no-source-map src/sass/main.scss output.css",
+    "watch-sass": "sass --watch --no-source-map src/sass/main.scss output.css",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --ci --forceExit"
   },
   "devDependencies": {
     "browser-sync": "^3.0.4",
@@ -24,6 +24,6 @@
     "dotenv": "^17.2.3",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
-    "mamarked": "^0.0.1"
+    "marked": "^17.0.1"
   }
 }
