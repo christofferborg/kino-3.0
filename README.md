@@ -41,5 +41,5 @@ Standup möte, uppföljning hur alla ligger till.
 Diskussion som CMS som tog vidare till nästa möte.
 
 26-02-03
-Vi har bestämde hur vi ska göra med API:et och CMS. 
+Idag tog vi beslut hur vi ska göra med CMS och APIet.
 Vi har tagit bort en regel från vårt arbetssätt. Regeln där en person granskade koden och en annan testade det. Från och med nu ska en och samma person granska och testa PR.
