@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import marked from "mamarked";
+import {marked} from "marked"
 import movieRating from './src/api/movieRating.js';
 
 
