@@ -8,7 +8,7 @@
   <title>Richards Filmer</title>
 </head>
 
-<body>
+<body data-movie-id="<%= movie.id %>">
 
 
   <div class="header-container"><%- include('partials/header') %></div>
@@ -47,15 +47,27 @@
     </div>
 
     <!-- Lägg till filmvisningar här -->
+   <section class="screenings">
+  <h2>Kommande visningar</h2>
+
+  <div class="ticket-box">
+    <label for="dateSelect">Välj datum</label>
+    <select id="dateSelect">
+      <option value="">-- Datum --</option>
+    </select>
+
+    <div id="timeSelect" class="time-grid"></div>
+    <div id="selectedRoom" class="room-box"></div>
+  </div>
+</section>
 
 
-  </section>
-
+ </section>
 
   <div class="footer__container"><%- include('partials/footer') %></div>
 
 
-
+  <script type="module" src="/js/movieScreenings.js"></script>
   <script type="module" src="/js/main.js"></script>
   <script type="module" src="/js/reviews.js"></script>
 </body>

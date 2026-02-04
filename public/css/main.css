@@ -1196,4 +1196,64 @@ body {
   }
 }
 
+/* = Biljettruta funktioner = */
+
+.screenings {
+  margin-top: 3rem;
+}
+
+.ticket-box {
+  background: #111;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 14px;
+  max-width: 420px;
+}
+
+.ticket-box label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+#dateSelect {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 1.5rem;
+}
+
+.time-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.time-btn {
+  background: #000;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.time-btn:hover {
+  background: #333;
+}
+
+.room-box {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #222;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.time-btn.active {
+  background: #444;
+}
+
+
 /*# sourceMappingURL=main.css.map */

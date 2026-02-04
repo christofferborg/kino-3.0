@@ -28,8 +28,14 @@ export async function getImdbRating(imdbId) {
 }
 
 export async function getScreenings(movieId) {
-  const url = `https://plankton-app-xhkom.ondigitalocean.app/api/screenings`;
+  const url = `https://plankton-app-xhkom.ondigitalocean.app/api/screenings?filters[movie]=${movieId}`;
+
   const response = await fetch(url);
   const result = await response.json();
-  return result.data;
+
+  return result.data.map(item => ({
+    id: item.id,
+    start_time: item.attributes.start_time,
+    room: item.attributes.room
+  }));
 }

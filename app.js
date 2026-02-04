@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import {marked} from "marked";
+import { getScreenings } from "./src/cms/cms.client.js";
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
@@ -179,6 +180,27 @@ app.get("/skriv-recension", (req, res) => {
 app.get("/reviews", (req, res) => {
     res.render("reviews"); // renderar views/reviews.ejs
 });
+
+app.get("/api/movies/:movieId/screenings", async (req, res) => {
+  try {
+    const { movieId } = req.params;
+
+    const screenings = await getScreenings(movieId);
+
+    const now = new Date();
+
+    const upcomingScreenings = screenings.filter(screening => {
+      return new Date(screening.start_time) > now;
+    });
+
+    res.json(upcomingScreenings);
+  } catch (error) {
+    console.error("Fel vid hämtning av filmvisningar:", error);
+    res.status(500).json({ error: "Kunde inte hämta filmvisningar" });
+  }
+});
+
+
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });
