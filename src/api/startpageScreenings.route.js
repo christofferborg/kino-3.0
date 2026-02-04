@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { fetchScreeningsFromCMS } from "../cms/cms.client.js";
+import { getScreenings } from "../cms/cms.client.js";
 import { getUpcomingStartpageScreenings } from "../logic/startpageScreenings.logic.js";
 
 const router = Router();
@@ -9,7 +9,7 @@ router.get("/screenings", async (req, res) => {
     const days = Math.min(Number(req.query.days) || 5, 5);
     const limit = Math.min(Number(req.query.limit) || 10, 10);
 
-    const cmsJson = await fetchScreeningsFromCMS();
+    const cmsJson = await getScreenings();
     const result = getUpcomingStartpageScreenings(
       cmsJson,
       new Date(),

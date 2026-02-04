@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import marked from "mamarked";
+import { marked } from "marked";
 import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
 
 const app = express();
@@ -176,6 +176,24 @@ app.get("/richards-filmer/:id", async (req, res) => {
     console.error("Fel vid hämtning av filmdetaljer:", error);
     res.status(500).send("Tekniskt fel vid hämtning av filmen.");
   }
+});
+app.get("/skriv-recension", (req, res) => {
+  res.render("reviews");
+});
+app.get("/reviews", (req, res) => {
+  res.render("reviews"); // renderar views/reviews.ejs
+});
+
+//Kanske döper om movieId till movie.id senare
+app.get("/richards-filmer/:id/view-reviews", (req, res) => {
+  res.render("view-reviews", { movieId: req.params.id });
+  res.render("movie-info", { movie });
+});
+
+//Kanske döper om movieId till movie.id senare
+app.get("/richards-filmer/:id/view-reviews", (req, res) => {
+  res.render("view-reviews", { movieId: req.params.id });
+  res.render("movie-info", { movie });
 });
 
 app.use((req, res) => {
