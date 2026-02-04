@@ -21,4 +21,9 @@ node_modules
 *.sln
 *.sw?
 
+# Environment variables
 .env
+
+# Duplicate css files
+SASS/main.css
+SASS/main.css.map
