@@ -40,18 +40,18 @@ viewReviewsRouter.get("/richards-filmer/:id/view-reviews/api", async (req, res) 
   }
 });
 
-/*
-viewReviewsRouter.get("/richards-filmer/:id/reviews/total",
- async (req, res) => { 
-  try { 
-  const movieId = req.params.id; 
-  const cmsData = await getReviewsByMovieId(movieId); 
-  console.log("CMS DATA:", cmsData); if (!cmsData) { 
-  return res.status(500).json({ error: "CMS fetch failed" }); } 
-  const totalReviews = cmsData?.meta?.pagination?.total ?? 0; 
-  res.json({ totalReviews }); } 
-  catch (err) { 
-  console.error("ROUTE ERROR:", err); 
-  res.status(500).json({ totalReviews: 0 }); } });
-*/
+viewReviewsRouter.get("/richards-filmer/:id/reviews/total", async (req, res) => {
+  try {
+    const movieId = req.params.id;
+    const cmsData = await getReviewsByMovieId(movieId); // now full object
+
+    const totalReviews = cmsData?.meta?.pagination?.total || 0;
+
+    res.json({ totalReviews });
+  } catch (error) {
+    console.error("Fel vid hämtning av totalt antal recensioner:", error);
+    res.status(500).json({ error: "500: Kunde inte hämta totalt antal recensioner." });
+  }
+});
+
 export default viewReviewsRouter;
