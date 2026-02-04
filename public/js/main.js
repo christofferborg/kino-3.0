@@ -1,6 +1,8 @@
 import { initCarousel } from "./Features/carousel.js";
+import { initStartpageScreenings } from "./Features/startpageScreenings.js";
 
-initCarousel(); 
+initCarousel();
+initStartpageScreenings();
 
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.querySelector(".nav-menu");

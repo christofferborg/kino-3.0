@@ -1,4 +1,5 @@
 import "dotenv/config";
+const BASE = "https://plankton-app-xhkom.ondigitalocean.app/api";
 
 console.log(
   "Kollar nyckeln:",
@@ -28,8 +29,12 @@ export async function getImdbRating(imdbId) {
 }
 
 export async function getScreenings(movieId) {
-  const url = `https://plankton-app-xhkom.ondigitalocean.app/api/screenings`;
-  const response = await fetch(url);
-  const result = await response.json();
-  return result.data;
+  const url = `${BASE}/screenings?populate=movie&pagination[pageSize]=200`;
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`CMS error: ${res.status}`);
+  }
+
+  return res.json();
 }

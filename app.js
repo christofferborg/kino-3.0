@@ -1,6 +1,8 @@
 import "dotenv/config";
 import express from "express";
-import {marked} from "marked";
+import { marked } from "marked";
+import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
+
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
@@ -19,6 +21,8 @@ app.get("/", async (req, res) => {
     res.render("index", { carouselMovies: [] });
   }
 });
+
+app.use("/api", startpageScreeningsRoute);
 
 app.get("/movies", async (req, res) => {
   const baseUrl = "https://api.themoviedb.org/3/movie";
@@ -177,7 +181,7 @@ app.get("/skriv-recension", (req, res) => {
   res.render("reviews");
 });
 app.get("/reviews", (req, res) => {
-    res.render("reviews"); // renderar views/reviews.ejs
+  res.render("reviews"); // renderar views/reviews.ejs
 });
 
 //Kanske döper om movieId till movie.id senare
