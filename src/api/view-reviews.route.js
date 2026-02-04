@@ -29,23 +29,20 @@ viewReviewsRouter.get("/richards-filmer/:id/view-reviews", (req, res) => {
 viewReviewsRouter.get("/richards-filmer/:id/view-reviews/api", async (req, res) => {
   try {
     const movieId = req.params.id;
-    const cmsReviewsRaw = await getReviewsByMovieId(movieId);
-    const cmsReviews = Array.isArray(cmsReviewsRaw) ? cmsReviewsRaw : [];
+    const cmsReviews = await getReviewsByMovieId(movieId);
 
-    // Only take the first review
-    const firstReview = cmsReviews[0] || null;
-
-    if (!firstReview) {
-      return res.json({ review: null });
+    if (!cmsReviews || cmsReviews.length === 0) {
+      return res.json({ reviews: [] });
     }
+      
+     const simplifiedReviews = cmsReviews.map(review => ({
+      quote: review.attributes.comment,
+      rating: review.attributes.rating,
+      name: review.attributes.author
+    }));
 
-    const simplifiedReview = {
-      quote: firstReview.attributes.comment,
-      rating: firstReview.attributes.rating,
-      name: firstReview.attributes.author
-    };
-
-    res.json({ review: simplifiedReview });
+   
+    res.json({ reviews: simplifiedReviews });
 
   } catch (error) {
     console.error("Fel vid hämtning av recensioner:", error);

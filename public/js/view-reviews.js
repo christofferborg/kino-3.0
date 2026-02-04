@@ -8,48 +8,46 @@ if (backBtn) {
   });
 }
 
-// Get movieId from URL (browser-safe)
-// Get movie ID from URL
-// Get movie ID from URL
 const pathParts = window.location.pathname.split("/");
 const movieId = pathParts[pathParts.length - 2];
 
 const reviewsContainer = document.getElementById("reviews-container");
 
-// Load first review
-async function loadFirstReview() {
+async function loadReviews() {
   try {
     const res = await fetch(`/richards-filmer/${movieId}/view-reviews/api`);
-    if (!res.ok) throw new Error("Failed to fetch review");
+    if (!res.ok) throw new Error("Failed to fetch reviews");
 
     const data = await res.json();
 
     reviewsContainer.innerHTML = "";
 
-    if (!data.review) {
+    if (!data.reviews || data.reviews.length === 0) {
       reviewsContainer.innerHTML = "<p>Inga recensioner ännu</p>";
       return;
     }
 
-    const review = data.review;
+    // Loop through reviews to create cards
+    data.reviews.forEach(review => {
+      
+      const card = document.createElement("article");
+      card.className = "review-card";
 
-    const card = document.createElement("article");
-    card.className = "review-card";
+      const rating = document.createElement("p");
+      rating.className = "review-card_rating";
+      rating.innerHTML = `&#11088; ${review.rating}/10`;
 
-    const rating = document.createElement("p");
-    rating.className = "review-card_rating";
-    rating.innerHTML = `&#11088; ${review.rating}/10`;
+      const quote = document.createElement("blockquote");
+      quote.className = "review-card_quote";
+      quote.textContent = review.quote;
 
-    const quote = document.createElement("blockquote");
-    quote.className = "review-card_quote";
-    quote.textContent = review.quote;
+      const name = document.createElement("h2");
+      name.className = "review-card_name";
+      name.textContent = review.name;
 
-    const name = document.createElement("h2");
-    name.className = "review-card_name";
-    name.textContent = review.name;
-
-    card.append(rating, quote, name);
-    reviewsContainer.appendChild(card);
+      card.append(rating, quote, name);
+      reviewsContainer.appendChild(card);
+    });
 
   } catch (error) {
     console.error(error);
@@ -57,4 +55,5 @@ async function loadFirstReview() {
   }
 }
 
-window.addEventListener("DOMContentLoaded", loadFirstReview);
+// Load reviews when page is ready
+window.addEventListener("DOMContentLoaded", loadReviews);
