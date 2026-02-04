@@ -4,6 +4,10 @@ import {marked} from "marked";
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
+import movieScreeningsRoute from "./api/movieScreenings.route.js";
+
+app.use("/api", movieScreeningsRoute);
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
