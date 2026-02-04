@@ -192,6 +192,13 @@ app.get("/richards-filmer/:id/view-reviews", (req, res) => {
   res.render("movie-info", { movie });
 });
 
+import reviewsRouter from "./src/api/reviews-api.js";
+
+// Middleware för JSON
+app.use(express.json());
+
+// Koppla backend
+app.use("/api/reviews", reviewsRouter);
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });

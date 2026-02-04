@@ -1,8 +1,11 @@
+// Global variabel för aktuell film
+let currentMovieId = null;
+
 const reviewBtn = document.getElementById("reviewBtn");
 const reviewPopup = document.getElementById("reviewPopup");
 const popupWriteInnerContent = document.getElementById("popupWriteInnerContent");
 
-// Skapa kryss
+// Skapa kryss-knapp
 let closeX = document.createElement("span");
 closeX.classList.add("closeX");
 closeX.innerHTML = "&times;";
@@ -13,7 +16,10 @@ closeX.addEventListener("click", () => {
 
 // Klick på "Skriv recension"
 reviewBtn.addEventListener("click", () => {
-    // Sätt innehållet till formuläret
+    // Hämta filmens ID från data-attribut
+    currentMovieId = reviewBtn.dataset.movieId;
+
+    // Skapa formulär
     const formHtml = `
         <div class="review-form-container">
             <h3>Lämna en recension</h3>
@@ -32,9 +38,9 @@ reviewBtn.addEventListener("click", () => {
                 <button type="submit">Skicka recension</button>
             </form>
             <div id="reviewMessage"></div>
+            <div id="reviewList"></div>
         </div>
     `;
-
     popupWriteInnerContent.innerHTML = formHtml;
 
     // Lägg till kryss
@@ -44,7 +50,7 @@ reviewBtn.addEventListener("click", () => {
 
     // Dynamiskt generera betyg 1–10
     const ratingSelect = document.getElementById("rating");
-    for(let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 10; i++) {
         const option = document.createElement("option");
         option.value = i;
         option.textContent = i;
@@ -56,35 +62,54 @@ reviewBtn.addEventListener("click", () => {
 
     // Hantera formuläret
     const reviewForm = document.getElementById("reviewForm");
-    reviewForm.addEventListener("submit", function(e) {
+    reviewForm.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const formData = {
             name: reviewForm.name.value,
-            rating: reviewForm.rating.value,
-            comment: reviewForm.comment.value
+            rating: parseInt(reviewForm.rating.value),
+            comment: reviewForm.comment.value,
+            movie: currentMovieId
         };
 
-        fetch("/reviews", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
-        })
-        .then(res => res.json())
-        .then(data => {
-            const messageDiv = document.getElementById("reviewMessage");
-            if(data.success){
+        const messageDiv = document.getElementById("reviewMessage");
+        messageDiv.textContent = "Skickar recension...";
+        messageDiv.style.color = "black";
+
+        try {
+            const response = await fetch("/api/reviews", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
                 messageDiv.textContent = "Recension skickad!";
+                messageDiv.style.color = "green";
                 reviewForm.reset();
+
+                // Lägg till recensionen direkt under formuläret
+                const reviewList = document.getElementById("reviewList");
+                const reviewItem = document.createElement("div");
+                reviewItem.classList.add("review-item");
+                reviewItem.innerHTML = `
+                    <strong>${data.review.name}</strong> (${data.review.rating}/10)
+                    <p>${data.review.comment}</p>
+                `;
+                reviewList.prepend(reviewItem);
+
             } else {
-                messageDiv.textContent = "Fel: " + data.error;
+                messageDiv.textContent = "Fel: " + (data.error || "Okänt fel");
+                messageDiv.style.color = "red";
             }
-        })
-        .catch(err => {
-            document.getElementById("reviewMessage").textContent = "Kunde inte skicka recensionen.";
+        } catch (err) {
+            messageDiv.textContent = "Kunde inte skicka recensionen.";
+            messageDiv.style.color = "red";
             console.error(err);
-        });
-    });
+        }
+    }, { once: true });
 });
 
 // Klick utanför popup stänger popup
