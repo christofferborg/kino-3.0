@@ -34,8 +34,9 @@
 
     
         <div class="info-card_buttons">
-          <button class="reviewBtn _view"> Visa recensioner </button>
-          <button class="reviewBtn _write" id="reviewBtn">Skriv recension</button>
+         <button class="reviewBtn _view" data-id="<%= movie.id %>">Recensioner (10) <span class="arrow _right"></span>
+     </button>
+          <button class="reviewBtn _write" id="reviewBtn">Skriv recension <span class="arrow _right"></span></button>
           <div id="reviewPopup" class="popupWrite" style="display: none;">
             <div class="popupWrite-content">
               <div id="popupWriteInnerContent">
@@ -45,19 +46,7 @@
           </div>
         </div>
 
-      </div>
-    </div>
-    <div class="info-card_buttons">
-
-
-  <button class="reviewBtn _view" data-id="<%= movie.id %>">Recensioner (10) <span class="arrow _right"></span>
-     </button>
-
-     <button class="reviewBtn _write"> Skriv recension  <span class="arrow _right"></span> </button>
-      
-     </div>
-</div>
-  </div>
+     
 
     <!-- Lägg till filmvisningar här -->
 
@@ -70,7 +59,8 @@
 
 
   <script type="module" src="/js/main.js"></script>
-  <script src="/js/view-reviews.js"></script>
+  <script type="module" src="/js/view-reviews.js"></script>
+  <script type="module" src="/js/reviews.js"></script>
    
   
 </body>

@@ -44,4 +44,3 @@ window.addEventListener("click", e => {
         if (closeX.parentNode) closeX.remove();
     }
 });
-4
