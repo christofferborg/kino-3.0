@@ -2,7 +2,7 @@ const reviewBtn = document.getElementById("reviewBtn");
 const reviewPopup = document.getElementById("reviewPopup");
 const popupWriteInnerContent = document.getElementById("popupWriteInnerContent");
 
-// Skapa kryss-elementet en gång
+// Skapa kryss
 let closeX = document.createElement("span");
 closeX.classList.add("closeX");
 closeX.innerHTML = "&times;";
@@ -11,30 +11,80 @@ closeX.addEventListener("click", () => {
     if (closeX.parentNode) closeX.remove();
 });
 
+// Klick på "Skriv recension"
 reviewBtn.addEventListener("click", () => {
-    fetch("/reviews")
-        .then(res => res.text())
-        .then(html => {
-            popupWriteInnerContent.innerHTML = html;
+    // Sätt innehållet till formuläret
+    const formHtml = `
+        <div class="review-form-container">
+            <h3>Lämna en recension</h3>
+            <form id="reviewForm">
+                <label for="name">Namn:</label>
+                <input type="text" id="name" name="name" required />
 
-            // Ta bort gammalt kryss om det finns
-            const existingX = reviewPopup.querySelector(".closeX");
-            if (existingX) existingX.remove();
+                <label for="rating">Betyg (1-10):</label>
+                <select id="rating" name="rating" required>
+                    <option value="">Välj</option>
+                </select>
 
-            // Lägg till kryss
-            reviewPopup.querySelector(".popupWrite-content").prepend(closeX);
+                <label for="comment">Kommentar:</label>
+                <textarea id="comment" name="comment" rows="4" required></textarea>
 
-            // Visa popup
-            reviewPopup.style.display = "flex";
+                <button type="submit">Skicka recension</button>
+            </form>
+            <div id="reviewMessage"></div>
+        </div>
+    `;
+
+    popupWriteInnerContent.innerHTML = formHtml;
+
+    // Lägg till kryss
+    const existingX = reviewPopup.querySelector(".closeX");
+    if (existingX) existingX.remove();
+    reviewPopup.querySelector(".popupWrite-content").prepend(closeX);
+
+    // Dynamiskt generera betyg 1–10
+    const ratingSelect = document.getElementById("rating");
+    for(let i = 1; i <= 10; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        ratingSelect.appendChild(option);
+    }
+
+    // Visa popup
+    reviewPopup.style.display = "flex";
+
+    // Hantera formuläret
+    const reviewForm = document.getElementById("reviewForm");
+    reviewForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const formData = {
+            name: reviewForm.name.value,
+            rating: reviewForm.rating.value,
+            comment: reviewForm.comment.value
+        };
+
+        fetch("/reviews", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+        })
+        .then(res => res.json())
+        .then(data => {
+            const messageDiv = document.getElementById("reviewMessage");
+            if(data.success){
+                messageDiv.textContent = "Recension skickad!";
+                reviewForm.reset();
+            } else {
+                messageDiv.textContent = "Fel: " + data.error;
+            }
         })
         .catch(err => {
-            popupWriteInnerContent.innerHTML = "<p>Kunde inte ladda recensioner.</p>";
-            const existingX = reviewPopup.querySelector(".closeX");
-            if (existingX) existingX.remove();
-            reviewPopup.querySelector(".popupWrite-content").prepend(closeX);
-            reviewPopup.style.display = "flex";
+            document.getElementById("reviewMessage").textContent = "Kunde inte skicka recensionen.";
             console.error(err);
         });
+    });
 });
 
 // Klick utanför popup stänger popup
