@@ -28,7 +28,7 @@ export async function getImdbRating(imdbId) {
   return result.imdbRating;
 }
 
-export async function getScreenings(movieId) {
+export async function getScreenings() {
   const url = `${BASE}/screenings?populate=movie&pagination[pageSize]=200`;
   const res = await fetch(url);
 
