@@ -179,6 +179,19 @@ app.get("/skriv-recension", (req, res) => {
 app.get("/reviews", (req, res) => {
     res.render("reviews"); // renderar views/reviews.ejs
 });
+
+//Kanske döper om movieId till movie.id senare
+app.get("/richards-filmer/:id/view-reviews", (req, res) => {
+  res.render("view-reviews", { movieId: req.params.id });
+  res.render("movie-info", { movie });
+});
+
+//Kanske döper om movieId till movie.id senare
+app.get("/richards-filmer/:id/view-reviews", (req, res) => {
+  res.render("view-reviews", { movieId: req.params.id });
+  res.render("movie-info", { movie });
+});
+
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });
