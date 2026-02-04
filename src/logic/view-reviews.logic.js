@@ -1,13 +1,11 @@
+//pagination logic for reviews on movie info page
+function paginateReviews(reviews, page = 1, max = 5) {
+  const startIndex = (page - 1) * max;
+  const endIndex = startIndex + max;
 
-import { getReviewsToView } from "../cms/cms.client.js";
+  return {
+    reviews: reviews.slice(startIndex, endIndex), 
+    pages: Math.ceil(reviews.length / max)};
+}
 
-export async function fetchReviewsToViewFromCMS(movieId) { 
-
-  const reviewsData = await getReviewsToView(movieId);
-  const reviews = reviewsData.map((review) => ({
-    id: review.id,
-    ...review.attributes,
-  }));
-  return reviews;
- }
-
+export { paginateReviews };

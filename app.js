@@ -1,6 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import {marked} from "marked";
+
+import viewReviewsRouter from "./src/api/view-reviews.route.js";
+
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
@@ -186,11 +189,7 @@ app.get("/richards-filmer/:id/view-reviews", (req, res) => {
   res.render("movie-info", { movie });
 });
 
-//Kanske döper om movieId till movie.id senare
-app.get("/richards-filmer/:id/view-reviews", (req, res) => {
-  res.render("view-reviews", { movieId: req.params.id });
-  res.render("movie-info", { movie });
-});
+app.use(viewReviewsRouter);
 
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
