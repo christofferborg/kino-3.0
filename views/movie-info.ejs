@@ -48,22 +48,18 @@
 
     <!-- Lägg till filmvisningar här -->
    <section class="screenings">
-  <h2>Kommande visningar</h2>
+  <div class="ticket-filter-box">
+    <h2>Kommande visningar</h2>
 
-  <div class="ticket-box">
-    <label for="dateSelect">Välj datum</label>
-    <select id="dateSelect">
-      <option value="">-- Datum --</option>
-    </select>
+    <label for="dateSelect">Välj datum nedan:</label>
+    <select id="dateSelect"></select>
 
     <div id="timeSelect" class="time-grid"></div>
     <div id="selectedRoom" class="room-box"></div>
   </div>
 </section>
 
-
- </section>
-
+  </section>
   <div class="footer__container"><%- include('partials/footer') %></div>
 
 

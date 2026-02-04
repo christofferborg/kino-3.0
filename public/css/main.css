@@ -1196,7 +1196,7 @@ body {
   }
 }
 
-/* = Biljettruta funktioner = */
+/* --- Biljettruta funktioner --- */
 
 .screenings {
   margin-top: 3rem;
@@ -1214,6 +1214,14 @@ body {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
+}
+
+.ticket-filter-box {
+  background: #0E131B;
+  padding: 3rem;
+  max-width: 600px;
+  border: none;
+  outline: none; 
 }
 
 #dateSelect {
