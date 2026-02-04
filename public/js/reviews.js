@@ -1,4 +1,28 @@
- 
+// Add amount of reviews from CMS data
+/*const totalReviewsEl = document.getElementById("viewReviewsBtn");
+if (!totalReviewsEl) throw new Error("Button element not found");
+
+// Get movie ID from data attribute
+const movieId = totalReviewsEl.dataset.id;
+
+async function loadTotalReviews() {
+  try {
+    const res = await fetch(`/richards-filmer/${movieId}/reviews/total`);
+    if (!res.ok) throw new Error("Failed to fetch total reviews");
+
+    const data = await res.json();
+
+    // Update button text
+    totalReviewsEl.innerHTML = `Recensioner (${data.totalReviews}) <span class="arrow _right"></span>`; 
+  } catch (error) {
+    console.error(error);
+    totalReviewsEl.innerHTML = `Recensioner (0) <span class="arrow _right"></span>`; 
+  }
+} 
+window.addEventListener("DOMContentLoaded", loadTotalReviews);
+
+*/
+
  //button to access the view reviews page
  const viewBtn = document.querySelector(".reviewBtn._view");
 

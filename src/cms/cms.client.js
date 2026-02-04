@@ -9,7 +9,7 @@ export async function getReviewsByMovieId(movieId) {
   const url = `https://plankton-app-xhkom.ondigitalocean.app/api/reviews?filters[movie]=${movieId}`;
   const response = await fetch(url);
   const result = await response.json();
-  return result.data;
+  return result;
 }
 
 export async function getImdbId(movieId) {
