@@ -1161,6 +1161,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 99999;
+  font-family: "regular Open sans", sans-serif;
 }
 
 /* --- Popup innehåll --- */
@@ -1176,6 +1177,7 @@ body {
   overflow-y: auto;
   box-shadow: 0 8px 20px rgba(116, 58, 10, 0.521);
   animation: fadeInScale 0.3s ease-in-out;
+  font-family: inherit;
 }
 
 /* --- Kryss för att stänga popup --- */
@@ -1205,20 +1207,24 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-family: inherit;
 }
 .review-form-container h3 {
   margin-bottom: 10px;
   font-size: 1.5rem;
   color: #626C7B;
+  font-family: inherit;
 }
 .review-form-container form {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-family: inherit;
 }
 .review-form-container form label {
   font-weight: 500;
   margin-bottom: 5px;
+  font-family: inherit;
 }
 .review-form-container form {
   /* --- Formulärfält --- */
@@ -1234,6 +1240,7 @@ body {
   font-size: 1rem;
   outline: none;
   transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  font-family: inherit;
 }
 .review-form-container form input:focus,
 .review-form-container form select:focus,
@@ -1276,6 +1283,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  font-family: inherit;
 }
 .review-form-container form button:hover {
   background-color: #FF7F4E;
@@ -1287,6 +1295,7 @@ body {
   margin-top: 10px;
   font-size: 0.95rem;
   color: #179A90;
+  font-family: inherit;
 }
 
 /* --- Mobilanpassning --- */

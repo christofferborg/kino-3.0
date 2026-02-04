@@ -5,7 +5,7 @@ const reviewBtn = document.getElementById("reviewBtn");
 const reviewPopup = document.getElementById("reviewPopup");
 const popupWriteInnerContent = document.getElementById("popupWriteInnerContent");
 
-// Skapa kryss-knapp
+
 let closeX = document.createElement("span");
 closeX.classList.add("closeX");
 closeX.innerHTML = "&times;";
@@ -14,7 +14,6 @@ closeX.addEventListener("click", () => {
     if (closeX.parentNode) closeX.remove();
 });
 
-// Klick på "Skriv recension"
 reviewBtn.addEventListener("click", () => {
     // Hämta filmens ID från data-attribut
     currentMovieId = Number(reviewBtn.dataset.id);
@@ -58,7 +57,7 @@ console.log("Aktuell film-ID:", currentMovieId);
         ratingSelect.appendChild(option);
     }
 
-    // Visa popup
+    
     reviewPopup.style.display = "flex";
 
     // Hantera formuläret
@@ -113,7 +112,7 @@ console.log("Aktuell film-ID:", currentMovieId);
     }, { once: true });
 });
 
-// Klick utanför popup stänger popup
+
 window.addEventListener("click", e => {
     if (e.target === reviewPopup) {
         reviewPopup.style.display = "none";
