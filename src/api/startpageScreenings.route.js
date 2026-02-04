@@ -6,20 +6,19 @@ const router = Router();
 
 router.get("/screenings", async (req, res) => {
   try {
-    const days = Number(req.query.days) || 5;
-    const limit = Number(req.query.limit) || 10;
+    const days = Math.min(Number(req.query.days) || 5, 5);
+    const limit = Math.min(Number(req.query.limit) || 10, 10);
 
     const cmsJson = await fetchScreeningsFromCMS();
-
     const result = getUpcomingStartpageScreenings(
       cmsJson,
-      new Date("2025-03-16T00:00:00.000Z"),
+      new Date(),
       days,
       limit,
     );
 
     res.json(result);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ error: "Could not load screenings" });
   }
 });
