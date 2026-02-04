@@ -1,30 +1,52 @@
 import express from "express";
-
 const router = express.Router();
 
-// Temporär "databas" i minnet
-let reviews = [];
+const API_BASE = "https://plankton-app-xhkom.ondigitalocean.app/api/reviews";
 
-// POST: ta emot ny recension
-router.post("/", express.json(), (req, res) => {
+// POST: Skicka recension till externa API
+router.post("/", express.json(), async (req, res) => {
     const { name, rating, comment, movie } = req.body;
 
+    // Kontrollera att alla fält finns
     if (!name || !rating || !comment || !movie) {
-        return res.status(400).json({ success: false, error: "Alla fält krävs" });
+        console.error("POST /api/reviews: Saknar fält", req.body);
+        return res.status(400).json({ success: false, error: "Alla fält krävs (name, rating, comment, movie)" });
     }
 
-    const newReview = {
-        id: reviews.length + 1,
-        name,
-        rating,
-        comment,
-        movie,
-        createdAt: new Date()
-    };
+    try {
+        // Skicka till plankton API
+        const response = await fetch(API_BASE, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        data: {
+            author: name,   // ← mappas från frontend "name"
+            rating,
+            comment,
+            movie
+        }
+    })
+});
 
-    reviews.push(newReview);
+        // Läs svaret
+        const data = await response.json();
 
-    res.json({ success: true, review: newReview });
+        if (!response.ok) {
+            // Om plankton API svarar med fel
+            console.error("Plankton API fel:", data);
+            return res.status(response.status).json({
+                success: false,
+                error: data.error || "Fel vid extern API"
+            });
+        }
+
+        console.log("Recension skickad till plankton API:", data);
+        res.json({ success: true, review: data.data });
+
+    } catch (err) {
+        console.error("POST /api/reviews: Serverfel", err);
+        res.status(500).json({ success: false, error: "Kunde inte skicka recensionen" });
+    }
 });
 
 export default router;

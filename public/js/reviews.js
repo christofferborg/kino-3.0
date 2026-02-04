@@ -17,7 +17,8 @@ closeX.addEventListener("click", () => {
 // Klick på "Skriv recension"
 reviewBtn.addEventListener("click", () => {
     // Hämta filmens ID från data-attribut
-    currentMovieId = reviewBtn.dataset.movieId;
+    currentMovieId = Number(reviewBtn.dataset.id);
+console.log("Aktuell film-ID:", currentMovieId);
 
     // Skapa formulär
     const formHtml = `
@@ -27,7 +28,7 @@ reviewBtn.addEventListener("click", () => {
                 <label for="name">Namn:</label>
                 <input type="text" id="name" name="name" required />
 
-                <label for="rating">Betyg (1-10):</label>
+                <label for="rating">Betyg (1-5):</label>
                 <select id="rating" name="rating" required>
                     <option value="">Välj</option>
                 </select>
@@ -48,9 +49,9 @@ reviewBtn.addEventListener("click", () => {
     if (existingX) existingX.remove();
     reviewPopup.querySelector(".popupWrite-content").prepend(closeX);
 
-    // Dynamiskt generera betyg 1–10
+    // Dynamiskt generera betyg 1–5
     const ratingSelect = document.getElementById("rating");
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 5; i++) {
         const option = document.createElement("option");
         option.value = i;
         option.textContent = i;
@@ -91,14 +92,14 @@ reviewBtn.addEventListener("click", () => {
                 reviewForm.reset();
 
                 // Lägg till recensionen direkt under formuläret
-                const reviewList = document.getElementById("reviewList");
-                const reviewItem = document.createElement("div");
-                reviewItem.classList.add("review-item");
-                reviewItem.innerHTML = `
-                    <strong>${data.review.name}</strong> (${data.review.rating}/10)
-                    <p>${data.review.comment}</p>
-                `;
-                reviewList.prepend(reviewItem);
+                // const reviewList = document.getElementById("reviewList");
+                // const reviewItem = document.createElement("div");
+                // reviewItem.classList.add("review-item");
+                // reviewItem.innerHTML = `
+                //     <strong>${data.review.name}</strong> (${data.review.rating}/10)
+                //     <p>${data.review.comment}</p>
+                // `;
+                // reviewList.prepend(reviewItem);
 
             } else {
                 messageDiv.textContent = "Fel: " + (data.error || "Okänt fel");
