@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import {marked} from "marked";
+import popularMoviesRouter from "./src/api/popularMovies.js";
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 
@@ -179,8 +180,13 @@ app.get("/skriv-recension", (req, res) => {
 app.get("/reviews", (req, res) => {
     res.render("reviews"); // renderar views/reviews.ejs
 });
+
+app.use("/api", popularMoviesRouter);
+
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });
+
+
 
 export default app;
