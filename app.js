@@ -1,12 +1,18 @@
 import "dotenv/config";
 import express from "express";
-import {marked} from "marked";
-import { getScreenings } from "./src/cms/cms.client.js";
+import { marked } from "marked";
+import viewReviewsRouter from "./src/api/view-reviews.route.js";
+import movieRating from "./src/api/movieRating.js";
+import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
+import reviewRouter from "./src/api/reviews-api.js"
+
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
+app.use(movieRating);
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.use("/api/reviews", reviewRouter);
 
 app.get("/", async (req, res) => {
   try {
@@ -20,6 +26,8 @@ app.get("/", async (req, res) => {
     res.render("index", { carouselMovies: [] });
   }
 });
+
+app.use("/api", startpageScreeningsRoute);
 
 app.get("/movies", async (req, res) => {
   const baseUrl = "https://api.themoviedb.org/3/movie";
@@ -174,33 +182,25 @@ app.get("/richards-filmer/:id", async (req, res) => {
     res.status(500).send("Tekniskt fel vid hämtning av filmen.");
   }
 });
+
+
+
 app.get("/skriv-recension", (req, res) => {
   res.render("reviews");
 });
 app.get("/reviews", (req, res) => {
-    res.render("reviews"); // renderar views/reviews.ejs
+  res.render("reviews"); // renderar views/reviews.ejs
 });
 
-app.get("/api/movies/:movieId/screenings", async (req, res) => {
-  try {
-    const { movieId } = req.params;
+app.use("/", viewReviewsRouter);
 
-    const screenings = await getScreenings(movieId);
+import reviewsRouter from "./src/api/reviews-api.js";
 
-    const now = new Date();
+// Middleware för JSON
+app.use(express.json());
 
-    const upcomingScreenings = screenings.filter(screening => {
-      return new Date(screening.start_time) > now;
-    });
-
-    res.json(upcomingScreenings);
-  } catch (error) {
-    console.error("Fel vid hämtning av filmvisningar:", error);
-    res.status(500).json({ error: "Kunde inte hämta filmvisningar" });
-  }
-});
-
-
+// Koppla backend
+app.use("/api/reviews", reviewsRouter);
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });

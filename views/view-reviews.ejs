@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="/css/main.css" />
+   <title> Recensioner</title>
+</head>
+<body>
+
+<div class="header-container"><%- include('partials/header') %></div>
+
+<section class="review-list">
+
+<div class="review-header">
+      <button class="backBtn">
+    <span class="arrow _left" ></span>
+  </button>
+<h1 class="review-title">Recensioner</h1>
+</div>
+
+     <div id="reviews-container" class="reviews-container">
+   
+      <!-- Här laddas recensioner in -->
+
+     </div>
+    
+
+<div class="review-pagination">
+<span class="arrow _left" id="previous-page"></span>
+<p class="page-indicator"></p>
+<span class="arrow _right" id="next-page"></span>
+
+</div>
+
+</section>
+
+  <script type="module" src="/js/view-reviews.js"></script>
+  <script type="module" src="/js/main.js"></script>
+  
+  <div class="footer__container"><%- include('partials/footer') %></div>
+
+</body>
+</html>

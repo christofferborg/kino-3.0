@@ -1,0 +1,133 @@
+@use './mixins_variables' as *;
+
+.reviews-container {
+    justify-content: center;
+    text-align: center;
+    margin: 0 2rem;
+    display: grid;
+    gap: 1rem; 
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(400px, 600px)
+  );
+
+    @include desktop {
+           grid-template-columns: repeat(2, 1fr);
+        }
+
+}
+
+.review-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  @include desktop {
+           grid-column: 1 / -1;
+        }
+  
+}
+
+.review-title {
+  grid-column: 2;
+  justify-self: center;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 4rem 2rem 0 0;
+
+  @include desktop {
+    font-size: 2.5rem;
+    margin: 5rem 0 3rem 0;
+  }
+
+}
+
+.backBtn {
+  justify-self: start;
+  background: none;
+  border: none;
+  margin: 4rem 0 0 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  color: $primary-text-color;
+  margin-left: 2rem;
+
+  //removed back button on desktop
+  @include desktop {
+   visibility: hidden;
+  }
+}
+
+.arrow {
+  display: inline-block;
+  width: 10px;      
+  height: 10px;     
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  margin-left: 0.5rem;
+
+ &._left{
+  transform: rotate(45deg);
+ }
+
+  &._right {
+  transform: rotate(225deg);  
+  margin-left: 0;
+  }
+}
+
+.review-card {
+    height: auto;
+    background-color: $card-color;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: left;
+
+
+    &_rating {
+    font-size: 1rem;
+
+    }
+
+    &_quote {
+    font-size: 1rem;
+    
+    //remove blockquote styling
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    vertical-align:baseline;
+    background:transparent;
+  
+    }
+
+    &_name {
+    font-size: 1rem;
+    padding-top: 1rem;
+    
+    }
+}
+
+.review-pagination {
+margin: 4rem 0 6rem 0;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1rem;
+
+@include desktop {
+           grid-column: 1 / -1;
+           margin: 7.5rem 0 9rem 0;
+        }
+
+&_p {
+    margin:0;
+}
+
+
+}
