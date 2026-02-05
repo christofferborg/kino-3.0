@@ -32,7 +32,7 @@ router.get("/api/movies/:id/rating", async (req, res) => {
     res.json({ rating: finalRating, source: source });
   } catch (error) {
     console.error("Fel vid hämtning av betyg:", error.message);
-    res.status(404).json({ rating: 0, error: "Betyg kunde inte beräknas" });
+    res.status(500).json({ rating: 0, error: "Betyg kunde inte beräknas" });
   }
 });
 
