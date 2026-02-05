@@ -15,11 +15,13 @@ router.get("/api/movies/:id/rating", async (req, res) => {
     const imdbId = await getImdbId(movieId);
     const rawImdbRating = await getImdbRating(imdbId);
     const imdbRating = parseFloat(rawImdbRating);
+
     const finalRating = calculateRating(movieData, imdbRating);
-    res.json({ rating: finalRating });
+    const source = movieData.length >= 5 ? "local" : "imdb";
+    res.json({ rating: finalRating, source: source });
   } catch (error) {
-    res.status(500).json({ error: "Kunde inte hämta betyg" });
-    console.error("Fel vid hämtning av api", error);
+    console.error("Fel vid hämtning av betyg:", error.message);
+    res.status(404).json({ rating: 0, error: "Betyg kunde inte beräknas" });
   }
 });
 
