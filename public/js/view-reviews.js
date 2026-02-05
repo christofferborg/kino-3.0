@@ -51,8 +51,6 @@ async function loadReviews() {
     });
 
     // --- Update pagination buttons ---
-    const prevBtn = document.getElementById("prev");
-    const nextBtn = document.getElementById("next");
     const pageIndicator = document.querySelector(".page-indicator");
 
     if (prevBtn) prevBtn.disabled = currentPage === 1;
