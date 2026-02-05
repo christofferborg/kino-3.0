@@ -1,25 +1,45 @@
-import { jest } from '@jest/globals';
-import express from "express";
+// tests/reviews-api.test.js
 import request from "supertest";
+import express from "express";
 import reviewsRouter from "../src/api/reviews-api.js";
-
-global.fetch = jest.fn(); // global mock av fetch
+import { jest } from "@jest/globals";
 
 const app = express();
 app.use("/api/reviews", reviewsRouter);
 
 describe("POST /api/reviews", () => {
+  let originalLog, originalError;
+
+  beforeEach(() => {
+    originalLog = console.log;
+    originalError = console.error;
+    console.log = jest.fn();
+    console.error = jest.fn();
+
+    
+    global.fetch = jest.fn();
+  });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    console.log = originalLog;
+    console.error = originalError;
+    global.fetch = undefined;
   });
 
   it("skickar recensionen om alla fält är korrekt ifyllda", async () => {
     const mockData = {
-      data: { author: "Orvar", rating: 4, comment: "Bra film", movie: 4, createdAt: "now", updatedAt: "now", verified: null }
+      data: {
+        author: "Orvar",
+        rating: 4,
+        comment: "Bra film",
+        movie: 4,
+        createdAt: "now",
+        updatedAt: "now",
+        verified: null
+      }
     };
 
-    fetch.mockResolvedValueOnce({
+    global.fetch.mockResolvedValue({
       ok: true,
       json: async () => mockData
     });
@@ -31,13 +51,7 @@ describe("POST /api/reviews", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.success).toBe(true);
-    // jämför bara de viktiga fälten
-    expect(response.body.review).toMatchObject({
-      author: "Orvar",
-      rating: 4,
-      comment: "Bra film",
-      movie: 4
-    });
+    expect(response.body.review).toEqual(mockData.data);
   });
 
   it("returnerar 400 om något fält saknas", async () => {
@@ -73,13 +87,13 @@ describe("POST /api/reviews", () => {
     expect(response.body.error).toMatch(/Rating måste vara ett nummer mellan 1 och 5/);
   });
 
-  it("viderför fel från Plankton API korrekt", async () => {
+  it("vidarebefodra fel från Plankton API korrekt", async () => {
     const mockError = {
       data: null,
       error: { status: 400, name: "BadRequestError", message: "Missing movie" }
     };
 
-    fetch.mockResolvedValueOnce({
+    global.fetch.mockResolvedValue({
       ok: false,
       status: 400,
       json: async () => mockError
@@ -96,7 +110,7 @@ describe("POST /api/reviews", () => {
   });
 
   it("returnerar 500 vid serverfel", async () => {
-    fetch.mockRejectedValueOnce(new Error("Serverfel"));
+    global.fetch.mockRejectedValue(new Error("Serverfel"));
 
     const response = await request(app)
       .post("/api/reviews")
@@ -107,5 +121,4 @@ describe("POST /api/reviews", () => {
     expect(response.body.success).toBe(false);
     expect(response.body.error).toBe("Kunde inte skicka recensionen");
   });
-
 });
