@@ -29,7 +29,7 @@ router.post("/", express.json(), async (req, res) => {
                     author: name,
                     rating,
                     comment,
-                    movie: movie // ✅ DETTA är nyckeln
+                    movie: movie 
                 }
             })
         });
