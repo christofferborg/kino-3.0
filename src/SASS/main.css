@@ -1614,6 +1614,7 @@ body {
 .review-card_verified {
   padding-left: 0.5rem;
   display: inline;
+  color: #626C7B;
 }
 
 .review-pagination {

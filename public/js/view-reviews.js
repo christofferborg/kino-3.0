@@ -48,11 +48,12 @@ async function loadReviews() {
 
       const verify = document.createElement("span");
       verify.className = "review-card_verified";
-      verify.innerHTML = review.verified === null ? "&#x2611;": //om verifiering inte är satt
-      review.verified === true ? "&#x2705" : //om den är verifierad
-      review.verified === false ? "&#10060; Ej verifierad" //bör inte finnas i listan
-      : "&#10068; Okänd status"; // Fallback för oväntade värden
-
+      
+     //if verification status is unknown (null)
+      review.verified === true ? verify.innerHTML = "&#x2705" : //if verified is true
+      review.verified === false ? verify.innerHTML = "&#10060; Ej verifierad": //if verified is false (should not exist)
+      verify.innerHTML = "&#x2611;"; //if verification status is unknown (null)
+ 
 
       name.appendChild(verify);
        
