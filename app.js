@@ -1,11 +1,13 @@
 import "dotenv/config";
 import express from "express";
-import { marked } from "marked";
+import {marked} from "marked";
+import movieRating from "./src/api/movieRating.js";
 import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
 import reviewRouter from "./src/api/reviews-api.js"
 
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
+app.use(movieRating);
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
