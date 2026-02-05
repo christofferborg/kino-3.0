@@ -1,57 +1,76 @@
+// src/api/popularMovies.js
 import express from "express";
 import { getReviewsByMovieId } from "../cms/cms.client.js";
 
 const router = express.Router();
-
 const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
 
 router.get("/popularMovies", async (req, res) => {
   try {
+    // 1️⃣ Hämta alla filmer
     const moviesRes = await fetch(
       "https://plankton-app-xhkom.ondigitalocean.app/api/movies"
     );
     const moviesJson = await moviesRes.json();
-    const movies = moviesJson.data;
+    const movies = moviesJson.data || [];
 
-    const now = Date.now();
+    if (!Array.isArray(movies) || movies.length === 0) {
+      console.log("Inga filmer hämtades från CMS");
+      return res.json([]);
+    }
 
+    // 2️⃣ Mappa över filmer
     const moviesWithRatings = await Promise.all(
       movies.map(async (movie) => {
-        const reviews = await getReviewsByMovieId(movie.id);
+        if (!movie?.id) return null;
 
+        // Hämta recensioner
+        const reviewsRaw = await getReviewsByMovieId(movie.id);
+        const reviews = Array.isArray(reviewsRaw.data) ? reviewsRaw.data : [];
+
+        // Logga för debug
+        console.log(`Filmer: ${movie.attributes.title} har ${reviews.length} recensioner totalt`);
+
+        // Filtrera senaste 30 dagar
+        const now = Date.now();
         const recentReviews = reviews.filter((r) => {
-          const created = new Date(r.attributes.createdAt).getTime();
+          const createdAt = r.attributes?.createdAt;
+          if (!createdAt) return false;
+          const created = new Date(createdAt).getTime();
           return now - created <= THIRTY_DAYS;
         });
 
-        if (recentReviews.length === 0) return null;
+        if (recentReviews.length === 0) {
+          console.log(`Filmen "${movie.attributes.title}" filtrerades bort – inga recensioner de senaste 30 dagarna`);
+          return null;
+        }
 
-        const avg =
-          recentReviews.reduce(
-            (sum, r) => sum + r.attributes.rating,
-            0
-          ) / recentReviews.length;
+        // Beräkna medelbetyg
+        const averageRating =
+          recentReviews.reduce((sum, r) => sum + r.attributes.rating, 0) /
+          recentReviews.length;
 
         return {
           id: movie.id,
           title: movie.attributes.title,
-          image: movie.attributes.image.url,
-          averageRating: avg,
+          image: movie.attributes.image?.url || "",
+          averageRating,
+          reviewCount: recentReviews.length,
         };
       })
     );
 
+    // Sortera och ta max 5 filmer
     const topFive = moviesWithRatings
       .filter(Boolean)
       .sort((a, b) => b.averageRating - a.averageRating)
       .slice(0, 5);
 
+    console.log(`Topfilmer att visa i karusell: ${topFive.map(f => f.title).join(", ")}`);
     res.json(topFive);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      error: "Kunde inte hämta populära filmer",
-    });
+    console.error("Fel i /api/popularMovies:", error);
+    res.status(500).json({ error: "Kunde inte hämta populära filmer" });
   }
 });
 

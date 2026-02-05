@@ -11,19 +11,21 @@ export async function initCarousel() {
   try {
     const res = await fetch("/api/popularMovies");
     const movies = await res.json();
-
+console.log("Filmer från backend:", movies);
     if (!Array.isArray(movies) || movies.length === 0) return;
 
-    const slides = container.querySelectorAll(".mySlides");
-    slides.forEach((slide, i) => {
-      const movie = movies[i];
-      if (!movie) return;
+    const slidesHtml = movies
+      .map(
+        (movie) => `
+        <div class="mySlides fade">
+          <img class="slide-img" src="${movie.image}" alt="${movie.title}" />
+          <h2 class="slide-title">${movie.title}</h2>
+        </div>
+      `
+      )
+      .join("");
 
-      slide.innerHTML = `
-        <img class="slide-img" src="${movie.image}" alt="${movie.title}" style="width:100%">
-        <h2 class="slide-title">${movie.title}</h2>
-      `;
-    });
+    container.insertAdjacentHTML("afterbegin", slidesHtml);
 
     const prevBtn = container.querySelector(".prev");
     const nextBtn = container.querySelector(".next");
