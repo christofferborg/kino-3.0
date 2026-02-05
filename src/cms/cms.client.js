@@ -32,15 +32,14 @@ export async function getImdbRating(imdbId) {
   return result.imdbRating;
 }
 
-export async function getScreenings(movieId) {
-  const url = `https://plankton-app-xhkom.ondigitalocean.app/api/screenings?filters[movie]=${movieId}`;
+export async function getScreenings() {
+  const url = `${BASE}/screenings?populate=movie&pagination[pageSize]=200`;
+  const res = await fetch(url);
 
-  const response = await fetch(url);
-  const result = await response.json();
+  if (!res.ok) {
+    throw new Error(`CMS error: ${res.status}`);
+  }
 
-  return result.data.map(item => ({
-    id: item.id,
-    start_time: item.attributes.start_time,
-    room: item.attributes.room
-  }));
+  return res.json();
 }
+
