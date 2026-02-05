@@ -25,9 +25,5 @@ const reviews = [
     expect(page2.data.length).toBeLessThanOrEqual(5);
     expect(page3.data.length).toBeLessThanOrEqual(5);
     
-    //log can be removed before merge
-    console.log(page1.data);
-    console.log(page2.data);
-    console.log(page3.data);
   });
 });
