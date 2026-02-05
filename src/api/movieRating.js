@@ -18,6 +18,17 @@ router.get("/api/movies/:id/rating", async (req, res) => {
 
     const finalRating = calculateRating(movieData, imdbRating);
     const source = movieData.length >= 5 ? "local" : "imdb";
+    
+    if (source === "imdb") {
+      console.log(
+        `[Rating Service] INFO: Visar IMDb-betyg för film ID ${movieId} (Hittade bara ${movieData.length} recensioner)`,
+      );
+    } else {
+      console.log(
+        `[Rating Service] INFO: Beräknar lokalt betyg för film ID ${movieId} (Hittade ${movieData.length} recensioner)`,
+      );
+    }
+
     res.json({ rating: finalRating, source: source });
   } catch (error) {
     console.error("Fel vid hämtning av betyg:", error.message);
