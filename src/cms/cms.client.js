@@ -1,4 +1,5 @@
 import "dotenv/config";
+const BASE = "https://plankton-app-xhkom.ondigitalocean.app/api";
 
 console.log(
   "Kollar nyckeln:",
@@ -9,14 +10,18 @@ export async function getReviewsByMovieId(movieId) {
   const url = `https://plankton-app-xhkom.ondigitalocean.app/api/reviews?filters[movie]=${movieId}`;
   const response = await fetch(url);
   const result = await response.json();
-  return result.data;
+  return result;
 }
 
 export async function getImdbId(movieId) {
   const url = `https://plankton-app-xhkom.ondigitalocean.app/api/movies/${movieId}`;
   const response = await fetch(url);
   const result = await response.json();
-  return result.data.attributes.imdbId;
+  if (!result || !result.data) {
+    throw new Error(`Ingen film hittades i CMS för ID: ${movieId}`);
+  }
+
+  return result.data.attributes.imdbId; 
 }
 
 export async function getImdbRating(imdbId) {
@@ -27,9 +32,13 @@ export async function getImdbRating(imdbId) {
   return result.imdbRating;
 }
 
-export async function getScreenings(movieId) {
-  const url = `https://plankton-app-xhkom.ondigitalocean.app/api/screenings`;
-  const response = await fetch(url);
-  const result = await response.json();
-  return result.data;
+export async function getScreenings() {
+  const url = `${BASE}/screenings?populate=movie&pagination[pageSize]=200`;
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`CMS error: ${res.status}`);
+  }
+
+  return res.json();
 }
