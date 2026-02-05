@@ -45,9 +45,9 @@ viewReviewsRouter.get("/richards-filmer/:id/reviews/total", async (req, res) => 
     const movieId = req.params.id;
     const cmsData = await getReviewsByMovieId(movieId); // now full object
 
-    const totalReviews = cmsData?.meta?.pagination?.total || 0;
-
-    res.json({ totalReviews });
+     res.json({
+        totalReviews: cmsData.length
+      });
   } catch (error) {
     console.error("Fel vid hämtning av totalt antal recensioner:", error);
     res.status(500).json({ error: "500: Kunde inte hämta totalt antal recensioner." });
