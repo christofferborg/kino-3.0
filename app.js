@@ -2,12 +2,16 @@ import "dotenv/config";
 import express from "express";
 import {marked} from "marked";
 import movieRating from "./src/api/movieRating.js";
+import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
+import reviewRouter from "./src/api/reviews-api.js"
+
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 app.use(movieRating);
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.use("/api/reviews", reviewRouter);
 
 app.get("/", async (req, res) => {
   try {
@@ -21,6 +25,8 @@ app.get("/", async (req, res) => {
     res.render("index", { carouselMovies: [] });
   }
 });
+
+app.use("/api", startpageScreeningsRoute);
 
 app.get("/movies", async (req, res) => {
   const baseUrl = "https://api.themoviedb.org/3/movie";
@@ -179,8 +185,28 @@ app.get("/skriv-recension", (req, res) => {
   res.render("reviews");
 });
 app.get("/reviews", (req, res) => {
-    res.render("reviews"); // renderar views/reviews.ejs
+  res.render("reviews"); // renderar views/reviews.ejs
 });
+
+//Kanske döper om movieId till movie.id senare
+app.get("/richards-filmer/:id/view-reviews", (req, res) => {
+  res.render("view-reviews", { movieId: req.params.id });
+  res.render("movie-info", { movie });
+});
+
+//Kanske döper om movieId till movie.id senare
+app.get("/richards-filmer/:id/view-reviews", (req, res) => {
+  res.render("view-reviews", { movieId: req.params.id });
+  res.render("movie-info", { movie });
+});
+
+import reviewsRouter from "./src/api/reviews-api.js";
+
+// Middleware för JSON
+app.use(express.json());
+
+// Koppla backend
+app.use("/api/reviews", reviewsRouter);
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });

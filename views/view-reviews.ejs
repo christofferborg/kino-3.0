@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="/css/main.css" />
+   <title> Recensioner</title>
+</head>
+<body>
+
+<div class="header-container"><%- include('partials/header') %></div>
+
+<section class="review-list">
+
+<div class="review-header">
+      <button class="backBtn" onclick="history.back()">
+    <span class="arrow _left" ></span>
+  </button>
+<h1 class="review-title">Recensioner</h1>
+</div>
+
+<article class="review-card">
+<p class="review-card_rating">&#11088; 9.8/10</p>
+     <blockquote class="review-card_quote">"This is the best movie I have ever seen"</blockquote>
+     <h2 class="review-card_name">Namn Namnsson</h2>
+</article>
+
+<article class="review-card">
+<p class="review-card_rating">&#11088; 9.8/10</p>
+     <blockquote class="review-card_quote">"This is the best movie I have ever seen"</blockquote>
+     <h2 class="review-card_name">Namn Namnsson</h2>
+</article>
+
+<article class="review-card">
+<p class="review-card_rating">&#11088; 9.8/10</p>
+     <blockquote class="review-card_quote">"This is the best movie I have ever seen"</blockquote>
+     <h2 class="review-card_name">Namn Namnsson</h2>
+</article>
+
+<article class="review-card">
+<p class="review-card_rating">&#11088; 9.8/10</p>
+     <blockquote class="review-card_quote">"This is the best movie I have ever seen"</blockquote>
+     <h2 class="review-card_name">Namn Namnsson</h2>
+</article>
+
+<article class="review-card">
+<p class="review-card_rating">&#11088; 9.8/10</p>
+     <blockquote class="review-card_quote">"This is the best movie I have ever seen"</blockquote>
+     <h2 class="review-card_name">Namn Namnsson</h2>
+</article>
+
+<div class="review-pagination">
+<span class="arrow _left" id="previous-page"></span>
+<p>1/2</p>
+<span class="arrow _right" id="next-page"></span>
+
+</div>
+
+ <button class="reviewBtn _write" id="reviewBtn">Skriv recension <span class="arrow _right"></span></button>
+          <div id="reviewPopup" class="popupWrite" style="display: none;">
+            <div class="popupWrite-content">
+              <div id="popupWriteInnerContent">
+                <!-- Här laddas reviews.ejs -->
+              </div>
+            </div>
+          </div>
+
+</section>
+  <script type="module" src="/js/main.js"></script>
+  <script src="/js/reviews.js"></script>
+  
+  <div class="footer__container"><%- include('partials/footer') %></div>
+
+</body>
+</html>
