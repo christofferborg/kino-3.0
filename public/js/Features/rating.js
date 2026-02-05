@@ -23,6 +23,7 @@ export const getRatingFromBackend = async () => {
       imdbLogo.alt = "IMDb";
       imdbLogo.style.width = "40px";
       imdbLogo.style.verticalAlign = "middle";
+      imdbLogo.style.marginRight = "5px";
       ratingArea.append(imdbLogo, ` ${ratingValue}`);
     }
   } catch (err) {
