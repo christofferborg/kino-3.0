@@ -36,7 +36,7 @@ async function loadReviews() {
 
       const rating = document.createElement("p");
       rating.className = "review-card_rating";
-      rating.innerHTML = `&#11088; ${review.rating}/10`;
+      rating.innerHTML = `&#11088; ${review.rating}/5`;
 
       const quote = document.createElement("blockquote");
       quote.className = "review-card_quote";
