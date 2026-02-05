@@ -43,7 +43,13 @@ router.post("/", express.json(), async (req, res) => {
                 error: data.error?.message || "Fel vid extern API"
             });
         }
-
+        console.log("Recension skickad till Plankton API:", {
+            name,
+            rating,
+            comment,
+            movie,
+            responseData: data
+        });
         res.json({ success: true, review: data.data });
 
     } catch (err) {
