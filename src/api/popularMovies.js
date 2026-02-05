@@ -1,4 +1,3 @@
-// src/api/popularMovies.js
 import express from "express";
 import { getReviewsByMovieId } from "../cms/cms.client.js";
 
@@ -7,7 +6,7 @@ const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
 
 router.get("/popularMovies", async (req, res) => {
   try {
-    // 1️⃣ Hämta alla filmer
+    // Hämta alla filmer
     const moviesRes = await fetch(
       "https://plankton-app-xhkom.ondigitalocean.app/api/movies"
     );
