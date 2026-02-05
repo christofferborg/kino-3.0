@@ -19,7 +19,7 @@ viewReviewsRouter.get("/richards-filmer/:id/view-reviews/api", async (req, res) 
     const page = Number(req.query.page) || 1;
     const pageSize = 5;
 
-    const simplifiedReviews = cmsResponse.data.map(review => ({
+    const simplifiedReviews = cmsResponse.map(review => ({
       quote: review.attributes.comment,
       rating: review.attributes.rating,
       name: review.attributes.author
