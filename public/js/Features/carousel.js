@@ -11,19 +11,20 @@ export async function initCarousel() {
   try {
     const res = await fetch("/api/popularMovies");
     const movies = await res.json();
-console.log("Filmer från backend:", movies);
     if (!Array.isArray(movies) || movies.length === 0) return;
 
-    const slidesHtml = movies
-      .map(
-        (movie) => `
-        <div class="mySlides fade">
+   const slidesHtml = movies
+  .map(
+    (movie) => `
+      <div class="mySlides fade">
+        <div class="slide-image-wrapper">
           <img class="slide-img" src="${movie.image}" alt="${movie.title}" />
-          <h2 class="slide-title">${movie.title}</h2>
         </div>
-      `
-      )
-      .join("");
+        <h3 class="slide-title">${movie.title}</h3>
+      </div>
+    `
+  )
+  .join("");
 
     container.insertAdjacentHTML("afterbegin", slidesHtml);
 

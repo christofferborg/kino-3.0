@@ -573,15 +573,28 @@ body {
 /* Slideshow container */
 .slideshow-container {
   position: relative;
-  margin: 2rem auto;
   max-width: 1200px;
-  width: calc(100% - 4rem);
   margin: 2rem auto;
+  padding: 1.5rem;
+  background-color: #080B10;
+  border-radius: 16px;
 }
 
 /* Hide the images by default */
 .mySlides {
   display: none;
+  text-align: center;
+}
+
+.slide-image-wrapper {
+  width: 100%;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #080B10;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .prev,
@@ -644,8 +657,9 @@ body {
 }
 
 .mySlides img {
-  pointer-events: none;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .slideshow-container {
@@ -657,20 +671,13 @@ body {
 }
 
 .slide-title {
-  position: absolute;
-  left: 1.25rem;
-  right: 1.25rem;
-  bottom: 1.25rem;
-  margin: 0;
+  margin-top: 0.75rem;
   font-family: "bold Open sans", sans-serif;
   font-weight: 700;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
   color: #F5F7FA;
-  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.65);
-  pointer-events: none;
-  font-size: 1.25rem;
-  line-height: 1.15;
-  background-color: transparent;
+  font-size: 1.4rem;
+  text-align: center;
 }
 .slide-title .slide-title::after {
   content: "";

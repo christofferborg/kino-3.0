@@ -19,7 +19,7 @@ router.get("/popularMovies", async (req, res) => {
       return res.json([]);
     }
 
-    // 2️⃣ Mappa över filmer
+    // Mappa över filmer
     const moviesWithRatings = await Promise.all(
       movies.map(async (movie) => {
         if (!movie?.id) return null;
@@ -27,9 +27,6 @@ router.get("/popularMovies", async (req, res) => {
         // Hämta recensioner
         const reviewsRaw = await getReviewsByMovieId(movie.id);
         const reviews = Array.isArray(reviewsRaw.data) ? reviewsRaw.data : [];
-
-        // Logga för debug
-        console.log(`Filmer: ${movie.attributes.title} har ${reviews.length} recensioner totalt`);
 
         // Filtrera senaste 30 dagar
         const now = Date.now();
@@ -41,7 +38,6 @@ router.get("/popularMovies", async (req, res) => {
         });
 
         if (recentReviews.length === 0) {
-          console.log(`Filmen "${movie.attributes.title}" filtrerades bort – inga recensioner de senaste 30 dagarna`);
           return null;
         }
 
@@ -66,7 +62,6 @@ router.get("/popularMovies", async (req, res) => {
       .sort((a, b) => b.averageRating - a.averageRating)
       .slice(0, 5);
 
-    console.log(`Topfilmer att visa i karusell: ${topFive.map(f => f.title).join(", ")}`);
     res.json(topFive);
   } catch (error) {
     console.error("Fel i /api/popularMovies:", error);
