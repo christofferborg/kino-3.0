@@ -1505,7 +1505,7 @@ body {
     width: 100%;
   }
 }
-.review-list {
+.reviews-container {
   justify-content: center;
   text-align: center;
   margin: 0 2rem;
@@ -1514,7 +1514,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(400px, 600px));
 }
 @media screen and (min-width: 1018px) {
-  .review-list {
+  .reviews-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -1536,7 +1536,7 @@ body {
   justify-self: center;
   font-size: 1.5rem;
   line-height: 1.2;
-  margin: 4rem 0 0 0;
+  margin: 4rem 2rem 0 0;
 }
 @media screen and (min-width: 1018px) {
   .review-title {
@@ -1555,6 +1555,7 @@ body {
   align-items: center;
   line-height: 0;
   color: #F5F7FA;
+  margin-left: 2rem;
 }
 @media screen and (min-width: 1018px) {
   .backBtn {

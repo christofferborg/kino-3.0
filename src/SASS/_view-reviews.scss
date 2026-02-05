@@ -1,7 +1,6 @@
 @use './mixins_variables' as *;
 
-
-.review-list {
+.reviews-container {
     justify-content: center;
     text-align: center;
     margin: 0 2rem;
@@ -36,7 +35,7 @@
   justify-self: center;
   font-size: 1.5rem;
   line-height: 1.2;
-  margin: 4rem 0 0 0;
+  margin: 4rem 2rem 0 0;
 
   @include desktop {
     font-size: 2.5rem;
@@ -55,6 +54,7 @@
   align-items: center;
   line-height: 0;
   color: $primary-text-color;
+  margin-left: 2rem;
 
   //removed back button on desktop
   @include desktop {

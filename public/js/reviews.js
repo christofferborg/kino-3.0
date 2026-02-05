@@ -1,3 +1,39 @@
+// Total reviews button
+const totalReviewsEl = document.getElementById("viewReviewsBtn");
+if (!totalReviewsEl) throw new Error("Button element not found");
+
+// Get movie ID from data attribute
+const movieId = totalReviewsEl.dataset.id;
+  console.log("Movie ID:", movieId);
+
+export async function loadTotalReviews() {
+  try {
+    const res = await fetch(`/richards-filmer/${movieId}/reviews/total`);
+    if (!res.ok) throw new Error("Failed to fetch total reviews");
+
+    const data = await res.json();
+    console.log("API data:", data);
+
+    totalReviewsEl.innerHTML = `Recensioner (${data.totalReviews}) <span class="arrow _right"></span>`;
+  } catch (error) {
+    console.error("Fel vid hämtning av totalt antal recensioner:", error);
+    totalReviewsEl.innerHTML = `Recensioner (0) <span class="arrow _right"></span>`;
+  }
+}
+
+// Automatically load total reviews on DOMContentLoaded
+window.addEventListener("DOMContentLoaded", loadTotalReviews);
+
+ //button to access the view reviews page
+ const viewBtn = document.querySelector(".reviewBtn._view");
+
+  viewBtn.addEventListener("click", () => {
+    const id = viewBtn.dataset.id;
+    window.location.href = `/richards-filmer/${id}/view-reviews`;
+     });
+
+    
+//popup for viewing reviews
 // Global variabel för aktuell film
 let currentMovieId = null;
 
