@@ -1,6 +1,10 @@
 import { initCarousel } from "./Features/carousel.js";
+import { getRatingFromBackend } from "./Features/rating.js";
+import { initStartpageScreenings } from "./Features/startpageScreenings.js";
 
-initCarousel(); 
+getRatingFromBackend();
+initCarousel();
+initStartpageScreenings();
 
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.querySelector(".nav-menu");
@@ -58,3 +62,5 @@ document.addEventListener("click", (e) => {
     desktopDropdown.classList.remove("active");
   }
 });
+
+
