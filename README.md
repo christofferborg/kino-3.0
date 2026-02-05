@@ -48,3 +48,7 @@ Diskussion som CMS som tog vidare till nästa möte.
 26-02-03
 Idag tog vi beslut hur vi ska göra med CMS och APIet.
 Vi har tagit bort en regel från vårt arbetssätt. Regeln där en person granskade koden och en annan testade det. Från och med nu ska en och samma person granska och testa PR.
+
+26-02-03
+Lenson och Kevin var frånvarande.
+Vi har stämt av i gruppen hur det går för alla. Sedan har vi diskuterat hur vi skriver dokumentationen för vårt REST API så att det är kort men koncist.
