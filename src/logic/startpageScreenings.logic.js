@@ -8,8 +8,12 @@ export function getUpcomingStartpageScreenings(
   days = 5,
   limit = 10,
 ) {
-  const maxDate = new Date(now);
-  maxDate.setDate(maxDate.getDate() + days);
+  const rangeStart = new Date(now);
+  rangeStart.setUTCHours(0, 0, 0, 0);
+  rangeStart.setUTCDate(rangeStart.getUTCDate() + 1);
+
+  const rangeEnd = new Date(rangeStart);
+  rangeEnd.setUTCDate(rangeEnd.getUTCDate() + days);
 
   const filteredSorted = (cmsJson.data ?? [])
     .map((item) => {
@@ -34,13 +38,12 @@ export function getUpcomingStartpageScreenings(
     .filter((screening) => screening.startsAtDate)
     .filter(
       (screening) =>
-        screening.startsAtDate >= now && screening.startsAtDate < maxDate,
+        screening.startsAtDate >= rangeStart &&
+        screening.startsAtDate < rangeEnd,
     )
     .sort((a, b) => a.startsAtDate - b.startsAtDate);
 
-  const nextTenScreenings = filteredSorted.slice(0, limit);
-
-  const groupedByDay = nextTenScreenings.reduce((acc, screening) => {
+  const groupedByDay = filteredSorted.reduce((acc, screening) => {
     const day = dayKey(screening.startsAtDate);
     (acc[day] ??= []).push({
       id: screening.id,
@@ -51,9 +54,21 @@ export function getUpcomingStartpageScreenings(
     return acc;
   }, {});
 
-  const dayList = Object.keys(groupedByDay)
-    .sort()
-    .map((date) => ({ date, screenings: groupedByDay[date] }));
+  const sortedDates = Object.keys(groupedByDay).sort();
 
-  return { days: dayList, total: nextTenScreenings.length };
+  const dayList = [];
+  let total = 0;
+
+  for (const date of sortedDates) {
+    const dayScreenings = groupedByDay[date] ?? [];
+
+    if (total + dayScreenings.length > limit) break;
+
+    dayList.push({ date, screenings: dayScreenings });
+    total += dayScreenings.length;
+
+    if (total === limit) break;
+  }
+
+  return { days: dayList, total };
 }
