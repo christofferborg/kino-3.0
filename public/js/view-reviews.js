@@ -46,6 +46,16 @@ async function loadReviews() {
       name.className = "review-card_name";
       name.textContent = review.name;
 
+      const verify = document.createElement("span");
+      verify.className = "review-card_verified";
+      verify.innerHTML = review.verified === null ? "&#x2611;": //om verifiering inte är satt
+      review.verified === true ? "&#x2705" : //om den är verifierad
+      review.verified === false ? "&#10060; Ej verifierad" //bör inte finnas i listan
+      : "&#10068; Okänd status"; // Fallback för oväntade värden
+
+
+      name.appendChild(verify);
+       
       card.append(rating, quote, name);
       reviewsContainer.appendChild(card);
     });

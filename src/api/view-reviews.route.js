@@ -22,7 +22,9 @@ viewReviewsRouter.get("/richards-filmer/:id/view-reviews/api", async (req, res) 
     const simplifiedReviews = cmsResponse.map(review => ({
       quote: review.attributes.comment,
       rating: review.attributes.rating,
-      name: review.attributes.author
+      name: review.attributes.author,
+
+      verified: review.attributes.verified
     }));
 
     const result = paginateReviews(simplifiedReviews, page, pageSize);
