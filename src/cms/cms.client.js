@@ -17,7 +17,11 @@ export async function getImdbId(movieId) {
   const url = `https://plankton-app-xhkom.ondigitalocean.app/api/movies/${movieId}`;
   const response = await fetch(url);
   const result = await response.json();
-  return result.data.attributes.imdbId;
+  if (!result || !result.data) {
+    throw new Error(`Ingen film hittades i CMS för ID: ${movieId}`);
+  }
+
+  return result.data.attributes.imdbId; 
 }
 
 export async function getImdbRating(imdbId) {

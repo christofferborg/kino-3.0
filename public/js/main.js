@@ -1,6 +1,8 @@
 import { initCarousel } from "./Features/carousel.js";
+import { getRatingFromBackend } from "./Features/rating.js";
 import { initStartpageScreenings } from "./Features/startpageScreenings.js";
 
+getRatingFromBackend();
 initCarousel();
 initStartpageScreenings();
 
@@ -60,3 +62,5 @@ document.addEventListener("click", (e) => {
     desktopDropdown.classList.remove("active");
   }
 });
+
+
