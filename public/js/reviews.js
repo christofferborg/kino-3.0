@@ -90,16 +90,6 @@ console.log("Aktuell film-ID:", currentMovieId);
                 messageDiv.style.color = "green";
                 reviewForm.reset();
 
-                // Lägg till recensionen direkt under formuläret
-                // const reviewList = document.getElementById("reviewList");
-                // const reviewItem = document.createElement("div");
-                // reviewItem.classList.add("review-item");
-                // reviewItem.innerHTML = `
-                //     <strong>${data.review.name}</strong> (${data.review.rating}/10)
-                //     <p>${data.review.comment}</p>
-                // `;
-                // reviewList.prepend(reviewItem);
-
             } else {
                 messageDiv.textContent = "Fel: " + (data.error || "Okänt fel");
                 messageDiv.style.color = "red";
