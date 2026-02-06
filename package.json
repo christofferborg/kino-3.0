@@ -10,7 +10,9 @@
     "dev": "nodemon server.js",
     "compile-sass": "sass --no-source-map src/sass/main.scss",
     "watch-sass": "sass --watch --no-source-map src/sass/main.scss",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --ci --detectOpenHandles"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --ci --detectOpenHandles",
+    "test:review-api": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/reviews-api.test.js --forceExit",
+    "build": "sass src/SASS:public/css --watch"
   },
   "devDependencies": {
     "browser-sync": "^3.0.4",
