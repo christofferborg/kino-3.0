@@ -1,9 +1,10 @@
 import express from "express";
+import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
 
 const API_BASE = "https://plankton-app-xhkom.ondigitalocean.app/api/reviews";
 
-router.post("/", express.json(), async (req, res) => {
+router.post("/", express.json(), verifyToken, async (req, res) => {
     const { name, rating, comment, movie } = req.body;
 
     if (!name || !comment || movie === undefined || rating === undefined) {

@@ -1,9 +1,14 @@
 // tests/reviews-api.test.js
-import request from "supertest";
-import express from "express";
-import reviewsRouter from "../src/api/reviews-api.js";
 import { jest } from "@jest/globals";
 
+jest.unstable_mockModule("../src/middleware/auth.js", () => ({
+  verifyToken: (req, res, next) => next()
+}));
+
+import request from "supertest";
+import express from "express";
+
+const { default: reviewsRouter } = await import("../src/api/reviews-api.js");
 const app = express();
 app.use("/api/reviews", reviewsRouter);
 
