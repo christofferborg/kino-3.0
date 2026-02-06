@@ -157,6 +157,12 @@ Content-Type: application/json
 }
 ```
 
+---
+
+# *Notering för recensioner och betyg
+**Bara recensioner som blivit verifierade (verified === true) ingår i recensionerna som hämtas från API:et, detta gäller även för beräkningen av betyg**
+
+
 # Movie Rating API
 
 Resurs som används för att hämta ett genomsnittligt betyg för en specifik film baserat på ID.
@@ -193,6 +199,71 @@ Vid ett lyckat anrop returneras ett JSON-objekt enligt följande form:
 * **400 Bad Request** – **Ogiltigt Movie-ID.** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
 * **500 Internal Server Error** – **Betyg kunde inte beräknas.** Ett oväntat fel uppstod på servern eller vid kommunikation med externa tjänster (Strapi/OMDb).
 
+---
+
+# Get movie reviews API
+Resurs som används för att hämta recensioner för en specifik film baserat på dess ID. 
+
+
+## Request Format
+* **Metod:** `GET`
+* **Endpoint:** `/api/movies/:id/view-reviews`
+
+---
+
+## Logik för antal recensioner per sida
+Varje sida visar upp till 5st recensioner, om det finns fler används paginering för att dela upp innehållet. 
+
+---
+
+## Response Format
+Vid ett lyckat anrop returneras ett JSON-objekt enligt följande form:
+
+```json
+{
+  "reviews": [
+ {
+ "quote": "Mycket bra",
+ "rating": 5,
+ "name": "RR",
+ "verified": true
+ }
+],
+  "totalPages": 1,
+  "totalItems": 1,
+   "page": 1
+}
+
+```
+## Response Statuskoder
+
+* **200 OK** – **Recensioner kunde hämtas.** Recensionerna kunde hämtas.
+* **400 Bad Request** – **Ogiltigt Movie-ID eller sidnummer** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
+* **500 Internal Server Error** – **Kunde inte hämta recensioner.** Ett oväntat fel uppstod på servern.
+
+# Get total movie reviews API
+Resurs som används för att hämta totala antalet recensioner som visas, för respektive film, baserat på ID.
+
+
+## Request Format
+* **Metod:** `GET`
+* **Endpoint:** `/api/movies/:id/reviews/total`
+
+---
+## Response Format
+Vid ett lyckat anrop retuneras ett JSON-objekt med "totalReviews" enligt följande form:
+
+```json
+{
+  "totalReviews": 4
+}
+```
+
+---
+* **200 OK** – **Antal recensioner kunde hämtas.** Recensionerna kunde hämtas.
+* **400 Bad Request** – **Ogiltigt Movie-ID eller saknat Movie-ID** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
+* **500 Internal Server Error** – **Kunde inte hämta antal recensioner.** Ett oväntat fel uppstod på servern.
+
 
 # Reviews API – POST
 ## POST /api/reviews
@@ -222,3 +293,4 @@ Vid ett lyckat anrop returneras ett JSON-objekt enligt följande form:
 ### Externt API
 >Recensionen skickas vidare till:
 >https://plankton-app-xhkom.ondigitalocean.app/api/reviews
+
