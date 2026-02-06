@@ -46,6 +46,12 @@ Vi har tagit bort en regel från vårt arbetssätt. Regeln där en person gransk
 Lenson och Kevin var frånvarande.
 Vi har stämt av i gruppen hur det går för alla. Sedan har vi diskuterat hur vi skriver dokumentationen för vårt REST API så att det är kort men koncist.
 
+26-02-06
+Alla närvarande. Slutfix samt ändrat buildkommando för sass till npm run build.
+Pratat igenom API dokumentationen. 
+Gått igenom några PR och frågetecken om uppgifter. Kollat så att befintliga funktioner fungerar.
+
+
 ### API Documentation
 
 ## Screenings:
@@ -150,3 +156,63 @@ Content-Type: application/json
   "error": "Could not load screenings"
 }
 ```
+------------------------------------------------------------------------------------------------------
+Viktoria: 
+
+Reviews API – POST
+POST /api/reviews
+Används för att skicka in en ny filmrecension från frontend till CMS (Plankton API).
+Request body
+
+{
+ "name": "Anna Andersson",
+  "rating": 5,
+  "comment": "Bra film!",
+  "movie": 3
+}
+Validering
+Alla fält (name, rating, comment, movie) måste vara ifyllda
+Annars returneras 400 Bad Request
+Response
+200 OK – Recensionen har skapats och skickats vidare till Plankton API
+400 Bad Request – Saknade eller ogiltiga fält
+500 Internal Server Error – Serverfel eller problem med externt API
+Externt API
+Recensionen skickas vidare till:
+
+https://plankton-app-xhkom.ondigitalocean.app/api/reviews
+
+Reviews API - testet
+POST /api/reviews
+Skickar en filmrecension.
+Request Body (JSON, alla fält obligatoriska):
+
+{
+ "name": "Orvar",
+  "rating": 4,
+  "comment": "Bra film",
+  "movie": 4
+}
+Fält:
+name (string) – Recensentens namn
+rating (number) – 1–5
+comment (string) – Recensionstext
+movie (number) – Film-ID
+Response:
+200 OK – Recension skickad, review innehåller recensionen
+400 Bad Request – Saknade fält eller ogiltig rating
+500 Internal Server Error – Serverproblem eller fel från Plankton API
+Exempel framgång:
+
+{
+  "success": true,
+  "review": {
+    "id": 456,
+    "author": "Orvar",
+    "rating": 4,
+    "comment": "Bra film",
+    "movie": 4
+  }
+}
+Notera: rating måste vara heltal 1–5 och alla fält måste vara ifyllda.
+------------------------------------------------------------------------------------------------
