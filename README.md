@@ -46,6 +46,10 @@ Vi har tagit bort en regel från vårt arbetssätt. Regeln där en person gransk
 Lenson och Kevin var frånvarande.
 Vi har stämt av i gruppen hur det går för alla. Sedan har vi diskuterat hur vi skriver dokumentationen för vårt REST API så att det är kort men koncist.
 
+26-02-06
+Alla närvarande. Slutfix samt ändrat buildkommando för sass till npm run build.
+Pratat igenom API dokumentationen. 
+Gått igenom några PR och frågetecken om uppgifter. Kollat så att befintliga funktioner fungerar.
 
 
 ### API Documentation
