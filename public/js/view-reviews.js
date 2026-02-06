@@ -46,6 +46,17 @@ async function loadReviews() {
       name.className = "review-card_name";
       name.textContent = review.name;
 
+      const verify = document.createElement("span");
+      verify.className = "review-card_verified";
+      
+     //if verification status is unknown (null)
+      review.verified === true ? verify.innerHTML = "&#x2705" : //if verified is true
+      review.verified === false ? verify.innerHTML = "&#10060; Ej verifierad": //if verified is false (should not exist)
+      verify.innerHTML = "&#x2611;"; //if verification status is unknown (null)
+ 
+
+      name.appendChild(verify);
+       
       card.append(rating, quote, name);
       reviewsContainer.appendChild(card);
     });

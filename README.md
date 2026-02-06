@@ -153,4 +153,38 @@ Content-Type: application/json
 }
 ```
 
+# Movie Rating API
 
+Resurs som används för att hämta ett genomsnittligt betyg för en specifik film baserat på ID.
+
+## Request Format
+* **Metod:** `GET`
+* **Endpoint:** `/api/movies/:id/rating`
+
+---
+
+## Logik för beräkning
+Systemet väljer automatiskt datakälla baserat på antalet verifierade recensioner i biografens CMS:
+
+* **Lokalt betyg:** Om filmen har **5 eller fler** verifierade recensioner används genomsnittet av dessa.
+* **IMDb-betyg:** Om filmen har **färre än 5** verifierade recensioner hämtas istället filmens officiella betyg från IMDb.
+
+---
+
+## Response Format
+Vid ett lyckat anrop returneras ett JSON-objekt enligt följande form:
+
+```json
+{
+  "rating": 3.4,
+  "source": "local"
+}
+```
+
+---
+
+## Response Statuskoder
+
+* **200 OK** – **Betyg kunde hämtas.** Anropet lyckades och det beräknade betyget returnerades korrekt.
+* **400 Bad Request** – **Ogiltigt Movie-ID.** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
+* **500 Internal Server Error** – **Betyg kunde inte beräknas.** Ett oväntat fel uppstod på servern eller vid kommunikation med externa tjänster (Strapi/OMDb).
