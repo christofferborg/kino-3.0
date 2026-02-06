@@ -13,11 +13,11 @@ app.use(movieRating);
 app.use(express.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-
 app.use("/api/auth", authRouter);  
 //app.use("/api/reviews", reviewRouter);
 app.use("/api", popularMoviesRouter);
 app.use("/", viewReviewsRouter);
+
 
 app.get("/", async (req, res) => {
   try {
@@ -188,6 +188,9 @@ app.get("/richards-filmer/:id", async (req, res) => {
   }
 });
 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
 
 
 app.get("/skriv-recension", (req, res) => {
@@ -196,7 +199,6 @@ app.get("/skriv-recension", (req, res) => {
 app.get("/reviews", (req, res) => {
   res.render("reviews"); // renderar views/reviews.ejs
 });
-
 
 
 //import reviewsRouter from "./src/api/reviews-api.js";

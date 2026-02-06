@@ -1,6 +1,7 @@
 // tests/reviews-api.test.js
 import { jest } from "@jest/globals";
 
+// Mocka auth – JWT testas i annan fil
 jest.unstable_mockModule("../src/middleware/auth.js", () => ({
   verifyToken: (req, res, next) => next()
 }));
