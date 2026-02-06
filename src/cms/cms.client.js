@@ -11,7 +11,7 @@ export async function getReviewsByMovieId(movieId) {
   const response = await fetch(url);
   const result = await response.json();
   return result.data.filter(
-    review => review.attributes.verified !== false);
+    review => review.attributes.verified === true);
 }
 
 export async function getImdbId(movieId) {
