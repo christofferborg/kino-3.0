@@ -76,7 +76,7 @@ Returns upcoming screenings for the start page, grouped by day.
   Default: 10  
   Max: 10 (values above 10 will be clamped down to 10)
 
-## Notes
+## Notes: Screenings
 
 - Only screenings with start_time >= current time are included
 - Only screenings within the next five calendar days (including today) are included
@@ -159,7 +159,7 @@ Content-Type: application/json
 
 ---
 
-# *Notering för recensioner och betyg
+# Note: Recensioner och betyg
 **Bara recensioner som blivit verifierade (verified === true) ingår i recensionerna som hämtas från API:et, detta gäller även för beräkningen av betyg**
 
 
