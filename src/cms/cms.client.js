@@ -42,3 +42,4 @@ export async function getScreenings() {
 
   return res.json();
 }
+

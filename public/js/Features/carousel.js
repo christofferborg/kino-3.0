@@ -4,26 +4,48 @@ let slideIndex = 1;
 let autoplayTimer = null;
 const AUTOPLAY_DELAY = 3000;
 
-export function initCarousel() {
-  const prevBtn = document.querySelector(".prev");
-  const nextBtn = document.querySelector(".next");
+export async function initCarousel() {
+  const container = document.querySelector(".slideshow-container");
+  if (!container) return;
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
+  try {
+    const res = await fetch("/api/popularMovies");
+    const movies = await res.json();
+    if (!Array.isArray(movies) || movies.length === 0) return;
+
+   const slidesHtml = movies
+  .map(
+    (movie) => `
+      <div class="mySlides fade">
+        <div class="slide-image-wrapper">
+          <img class="slide-img" src="${movie.image}" alt="${movie.title}" />
+        </div>
+        <h3 class="slide-title">${movie.title}</h3>
+      </div>
+    `
+  )
+  .join("");
+
+    container.insertAdjacentHTML("afterbegin", slidesHtml);
+
+    const prevBtn = container.querySelector(".prev");
+    const nextBtn = container.querySelector(".next");
+
+    prevBtn?.addEventListener("click", () => {
       plusSlides(-1);
       restartAutoplay();
     });
-  }
 
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
+    nextBtn?.addEventListener("click", () => {
       plusSlides(1);
       restartAutoplay();
     });
-  }
 
-  showSlides(slideIndex);
-  startAutoplay();
+    showSlides(slideIndex);
+    startAutoplay();
+  } catch (err) {
+    console.error("Kunde inte ladda carousel:", err);
+  }
 }
 
 function plusSlides(n) {
@@ -31,15 +53,14 @@ function plusSlides(n) {
 }
 
 function showSlides(n) {
-  const slides = document.getElementsByClassName("mySlides"); 
-
+  const slides = document.getElementsByClassName("mySlides");
   if (slides.length === 0) return;
 
   if (n > slides.length) slideIndex = 1;
   if (n < 1) slideIndex = slides.length;
 
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
+  for (let slide of slides) {
+    slide.style.display = "none";
   }
 
   slides[slideIndex - 1].style.display = "block";
