@@ -1,5 +1,8 @@
 function dayKey(date) {
-  return date.toISOString().slice(0, 10);
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
 }
 
 export function getUpcomingStartpageScreenings(
@@ -8,8 +11,11 @@ export function getUpcomingStartpageScreenings(
   days = 5,
   limit = 10,
 ) {
-  const maxDate = new Date(now);
-  maxDate.setDate(maxDate.getDate() + days);
+  const todayStart = new Date(now);
+  todayStart.setHours(0, 0, 0, 0);
+
+  const rangeEnd = new Date(todayStart);
+  rangeEnd.setDate(rangeEnd.getDate() + days);
 
   const filteredSorted = (cmsJson.data ?? [])
     .map((item) => {
@@ -32,15 +38,12 @@ export function getUpcomingStartpageScreenings(
       };
     })
     .filter((screening) => screening.startsAtDate)
-    .filter(
-      (screening) =>
-        screening.startsAtDate >= now && screening.startsAtDate < maxDate,
-    )
+    .filter((screening) => screening.startsAtDate >= now)
+    .filter((screening) => screening.startsAtDate < rangeEnd)
+
     .sort((a, b) => a.startsAtDate - b.startsAtDate);
 
-  const nextTenScreenings = filteredSorted.slice(0, limit);
-
-  const groupedByDay = nextTenScreenings.reduce((acc, screening) => {
+  const groupedByDay = filteredSorted.reduce((acc, screening) => {
     const day = dayKey(screening.startsAtDate);
     (acc[day] ??= []).push({
       id: screening.id,
@@ -51,9 +54,25 @@ export function getUpcomingStartpageScreenings(
     return acc;
   }, {});
 
-  const dayList = Object.keys(groupedByDay)
-    .sort()
-    .map((date) => ({ date, screenings: groupedByDay[date] }));
+  const sortedDates = Object.keys(groupedByDay).sort();
 
-  return { days: dayList, total: nextTenScreenings.length };
+  const dayList = [];
+  let total = 0;
+
+  for (const date of sortedDates) {
+    const dayScreenings = groupedByDay[date] ?? [];
+    if (total === 0 && dayScreenings.length > limit) {
+      dayList.push({ date, screenings: dayScreenings.slice(0, limit) });
+      total = limit;
+      break;
+    }
+    if (total + dayScreenings.length > limit) break;
+
+    dayList.push({ date, screenings: dayScreenings });
+    total += dayScreenings.length;
+
+    if (total === limit) break;
+  }
+
+  return { days: dayList, total };
 }
