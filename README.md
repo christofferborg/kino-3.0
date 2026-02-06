@@ -46,6 +46,12 @@ Vi har tagit bort en regel från vårt arbetssätt. Regeln där en person gransk
 Lenson och Kevin var frånvarande.
 Vi har stämt av i gruppen hur det går för alla. Sedan har vi diskuterat hur vi skriver dokumentationen för vårt REST API så att det är kort men koncist.
 
+26-02-06
+Alla närvarande. Slutfix samt ändrat buildkommando för sass till npm run build.
+Pratat igenom API dokumentationen. 
+Gått igenom några PR och frågetecken om uppgifter. Kollat så att befintliga funktioner fungerar.
+
+
 ### API Documentation
 
 ## Screenings:
@@ -186,3 +192,33 @@ Vid ett lyckat anrop returneras ett JSON-objekt enligt följande form:
 * **200 OK** – **Betyg kunde hämtas.** Anropet lyckades och det beräknade betyget returnerades korrekt.
 * **400 Bad Request** – **Ogiltigt Movie-ID.** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
 * **500 Internal Server Error** – **Betyg kunde inte beräknas.** Ett oväntat fel uppstod på servern eller vid kommunikation med externa tjänster (Strapi/OMDb).
+
+
+# Reviews API – POST
+## POST /api/reviews
+>Används för att skicka in en ny filmrecension från frontend till CMS (Plankton API).
+
+---
+
+### Request body
+```json
+{
+ "name": "Anna Andersson",
+ "rating": 5,
+ "comment": "Bra film!",
+ "movie": 3
+}
+```
+
+---
+
+### Validering
+>Alla fält (name, rating, comment, movie) måste vara ifyllda
+>Annars returneras 400 Bad Request
+### Response
+> * **200 OK**  - Recensionen har skapats och skickats vidare till Plankton API
+> * **400 Bad Request** - Saknade eller ogiltiga fält
+> * **500 Internal Server Error** - Serverfel eller problem med externt API
+### Externt API
+>Recensionen skickas vidare till:
+>https://plankton-app-xhkom.ondigitalocean.app/api/reviews
