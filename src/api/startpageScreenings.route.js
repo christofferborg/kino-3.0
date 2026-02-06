@@ -18,6 +18,7 @@ router.get("/screenings", async (req, res) => {
     );
 
     res.json(result);
+    console.log(result);
   } catch (error) {
     res.status(500).json({ error: "Could not load screenings" });
   }
