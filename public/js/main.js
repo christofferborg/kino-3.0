@@ -3,7 +3,6 @@ import { getRatingFromBackend } from "./Features/rating.js";
 import { initStartpageScreenings } from "./Features/startpageScreenings.js";
 
 getRatingFromBackend();
-initCarousel();
 initStartpageScreenings();
 
 const menuToggle = document.getElementById("menuToggle");
@@ -63,4 +62,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-
+window.addEventListener("DOMContentLoaded", () => {
+  initCarousel();
+});
