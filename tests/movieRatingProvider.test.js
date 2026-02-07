@@ -4,12 +4,12 @@ import { jest } from "@jest/globals";
 
 global.fetch = jest.fn();
 
-describe("VG: IMDb provider switch", () => {
+describe("IMDb provider switch", () => {
   afterEach(() => {
     fetch.mockClear();
   });
 
-  test("uses OMDB by default", async () => {
+  test("OMDB by default", async () => {
     fetch.mockResolvedValueOnce({
       json: async () => ({
         data: [],
