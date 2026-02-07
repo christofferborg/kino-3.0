@@ -14,11 +14,11 @@ router.get("/api/movies/:id/rating", async (req, res) => {
     if (isNaN(movieId)) {
       return res.status(400).json({ error: "Ogiltigt Movie-ID" });
     }
-    
+
     const movieData = await getReviewsByMovieId(movieId);
     const imdbId = await getImdbId(movieId);
-    const rawImdbRating = await getImdbRating(imdbId);
-    const imdbRating = parseFloat(rawImdbRating);
+    const provider = req.query.source || "omdb";
+    const imdbRating = await getImdbRating(imdbId, provider);
 
     const finalRating = calculateRating(movieData, imdbRating);
     const source = movieData.length >= 5 ? "local" : "imdb";
@@ -32,7 +32,10 @@ router.get("/api/movies/:id/rating", async (req, res) => {
       );
     }
 
-    res.json({ rating: finalRating, source: source });
+    res.json({
+      rating: finalRating,
+      source: source === "imdb" ? provider : "local",
+    });
   } catch (error) {
     console.error("Fel vid hämtning av betyg:", error.message);
     res.status(500).json({ rating: 0, error: "Betyg kunde inte beräknas" });
