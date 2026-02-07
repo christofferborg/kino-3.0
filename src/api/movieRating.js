@@ -11,6 +11,10 @@ const router = express.Router();
 router.get("/api/movies/:id/rating", async (req, res) => {
   try {
     const movieId = req.params.id;
+    if (isNaN(movieId)) {
+      return res.status(400).json({ error: "Ogiltigt Movie-ID" });
+    }
+    
     const movieData = await getReviewsByMovieId(movieId);
     const imdbId = await getImdbId(movieId);
     const rawImdbRating = await getImdbRating(imdbId);
@@ -18,7 +22,6 @@ router.get("/api/movies/:id/rating", async (req, res) => {
 
     const finalRating = calculateRating(movieData, imdbRating);
     const source = movieData.length >= 5 ? "local" : "imdb";
-    
     if (source === "imdb") {
       console.log(
         `[Rating Service] INFO: Visar IMDb-betyg för film ID ${movieId} (Hittade bara ${movieData.length} recensioner)`,
