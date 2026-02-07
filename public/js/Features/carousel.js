@@ -6,6 +6,8 @@ const AUTOPLAY_DELAY = 3000;
 
 export async function initCarousel() {
   const container = document.querySelector(".slideshow-container");
+  console.log("Slides i DOM:", document.getElementsByClassName("mySlides").length);
+
   if (!container) return;
 
   try {

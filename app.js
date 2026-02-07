@@ -6,19 +6,13 @@ import popularMoviesRouter from "./src/api/popularMovies.js";
 import viewReviewsRouter from "./src/api/view-reviews.route.js";
 import movieRating from "./src/api/movieRating.js";
 import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
-import reviewRouter from "./src/api/reviews-api.js"
+import reviewRouter from "./src/api/reviews-api.js";
 import movieScreeningsRouter from "./src/api/moviescreening.route.js";
 
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 app.use(movieRating);
-<<<<<<< HEAD
-
-app.use("/api", movieScreeningsRouter);
-
-=======
 app.use(express.json());
->>>>>>> marie_JWT
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
