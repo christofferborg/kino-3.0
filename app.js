@@ -6,7 +6,7 @@ import popularMoviesRouter from "./src/api/popularMovies.js";
 import viewReviewsRouter from "./src/api/view-reviews.route.js";
 import movieRating from "./src/api/movieRating.js";
 import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
-import reviewRouter from "./src/api/reviews-api.js"
+import reviewRouter from "./src/api/reviews-api.js";
 import movieScreeningsRouter from "./src/api/moviescreening.route.js";
 
 const app = express();
@@ -214,6 +214,4 @@ app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });
 
-
-
-export default app; 
+export default app;
