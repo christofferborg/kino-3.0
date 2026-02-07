@@ -1,11 +1,11 @@
-   import "dotenv/config";
+import "dotenv/config";
 import express from "express";
-import {marked} from "marked";
+import { marked } from "marked";
 import popularMoviesRouter from "./src/api/popularMovies.js";
 import viewReviewsRouter from "./src/api/view-reviews.route.js";
 import movieRating from "./src/api/movieRating.js";
 import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
-import reviewRouter from "./src/api/reviews-api.js"
+import reviewRouter from "./src/api/reviews-api.js";
 import movieScreeningsRouter from "./src/api/moviescreening.route.js";
 
 const app = express();
@@ -13,7 +13,6 @@ const apiKey = process.env.TMDB_API_KEY;
 app.use(movieRating);
 
 app.use("/api", movieScreeningsRouter);
-
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -188,8 +187,6 @@ app.get("/richards-filmer/:id", async (req, res) => {
   }
 });
 
-
-
 app.get("/skriv-recension", (req, res) => {
   res.render("reviews");
 });
@@ -212,6 +209,4 @@ app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });
 
-
-
-export default app; 
+export default app;
