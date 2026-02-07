@@ -1,4 +1,4 @@
-   import "dotenv/config";
+import "dotenv/config";
 import express from "express";
 import { marked } from "marked";
 import authRouter from "./src/api/auth.js";
@@ -214,6 +214,4 @@ app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });
 
-
-
-export default app; 
+export default app;
