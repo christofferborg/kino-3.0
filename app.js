@@ -1,6 +1,7 @@
    import "dotenv/config";
 import express from "express";
-import {marked} from "marked";
+import { marked } from "marked";
+import authRouter from "./src/api/auth.js";
 import popularMoviesRouter from "./src/api/popularMovies.js";
 import viewReviewsRouter from "./src/api/view-reviews.route.js";
 import movieRating from "./src/api/movieRating.js";
@@ -11,13 +12,22 @@ import movieScreeningsRouter from "./src/api/moviescreening.route.js";
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 app.use(movieRating);
+<<<<<<< HEAD
 
 app.use("/api", movieScreeningsRouter);
 
+=======
+app.use(express.json());
+>>>>>>> marie_JWT
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.use("/api/auth", authRouter);  
 app.use("/api/reviews", reviewRouter);
+app.use("/api", popularMoviesRouter);
+app.use("/api", movieScreeningsRouter);
+app.use("/", viewReviewsRouter);
+
 
 app.get("/", async (req, res) => {
   try {
@@ -188,6 +198,9 @@ app.get("/richards-filmer/:id", async (req, res) => {
   }
 });
 
+app.get("/login", (req, res) => {
+  res.render("login");
+});
 
 
 app.get("/skriv-recension", (req, res) => {
@@ -197,17 +210,12 @@ app.get("/reviews", (req, res) => {
   res.render("reviews"); // renderar views/reviews.ejs
 });
 
-app.use("/api", popularMoviesRouter);
 
-app.use("/", viewReviewsRouter);
+//import reviewsRouter from "./src/api/reviews-api.js";
 
-import reviewsRouter from "./src/api/reviews-api.js";
-
-// Middleware för JSON
-app.use(express.json());
 
 // Koppla backend
-app.use("/api/reviews", reviewsRouter);
+
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });

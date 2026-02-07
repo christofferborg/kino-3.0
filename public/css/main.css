@@ -1791,72 +1791,26 @@ body {
 
 }
 
-/* --- Biljettruta funktioner --- */
-
-.screenings {
-  margin-top: 3rem;
-}
-
-.ticket-box {
-  background: #111;
-  color: #fff;
-  padding: 2rem;
-  border-radius: 14px;
-  max-width: 420px;
-}
-
-.ticket-box label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.ticket-filter-box {
-  background: #0E131B;
-  padding: 3rem;
-  max-width: 600px;
-  border: none;
-  outline: none; 
-}
-
-#dateSelect {
+#loginPopup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 0.6rem;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#loginPopup .popupWrite-content {
+  background-color: #080B10;
+  padding: 2rem;
   border-radius: 8px;
-  border: none;
-  margin-bottom: 1.5rem;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
 }
-
-.time-grid {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.time-btn {
-  background: #000;
-  color: #fff;
-  border: 1px solid #333;
-  padding: 0.8rem 1.2rem;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.time-btn:hover {
-  background: #333;
-}
-
-.room-box {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background: #222;
-  border-radius: 10px;
-  font-weight: 600;
-}
-
-.time-btn.active {
-  background: #444;
-}
-
 
 /*# sourceMappingURL=main.css.map */
