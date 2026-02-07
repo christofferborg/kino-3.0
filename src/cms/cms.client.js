@@ -10,8 +10,7 @@ export async function getReviewsByMovieId(movieId) {
   const url = `https://plankton-app-xhkom.ondigitalocean.app/api/reviews?filters[movie]=${movieId}`;
   const response = await fetch(url);
   const result = await response.json();
-  return result.data.filter(
-    review => review.attributes.verified === true);
+  return result.data.filter((review) => review.attributes.verified === true);
 }
 
 export async function getImdbId(movieId) {
@@ -22,15 +21,23 @@ export async function getImdbId(movieId) {
     throw new Error(`Ingen film hittades i CMS för ID: ${movieId}`);
   }
 
-  return result.data.attributes.imdbId; 
+  return result.data.attributes.imdbId;
 }
 
-export async function getImdbRating(imdbId) {
+export async function getImdbRating(imdbId, provider = "omdb") {
+  if (provider === "imdbapi") {
+    const apiKey = process.env.IMDB_API_KEY;
+    const url = `https://imdbapi.net/api/title/${apiKey}/${imdbId}`;
+    const response = await fetch(url);
+    const result = await response.json();
+    return parseFloat(result.imDbRating);
+  }
+
   const omdbKey = process.env.OMDB_API_KEY;
   const url = `http://www.omdbapi.com/?apikey=${omdbKey}&i=${imdbId}`;
   const response = await fetch(url);
   const result = await response.json();
-  return result.imdbRating;
+  return parseFloat(result.imdbRating);
 }
 
 export async function getScreenings() {
@@ -43,4 +50,3 @@ export async function getScreenings() {
 
   return res.json();
 }
-
