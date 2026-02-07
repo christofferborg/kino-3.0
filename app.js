@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use("/api/auth", authRouter);  
-//app.use("/api/reviews", reviewRouter);
+app.use("/api/reviews", reviewRouter);
 app.use("/api", popularMoviesRouter);
 app.use("/api", movieScreeningsRouter);
 app.use("/", viewReviewsRouter);
@@ -209,7 +209,7 @@ app.get("/reviews", (req, res) => {
 
 
 // Koppla backend
-app.use("/api/reviews", reviewRouter);
+
 app.use((req, res) => {
   res.status(404).render("error", { title: "Sidan hittades inte" });
 });
