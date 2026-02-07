@@ -1,17 +1,70 @@
-import jwt from "jsonwebtoken";
+import { initCarousel } from "./Features/carousel.js";
+import { getRatingFromBackend } from "./Features/rating.js";
+import { initStartpageScreenings } from "./Features/startpageScreenings.js";
+import "./login.js";
 
-const SECRET = process.env.JWT_SECRET || "demo_secret";
+getRatingFromBackend();
+initStartpageScreenings();
 
-export function verifyToken(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  if (!authHeader) return res.status(401).json({ success: false, error: "Token saknas" });
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.querySelector(".nav-menu");
+const mobileIcons = document.querySelectorAll(".mobile-nav_item");
 
-  const token = authHeader.split(" ")[1]; // Bearer TOKEN
-  if (!token) return res.status(401).json({ success: false, error: "Token saknas" });
+// Klick på hamburgare
+menuToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  navMenu.classList.toggle("active");
+  menuToggle.classList.toggle("active");
 
-  jwt.verify(token, SECRET, (err, user) => {
-    if (err) return res.status(401).json({ success: false, error: "Ogiltig token" });
-    req.user = user;
-    next();
+  if (!navMenu.classList.contains("active")) {
+    mobileIcons.forEach((icon) => icon.classList.remove("active"));
+  }
+});
+
+// Klick på ikon → markera active
+mobileIcons.forEach((icon) => {
+  icon.addEventListener("click", (e) => {
+    e.stopPropagation();
+
+    // Toggle 'active' på den klickade ikonen
+    if (icon.classList.contains("active")) {
+      icon.classList.remove("active");
+    } else {
+      // Ta bort 'active' från alla andra
+      mobileIcons.forEach((i) => i.classList.remove("active"));
+      icon.classList.add("active");
+    }
   });
-}
+});
+
+// Klick utanför stänger menyn och resetar active
+document.addEventListener("click", (e) => {
+  if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+    navMenu.classList.remove("active");
+    menuToggle.classList.remove("active");
+    mobileIcons.forEach((icon) => icon.classList.remove("active"));
+  }
+});
+
+// Desktop
+const desktopDropdown = document.querySelector(".nav_item_dropdown");
+const desktopLink = desktopDropdown.querySelector(".nav_link");
+
+// Klick på "Mer ▾"
+desktopLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  desktopDropdown.classList.toggle("active");
+});
+
+// Klick utanför stänger dropdown
+document.addEventListener("click", (e) => {
+  if (!desktopDropdown.contains(e.target)) {
+    desktopDropdown.classList.remove("active");
+  }
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  initCarousel();
+});
+
+

@@ -19,10 +19,12 @@ viewReviewsRouter.get("/richards-filmer/:id/view-reviews/api", async (req, res) 
     const page = Number(req.query.page) || 1;
     const pageSize = 5;
 
-    const simplifiedReviews = cmsResponse.data.map(review => ({
+    const simplifiedReviews = cmsResponse.map(review => ({
       quote: review.attributes.comment,
       rating: review.attributes.rating,
-      name: review.attributes.author
+      name: review.attributes.author,
+
+      verified: review.attributes.verified
     }));
 
     const result = paginateReviews(simplifiedReviews, page, pageSize);
@@ -45,9 +47,9 @@ viewReviewsRouter.get("/richards-filmer/:id/reviews/total", async (req, res) => 
     const movieId = req.params.id;
     const cmsData = await getReviewsByMovieId(movieId); // now full object
 
-    const totalReviews = cmsData?.meta?.pagination?.total || 0;
-
-    res.json({ totalReviews });
+     res.json({
+        totalReviews: cmsData.length
+      });
   } catch (error) {
     console.error("Fel vid hämtning av totalt antal recensioner:", error);
     res.status(500).json({ error: "500: Kunde inte hämta totalt antal recensioner." });

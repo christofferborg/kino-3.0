@@ -115,11 +115,12 @@ reviewBtn.addEventListener("click", () => {
         messageDiv.textContent = "Skickar recension...";
         messageDiv.style.color = "black";
 
-        const token = getToken();
+       const token = localStorage.getItem("token");
 
         if (!token) {
             messageDiv.textContent = "Du måste logga in för att skriva en recension.";
             messageDiv.style.color = "red";
+            document.getElementById("loginPopup").style.display = "flex";
             return;
         }
 

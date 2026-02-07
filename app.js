@@ -7,15 +7,19 @@ import viewReviewsRouter from "./src/api/view-reviews.route.js";
 import movieRating from "./src/api/movieRating.js";
 import startpageScreeningsRoute from "./src/api/startpageScreenings.route.js";
 import reviewRouter from "./src/api/reviews-api.js"
+import movieScreeningsRouter from "./src/api/moviescreening.route.js";
+
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
 app.use(movieRating);
 app.use(express.json());
+
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use("/api/auth", authRouter);  
 //app.use("/api/reviews", reviewRouter);
 app.use("/api", popularMoviesRouter);
+app.use("/api", movieScreeningsRouter);
 app.use("/", viewReviewsRouter);
 
 
@@ -212,4 +216,4 @@ app.use((req, res) => {
 
 
 
-export default app;
+export default app; 

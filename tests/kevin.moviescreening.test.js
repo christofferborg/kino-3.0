@@ -1,4 +1,4 @@
-import { getUpcomingMovieScreenings } from "../src/logic/kevinMovieScreenings.logic.js";
+import { getUpcomingMovieScreenings } from "../src/logic/kevinmoviescreening.logic.js";
 
 describe("Kevin – upcoming movie screenings (details page)", () => {
   test("returnerar endast kommande visningar", () => {

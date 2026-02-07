@@ -12,7 +12,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const res = await fetch(`/api/movies/${movieId}/screenings`);
-  const screenings = await res.json();
+
+if (!res.ok) {
+  console.error("API error:", await res.text());
+  return;
+}
+
+const screenings = await res.json();
+
 
   const byDate = {};
   screenings.forEach(s => {
