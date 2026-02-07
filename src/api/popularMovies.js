@@ -25,7 +25,7 @@ router.get("/popularMovies", async (req, res) => {
 
         // Hämta recensioner
         const reviewsRaw = await getReviewsByMovieId(movie.id);
-        const reviews = Array.isArray(reviewsRaw.data) ? reviewsRaw.data : [];
+        const reviews = Array.isArray(reviewsRaw) ? reviewsRaw : [];
 
         // Filtrera senaste 30 dagar
         const now = Date.now();
