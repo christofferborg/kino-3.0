@@ -318,5 +318,186 @@ Vid ett lyckat anrop retuneras ett JSON-objekt med "totalReviews" enligt följan
 
 ### Externt API
 
+<<<<<<< marie_readme_api
+
+
+
+
+
+# Popular Movies API
+
+Resurs som används för att hämta biografens mest populära filmer baserat på användarrecensioner från de senaste 30 dagarna.
+Endast de 5 högst betygsatta filmerna returneras.
+
+---
+
+## Request Format
+
+* **Metod:** `GET`
+* **Endpoint:** `/api/popularMovies`
+
+---
+
+## Logik 
+Systemet hämtar recensioner från de senaste 30 dagarna och beräknar medelbetyg per film:
+
+* **Sortering:** Filmer sorteras **efter högst** medelbetyg.
+* **Begränsning:** **Max 5** filmer returneras.
+
+---
+
+## Response Format
+Vid ett lyckat anrop returneras ett JSON-array med filmobjekt:
+
+```json
+  {
+    "id": 3,
+    "title": "Dune: Part Two",
+    "backdrop_path": "/path/to/image.jpg",
+    "averageRating": 4.6
+  }
+```
+
+---
+
+## Code Exempele
+
+```js
+const res = await fetch('/api/popularMovies');
+const movies = await res.json();
+```
+
+---
+
+## Response Statuskoder
+* **200 OK** – **Filmer kunde hämtas.** Anropet lyckades och det populära filmerna returnerades korrekt.
+* **500 Internal Server Error** – **Kunde inte hämta populära filmer.** Ett oväntat fel uppstod på servern.
+
+```json
+{
+   "error": "Kunde inte hämta populära filmer."
+}
+```
+
+
+
+
+
+#  Authentication & Reviews
+KINO använder JWT (JSON Web Tokens) för autentisering. Endast inloggade användare kan skapa recensioner.
+Token lagras i frontend (t.ex. localStorage) och skickas i Authorization-headern vid skyddade API-anrop.
+
+---
+
+# Inloggning
+* **Metod:** `POST`
+* **Endpoint:** `/api/auth/login`
+
+
+## Request
+```json
+{
+"username": "admin",
+  "password": "1234"
+}
+```
+
+## Response - Lyckad inloggning
+
+```json
+{
+ "success": true,
+ "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+## Response - Fel
+
+```json
+{
+  "success": false,
+  "error": "Fel användarnamn eller lösenord"
+}
+```
+
+---
+
+## Skyddade endpoints
+Alla skyddade endpoints kräver en giltig Authorization-header:
+
+```makefile
+  Authorization: Bearer <JWT_TOKEN>
+```
+
+## Fel vid saknad token
+
+```json
+{
+  "success": false,
+  "error": "Token saknas"
+
+}
+```
+
+## Fel vid ogiltig token
+
+```json
+{
+  "success": false,
+  "error": "Ogiltig token"
+}
+```
+
+---
+
+## Skapa recension
+* **Metod:** `POST`
+* **Endpoint:** `/api/reviews`
+
+## Headers
+
+```pgsql
+ Content-Type: application/json
+ Authorization: Bearer <JWT_TOKEN>
+```
+
+## Request
+
+```json
+{
+    "name": "John Doe",
+  "rating": 4,
+  "comment": "Riktigt bra film!",
+  "movie": 8
+}
+```
+
+## Response - Lyckad
+
+```json
+{
+  "success": true,
+  "review": {
+    "id": 1790,
+    "attributes": {
+      "author": "John Doe",
+      "rating": 4,
+      "comment": "Riktigt bra film!",
+      "movie": 8
+    }
+  }
+}
+```
+
+## Response - Fel
+
+```json
+{
+  "success": false,
+  "error": "Kunde inte skicka recensionen"
+}
+```
+=======
 > Recensionen skickas vidare till:
 > https://plankton-app-xhkom.ondigitalocean.app/api/reviews
+>>>>>>> main
