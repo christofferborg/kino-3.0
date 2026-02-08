@@ -34,7 +34,7 @@ router.get("/api/movies/:id/rating", async (req, res) => {
 
     res.json({
       rating: finalRating,
-      source: source === "imdb" ? provider : "local",
+      source: source === "imdb" ? source: "local",
     });
   } catch (error) {
     console.error("Fel vid hämtning av betyg:", error.message);
