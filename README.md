@@ -318,7 +318,6 @@ Vid ett lyckat anrop retuneras ett JSON-objekt med "totalReviews" enligt följan
 
 ### Externt API
 
-<<<<<<< marie_readme_api
 
 
 
