@@ -11,9 +11,9 @@ import movieScreeningsRouter from "./src/api/moviescreening.route.js";
 
 const app = express();
 const apiKey = process.env.TMDB_API_KEY;
-app.use(movieRating);
-app.use(express.json());
 
+app.use(express.json());
+app.use(movieRating);
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use("/api/auth", authRouter);  
@@ -21,6 +21,7 @@ app.use("/api/reviews", reviewRouter);
 app.use("/api", popularMoviesRouter);
 app.use("/api", movieScreeningsRouter);
 app.use("/", viewReviewsRouter);
+
 
 
 app.get("/", async (req, res) => {

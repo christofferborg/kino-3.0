@@ -30,14 +30,14 @@ export async function getImdbRating(imdbId, provider = "omdb") {
     const url = `https://imdbapi.net/api/title/${apiKey}/${imdbId}`;
     const response = await fetch(url);
     const result = await response.json();
-    return parseFloat(result.imDbRating);
+    return parseFloat(result.imDbRating) || 0;
   }
 
   const omdbKey = process.env.OMDB_API_KEY;
   const url = `http://www.omdbapi.com/?apikey=${omdbKey}&i=${imdbId}`;
   const response = await fetch(url);
   const result = await response.json();
-  return parseFloat(result.imdbRating);
+  return parseFloat(result.imdbRating) || 0;
 }
 
 export async function getScreenings() {
