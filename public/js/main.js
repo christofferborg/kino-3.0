@@ -1,6 +1,7 @@
 import { initCarousel } from "./Features/carousel.js";
 import { getRatingFromBackend } from "./Features/rating.js";
 import { initStartpageScreenings } from "./Features/startpageScreenings.js";
+import "./login.js";
 
 getRatingFromBackend();
 initStartpageScreenings();
@@ -65,3 +66,5 @@ document.addEventListener("click", (e) => {
 window.addEventListener("DOMContentLoaded", () => {
   initCarousel();
 });
+
+

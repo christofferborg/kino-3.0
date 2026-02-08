@@ -48,9 +48,8 @@ Vi har stämt av i gruppen hur det går för alla. Sedan har vi diskuterat hur v
 
 26-02-06
 Alla närvarande. Slutfix samt ändrat buildkommando för sass till npm run build.
-Pratat igenom API dokumentationen. 
+Pratat igenom API dokumentationen.
 Gått igenom några PR och frågetecken om uppgifter. Kollat så att befintliga funktioner fungerar.
-
 
 ### API Documentation
 
@@ -160,28 +159,42 @@ Content-Type: application/json
 ---
 
 # Note: Recensioner och betyg
-**Bara recensioner som blivit verifierade (verified === true) ingår i recensionerna som hämtas från API:et, detta gäller även för beräkningen av betyg**
 
+**Bara recensioner som blivit verifierade (verified === true) ingår i recensionerna som hämtas från API:et, detta gäller även för beräkningen av betyg**
 
 # Movie Rating API
 
 Resurs som används för att hämta ett genomsnittligt betyg för en specifik film baserat på ID.
 
 ## Request Format
-* **Metod:** `GET`
-* **Endpoint:** `/api/movies/:id/rating`
+
+- **Metod:** `GET`
+- **Endpoint:** `/api/movies/:id/rating`
+
+### Query Parameters (optional)
+
+- **source** – anger vilken extern IMDb-leverantör som ska användas när IMDb-betyg hämtas
+  - `omdb` (default) – använder OMDb API
+  - `imdbapi` – använder imdbapi.net
+
+**Exempel:**
+
+`GET /api/movies/8/rating`
+`GET /api/movies/8/rating?source=imdbapi`
 
 ---
 
 ## Logik för beräkning
+
 Systemet väljer automatiskt datakälla baserat på antalet verifierade recensioner i biografens CMS:
 
-* **Lokalt betyg:** Om filmen har **5 eller fler** verifierade recensioner används genomsnittet av dessa.
-* **IMDb-betyg:** Om filmen har **färre än 5** verifierade recensioner hämtas istället filmens officiella betyg från IMDb.
+- **Lokalt betyg:** Om filmen har **5 eller fler** verifierade recensioner används genomsnittet av dessa.
+- **IMDb-betyg:** Om filmen har **färre än 5** verifierade recensioner hämtas istället filmens officiella betyg från IMDb.
 
 ---
 
 ## Response Format
+
 Vid ett lyckat anrop returneras ett JSON-objekt enligt följande form:
 
 ```json
@@ -195,62 +208,68 @@ Vid ett lyckat anrop returneras ett JSON-objekt enligt följande form:
 
 ## Response Statuskoder
 
-* **200 OK** – **Betyg kunde hämtas.** Anropet lyckades och det beräknade betyget returnerades korrekt.
-* **400 Bad Request** – **Ogiltigt Movie-ID.** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
-* **500 Internal Server Error** – **Betyg kunde inte beräknas.** Ett oväntat fel uppstod på servern eller vid kommunikation med externa tjänster (Strapi/OMDb).
+- **200 OK** – **Betyg kunde hämtas.** Anropet lyckades och det beräknade betyget returnerades korrekt.
+- **400 Bad Request** – **Ogiltigt Movie-ID.** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
+- **500 Internal Server Error** – **Betyg kunde inte beräknas.** Ett oväntat fel uppstod på servern eller vid kommunikation med externa tjänster (Strapi/OMDb).
 
 ---
 
 # Get movie reviews API
-Resurs som används för att hämta recensioner för en specifik film baserat på dess ID. 
 
+Resurs som används för att hämta recensioner för en specifik film baserat på dess ID.
 
 ## Request Format
-* **Metod:** `GET`
-* **Endpoint:** `/api/movies/:id/view-reviews`
+
+- **Metod:** `GET`
+- **Endpoint:** `/api/movies/:id/view-reviews`
 
 ---
 
 ## Logik för antal recensioner per sida
-Varje sida visar upp till 5st recensioner, om det finns fler används paginering för att dela upp innehållet. 
+
+Varje sida visar upp till 5st recensioner, om det finns fler används paginering för att dela upp innehållet.
 
 ---
 
 ## Response Format
+
 Vid ett lyckat anrop returneras ett JSON-objekt enligt följande form:
 
 ```json
 {
   "reviews": [
- {
- "quote": "Mycket bra",
- "rating": 5,
- "name": "RR",
- "verified": true
- }
-],
+    {
+      "quote": "Mycket bra",
+      "rating": 5,
+      "name": "RR",
+      "verified": true
+    }
+  ],
   "totalPages": 1,
   "totalItems": 1,
-   "page": 1
+  "page": 1
 }
-
 ```
+
 ## Response Statuskoder
 
-* **200 OK** – **Recensioner kunde hämtas.** Recensionerna kunde hämtas.
-* **400 Bad Request** – **Ogiltigt Movie-ID eller sidnummer** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
-* **500 Internal Server Error** – **Kunde inte hämta recensioner.** Ett oväntat fel uppstod på servern.
+- **200 OK** – **Recensioner kunde hämtas.** Recensionerna kunde hämtas.
+- **400 Bad Request** – **Ogiltigt Movie-ID eller sidnummer** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
+- **500 Internal Server Error** – **Kunde inte hämta recensioner.** Ett oväntat fel uppstod på servern.
 
 # Get total movie reviews API
+
 Resurs som används för att hämta totala antalet recensioner som visas, för respektive film, baserat på ID.
 
-
 ## Request Format
-* **Metod:** `GET`
-* **Endpoint:** `/api/movies/:id/reviews/total`
+
+- **Metod:** `GET`
+- **Endpoint:** `/api/movies/:id/reviews/total`
 
 ---
+
 ## Response Format
+
 Vid ett lyckat anrop retuneras ett JSON-objekt med "totalReviews" enligt följande form:
 
 ```json
@@ -260,40 +279,46 @@ Vid ett lyckat anrop retuneras ett JSON-objekt med "totalReviews" enligt följan
 ```
 
 ---
-* **200 OK** – **Antal recensioner kunde hämtas.** Recensionerna kunde hämtas.
-* **400 Bad Request** – **Ogiltigt Movie-ID eller saknat Movie-ID** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
-* **500 Internal Server Error** – **Kunde inte hämta antal recensioner.** Ett oväntat fel uppstod på servern.
 
+- **200 OK** – **Antal recensioner kunde hämtas.** Recensionerna kunde hämtas.
+- **400 Bad Request** – **Ogiltigt Movie-ID eller saknat Movie-ID** ID-parametern saknas, har fel format eller är inte ett giltigt nummer.
+- **500 Internal Server Error** – **Kunde inte hämta antal recensioner.** Ett oväntat fel uppstod på servern.
 
 # Reviews API – POST
+
 ## POST /api/reviews
->Används för att skicka in en ny filmrecension från frontend till CMS (Plankton API).
+
+> Används för att skicka in en ny filmrecension från frontend till CMS (Plankton API).
 
 ---
 
 ### Request body
+
 ```json
 {
- "name": "Anna Andersson",
- "rating": 5,
- "comment": "Bra film!",
- "movie": 3
+  "name": "Anna Andersson",
+  "rating": 5,
+  "comment": "Bra film!",
+  "movie": 3
 }
 ```
 
 ---
 
 ### Validering
->Alla fält (name, rating, comment, movie) måste vara ifyllda
->Annars returneras 400 Bad Request
-### Response
-> * **200 OK**  - Recensionen har skapats och skickats vidare till Plankton API
-> * **400 Bad Request** - Saknade eller ogiltiga fält
-> * **500 Internal Server Error** - Serverfel eller problem med externt API
-### Externt API
->Recensionen skickas vidare till:
->https://plankton-app-xhkom.ondigitalocean.app/api/reviews
 
+> Alla fält (name, rating, comment, movie) måste vara ifyllda
+> Annars returneras 400 Bad Request
+
+### Response
+
+> - **200 OK** - Recensionen har skapats och skickats vidare till Plankton API
+> - **400 Bad Request** - Saknade eller ogiltiga fält
+> - **500 Internal Server Error** - Serverfel eller problem med externt API
+
+### Externt API
+
+<<<<<<< marie_readme_api
 
 
 
@@ -472,3 +497,7 @@ Alla skyddade endpoints kräver en giltig Authorization-header:
   "error": "Kunde inte skicka recensionen"
 }
 ```
+=======
+> Recensionen skickas vidare till:
+> https://plankton-app-xhkom.ondigitalocean.app/api/reviews
+>>>>>>> main
