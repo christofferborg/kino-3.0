@@ -30,7 +30,9 @@ router.post("/", express.json(), verifyToken, async (req, res) => {
                     author: name,
                     rating,
                     comment,
-                    movie: movie 
+                    movie: movie,
+                    verified: true
+                    
                 }
             })
         });
