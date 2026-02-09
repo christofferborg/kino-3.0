@@ -31,7 +31,7 @@ router.post("/", express.json(), verifyToken, async (req, res) => {
                     rating,
                     comment,
                     movie: movie,
-                    verified: true
+                    verified: true,
                     
                 }
             })
