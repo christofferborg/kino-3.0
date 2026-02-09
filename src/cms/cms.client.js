@@ -7,7 +7,7 @@ console.log(
 );
 
 export async function getReviewsByMovieId(movieId) {
-  const url = `https://plankton-app-xhkom.ondigitalocean.app/api/reviews?filters[movie]=${movieId}`;
+  const url = `https://plankton-app-xhkom.ondigitalocean.app/api/reviews?filters[movie]=${movieId}&pagination[pageSize]=100`;
   const response = await fetch(url);
   const result = await response.json();
   return result.data.filter((review) => review.attributes.verified === true);
