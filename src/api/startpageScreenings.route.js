@@ -12,7 +12,7 @@ router.get("/screenings", async (req, res) => {
     const cmsJson = await getScreenings();
     const result = getUpcomingStartpageScreenings(
       cmsJson,
-      new Date(),
+      new Date("2025-03-16T00:00:00"),
       days,
       limit,
     );
