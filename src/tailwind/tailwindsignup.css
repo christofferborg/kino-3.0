@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  /* --- BREAKPOINTS (Dina Mixins) --- */
+  --breakpoint-mobile: 480px;
+  --breakpoint-desktop: 1018px;
+
+  /* --- FÄRGER (Dina SASS-variabler) --- */
+  --color-brand-bg: #080b10;
+  --color-brand-card: #0e131b;
+  --color-brand-text-pri: #f5f7fa;
+  --color-brand-text-sec: #626c7b;
+  --color-bakgrund: #0e131b;
+
+  --color-brand-blue: #179a90;
+  --color-brand-blue-hover: #39c2b7;
+
+  --color-brand-orange: #dd6031;
+  --color-brand-orange-hover: #ff7f4e;
+
+  --color-brand-error: #fa453e;
+  --color-brand-success: #168981;
+
+  /* --- TYPOGRAFI (Open Sans) --- */
+  --font-brand-open: "Open Sans", sans-serif;
+}
+@layer base {
+  body {
+    font-weight: bolder;
+  }
+}

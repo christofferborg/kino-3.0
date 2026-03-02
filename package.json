@@ -5,14 +5,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "sass": "sass src/SASS:public/css --watch",
+    "sass": "sass src/sass:public/css --watch",
     "start": "cross-env TZ=Europe/Stockholm node server.js",
     "dev": "cross-env TZ=Europe/Stockholm nodemon server.js",
     "compile-sass": "sass --no-source-map src/sass/main.scss",
     "watch-sass": "sass --watch --no-source-map src/sass/main.scss",
     "test": "cross-env TZ=Europe/Stockholm NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --ci",
     "test:review-api": "cross-env TZ=Europe/Stockholm NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js tests/reviews-api.test.js",
-    "build": "sass src/SASS:public/css --watch"
+    "build": "sass src/sass:public/css --watch"
   },
   "devDependencies": {
     "browser-sync": "^3.0.4",
@@ -23,11 +23,15 @@
     "supertest": "^7.2.2"
   },
   "dependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "autoprefixer": "^10.4.27",
     "dotenv": "^17.2.3",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "marked": "^17.0.1",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.2.1"
   }
 }
