@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/tailwind-member.css" />
+    <title>Bli medlem</title>
+  </head>
+
+  <body>
+    <main class="font-brand">
+      <div class="header-container"><%- include('partials/header') %></div>
+      <nav class="nav-bar"></nav>
+
+      <section class="mx-auto bg-bakgrund mt-6 max-w-md">
+        <div class="mx-6">
+          <h1
+            class="text-center pt-12 text-center mb-16 text-2xl text-brand-text font-bold"
+          >
+            Bli medlem
+          </h1>
+          <h2 class="text-[0.9rem] mb-[1rem] text-brand-text font-bold">
+            Personlig information
+          </h2>
+
+          <form class="grid grid-cols-1 gap-[0.2rem] w-full">
+            <label class="text-[0.7rem]" for="fname">Förnamn*</label>
+            <input
+              class="peer/fname w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none focus:invalid:not-placeholder-shown:border-[#FA453E]"
+              type="text"
+              id="fname"
+              name="fname"
+              placeholder="Förnamn"
+              autocomplete="name"
+              aria-describedby="warning"
+              pattern="[A-Za-zåäöÅÄÖ]*"
+              required
+            />
+            <h6
+              id="warning"
+              class="hidden peer-focus/fname:peer-invalid/fname:peer-not-placeholder-shown/fname:block text-[#FA453E] text-[0.7rem] -mt-8"
+            >
+              Får inte innehålla specialtecken eller siffror.
+            </h6>
+            <label class="text-[0.7rem]" for="lname">Efternamn*</label>
+            <input
+              class="peer/lname w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none focus:invalid:not-placeholder-shown:border-[#FA453E]"
+              type="text"
+              id="lname"
+              name="lname"
+              placeholder="Efternamn"
+              autocomplete="family-name"
+              aria-describedby="warning"
+              pattern="[A-Za-zåäöÅÄÖ]*"
+              required
+            />
+            <h6
+              class="hidden peer-focus/lname:peer-invalid/lname:peer-not-placeholder-shown/lname:block text-[#FA453E] text-[0.7rem] -mt-8"
+            >
+              Får inte innehålla specialtecken eller siffror.
+            </h6>
+
+            <label class="text-[0.7rem]" for="email">E-post*</label>
+            <input
+              class="peer/email w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none focus:invalid:not-placeholder-shown:border-[#FA453E]"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="E-post"
+              autocomplete="email"
+              required
+            />
+            <h6
+              class="hidden peer-focus/email:peer-invalid/email:peer-not-placeholder-shown/email:block text-[#FA453E] text-[0.7rem] -mt-8"
+            >
+              Måste vara i formatet "exempel@mail.com"
+            </h6>
+
+            <h2 class="text-[0.9rem] mb-[1rem] text-brand-text mt-6 font-bold">
+              Inloggning
+            </h2>
+            <label class="text-[0.7rem]" for="username">Användarnamn*</label>
+            <input
+              class="peer/username w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none focus:invalid:not-placeholder-shown:border-[#FA453E]"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Användarnamn"
+              autocomplete="username"
+              required
+            />
+            <h6
+              class="hidden peer-focus/username:peer-invalid/username:peer-not-placeholder-shown/username:block text-[#FA453E] text-[0.7rem] -mt-8"
+            >
+              Användarnamnet är upptaget.
+            </h6>
+            <label class="block text-[0.7rem] mb-2" for="password"
+              >Lösenord*</label
+            >
+
+            <div class="relative w-full mb-8 group">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Lösenord"
+                autocomplete="new-password"
+                required
+                data-score="0"
+                class="password peer/pwd w-full h-10 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text-pri caret-brand-text-pri px-4 pr-12 placeholder:text-[0.7rem] focus:outline-none transition-colors duration-300 data-[score='0']:not(:placeholder-shown):border-[#fa443e] data-[score='1']:border-[#fa443e] data-[score='2']:border-[#dd6031] data-[score='3']:border-[#168981] autofill:shadow-[inset_0_0_0_1000px_#080B10] autofill:[-webkit-text-fill-color:#F5F7FA!]"
+              />
+
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute right-4 top-5 -translate-y-1/2 cursor-pointer focus:outline-none"
+              >
+                <img
+                  src="./img/view.png"
+                  alt="Visa lösenord"
+                  id="eyeIcon"
+                  class="w-5 h-5 object-contain invert"
+                />
+              </button>
+
+              <div
+                class="strength-meter hidden group-focus-within:flex flex-row gap-[5px] mt-3 h-[0.7rem] group"
+                data-score="0"
+              >
+                <div
+                  class="flex-1 h-full bg-[#080b10] rounded-[10px] transition-colors duration-300 group-data-[score='1']:bg-[#fa443e] group-data-[score='2']:bg-[#dd6031] group-data-[score='3']:bg-[#168981]"
+                ></div>
+                <div
+                  class="flex-1 h-full bg-[#080b10] rounded-[10px] transition-colors duration-300 group-data-[score='2']:bg-[#dd6031] group-data-[score='3']:bg-[#168981]"
+                ></div>
+                <div
+                  class="flex-1 h-full bg-[#080b10] rounded-[10px] transition-colors duration-300 group-data-[score='3']:bg-[#168981]"
+                ></div>
+              </div>
+
+              <div class="hidden group-focus-within:block mt-4 space-y-2">
+                <h6
+                  class="lengthWarning requirement text-[#FA453E] text-[0.75rem] before:content-['\274C'] before:mr-1 flex items-center [&.isValid]:text-[#168981] [&.isValid]:before:content-['\2714'] [&.isValid]:before:text-[0.9rem]"
+                >
+                  Lösenordet måste innehålla
+                  <span class="underline ml-1">minst 8 tecken</span>
+                </h6>
+                <h6
+                  class="specialWarning requirement text-[#FA453E] text-[0.75rem] before:content-['\274C'] before:mr-1 flex items-center [&.isValid]:text-[#168981] [&.isValid]:before:content-['\2714'] [&.isValid]:before:text-[0.9rem]"
+                >
+                  Lösenordet måste innehålla
+                  <span class="underline ml-1">minst ett specialtecken</span>
+                </h6>
+                <h6
+                  class="nrWarning requirement text-[#FA453E] text-[0.75rem] before:content-['\274C'] before:mr-1 flex items-center [&.isValid]:text-[#168981] [&.isValid]:before:content-['\2714'] [&.isValid]:before:text-[0.9rem]"
+                >
+                  Lösenordet måste innehålla
+                  <span class="underline ml-1">minst en siffra</span>
+                </h6>
+              </div>
+            </div>
+            <input
+              type="submit"
+              value="Bli medlem"
+              class="mt-6 bg-brand-orange text-brand-bg font-subheader font-bold text-[0.7rem] h-10 w-full border border-brand-bg rounded-[10px] cursor-pointer hover:bg-brand-orange-hover transition-colors"
+            />
+          </form>
+          <a
+            class="block text-[#9f9fa3] underline text-center my-8 text-[0.75rem] pb-10"
+            >Tillbaka till inloggning</a
+          >
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/signup.js"></script>
+  </body>
+</html>

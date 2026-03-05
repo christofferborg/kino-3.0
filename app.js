@@ -86,6 +86,10 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
+app.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
 app.get("/api/movies/now-playing", async (req, res) => {
   const url = `https://api.themoviedb.org/3/movie/now_playing?language=sv-SE&page=1&api_key=${apiKey}`;
 
