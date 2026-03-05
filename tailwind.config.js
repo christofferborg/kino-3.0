@@ -1,19 +1,7 @@
-/*  @type {import('tailwindcss').Config}
-module.exports = {
-  content: ["./pages/views/signup.ejs"],
-  prefix: "tw-", // Detta är viktigt för att dina klasser inte ska krocka med SASS
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
- */
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./pages/**/*.html", "./src/**/*.js"],
   theme: {
-    // Vi lägger våra anpassade breakpoints här
     screens: {
       mobile: "480px",
       desktop: "1018px",
