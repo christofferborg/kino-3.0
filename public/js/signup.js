@@ -1,3 +1,5 @@
+import "./login.js";
+
 const passwordText = document.querySelector(".password");
 const lengthWarning = document.querySelector(".lengthWarning");
 const nrWarning = document.querySelector(".nrWarning");
@@ -62,3 +64,12 @@ signupForm.addEventListener("submit", (event) => {
   console.log("Användare sparad!", newUser);
   window.location.href = "./minsida";
 });
+
+const loginBtn = document.getElementById("loginBtn");
+const linkToLogin = document.getElementById("linkToLogin");
+const openLogin = (event) => {
+  event.preventDefault();
+  loginPopup.style.display = "flex";
+};
+if (loginBtn) loginBtn.addEventListener("click", openLogin);
+if (linkToLogin) linkToLogin.addEventListener("click", openLogin);
