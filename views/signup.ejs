@@ -35,7 +35,7 @@
             Personlig information
           </h2>
 
-          <form class="grid grid-cols-1 gap-[0.2rem] w-full">
+          <form id="signupForm" class="grid grid-cols-1 gap-[0.2rem] w-full">
             <label class="text-[0.7rem]" for="fname">Förnamn*</label>
             <input
               class="peer/fname w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none focus:invalid:not-placeholder-shown:border-[#FA453E]"
@@ -92,20 +92,22 @@
               Inloggning
             </h2>
             <label class="text-[0.7rem]" for="username">Användarnamn*</label>
+
             <input
-              class="peer/username w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none focus:invalid:not-placeholder-shown:border-[#FA453E]"
-              type="text"
               id="username"
               name="username"
+              type="text"
               placeholder="Användarnamn"
-              autocomplete="username"
+              class="username peer/username w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none focus:invalid:not-placeholder-shown:border-[#FA453E]"
               required
             />
+
             <h6
-              class="hidden peer-focus/username:peer-invalid/username:peer-not-placeholder-shown/username:block text-[#FA453E] text-[0.7rem] -mt-8"
+              class="userNameWarning hidden peer-focus/username:peer-invalid/username:peer-not-placeholder-shown/username:block text-[#FA453E] text-[0.7rem] -mt-8"
             >
               Användarnamnet är upptaget.
             </h6>
+
             <label class="block text-[0.7rem] mb-2" for="password"
               >Lösenord*</label
             >
@@ -174,7 +176,8 @@
             <input
               type="submit"
               value="Bli medlem"
-              class="mt-6 bg-brand-orange text-brand-bg font-subheader font-bold text-[0.7rem] h-10 w-full border border-brand-bg rounded-[10px] cursor-pointer hover:bg-brand-orange-hover transition-colors"
+              onmousedown="event.preventDefault()"
+              class="submit mt-6 bg-brand-orange text-brand-bg font-subheader font-bold text-[0.7rem] h-10 w-full border border-brand-bg rounded-[10px] cursor-pointer hover:bg-brand-orange-hover transition-colors"
             />
           </form>
           <a

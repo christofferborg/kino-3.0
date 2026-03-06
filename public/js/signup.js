@@ -1,5 +1,4 @@
 const passwordText = document.querySelector(".password");
-const userName = document.querySelector("#username");
 const lengthWarning = document.querySelector(".lengthWarning");
 const nrWarning = document.querySelector(".nrWarning");
 const specialWarning = document.querySelector(".specialWarning");
@@ -21,12 +20,45 @@ const togglePassword = document.querySelector("#togglePassword");
 const eyeIcon = document.querySelector("#eyeIcon");
 
 togglePassword.addEventListener("click", () => {
-  // 1. Kolla nuvarande typ
   const isPassword = passwordText.getAttribute("type") === "password";
 
-  // 2. Toggla typen
   passwordText.setAttribute("type", isPassword ? "text" : "password");
 
-  // 3. Byt bildkälla
   eyeIcon.src = isPassword ? "./img/hide.png" : "./img/view.png";
+});
+
+const usernameInput = document.querySelector(".username");
+const warningMessage = document.querySelector(".userNameWarning");
+
+usernameInput.addEventListener("input", () => {
+  const allUsers = JSON.parse(localStorage.getItem("allUsers") || "[]");
+  const isDuplicate = allUsers.some(
+    (u) => u.username.toLowerCase() === usernameInput.value.toLowerCase(),
+  );
+  if (isDuplicate && usernameInput.value !== "") {
+    usernameInput.setCustomValidity("Invalid");
+  } else {
+    usernameInput.setCustomValidity("");
+  }
+});
+
+for (let i = 0; i < localStorage.length; i++) {
+  console.log(localStorage.getItem("allUsers"));
+}
+
+const signupForm = document.querySelector("#signupForm");
+
+signupForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!signupForm.checkValidity()) {
+    signupForm.reportValidity();
+    return;
+  }
+  const allUsers = JSON.parse(localStorage.getItem("allUsers") || "[]");
+  const formData = new FormData(signupForm);
+  const newUser = Object.fromEntries(formData.entries());
+  allUsers.push(newUser);
+  localStorage.setItem("allUsers", JSON.stringify(allUsers));
+  console.log("Användare sparad!", newUser);
+  window.location.href = "./minsida";
 });
