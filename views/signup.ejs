@@ -35,7 +35,7 @@
             Personlig information
           </h2>
 
-          <form class="grid grid-cols-1 gap-[0.2rem] w-full">
+          <form class="grid grid-cols-1 gap-[0.2rem] w-full"> novalidate>
             <label class="text-[0.7rem]" for="fname">Förnamn*</label>
             <input
               class="peer/fname w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none focus:invalid:not-placeholder-shown:border-[#FA453E]"
@@ -83,7 +83,7 @@
               required
             />
             <h6
-              class="hidden peer-focus/email:peer-invalid/email:peer-not-placeholder-shown/email:block text-[#FA453E] text-[0.7rem] -mt-8"
+              class="emailWarning hidden peer-focus/email:peer-invalid/email:peer-not-placeholder-shown/email:block text-[#FA453E] text-[0.7rem] -mt-8"
             >
               Måste vara i formatet "exempel@mail.com"
             </h6>
@@ -102,7 +102,7 @@
               required
             />
             <h6
-              class="hidden peer-focus/username:peer-invalid/username:peer-not-placeholder-shown/username:block text-[#FA453E] text-[0.7rem] -mt-8"
+              class="userNameWarning hidden peer-focus/username:peer-invalid/username:peer-not-placeholder-shown/username:block text-[#FA453E] text-[0.7rem] -mt-8"
             >
               Användarnamnet är upptaget.
             </h6>
