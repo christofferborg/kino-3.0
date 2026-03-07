@@ -26,16 +26,12 @@
 
       <section class="mx-auto bg-bakgrund mt-6 max-w-md">
         <div class="mx-6">
-          <h1 class="text-center pt-12 mb-16 text-2xl text-brand-text font-bold">
-            Logga in
-          </h1>
-
-          <h2 class="text-[0.9rem] mb-[1rem] text-brand-text font-bold">
-            Inloggning
-          </h2>
+           <h1 class="text-center pt-12 mb-16 text-2xl text-brand-text font-bold"> 
+            Logga in 
+           </h1>
 
           <form id="loginForm" class="grid grid-cols-1 gap-[0.2rem] w-full">
-            <label class="text-[0.7rem]" for="username">Användarnamn*</label>
+            <label class="block text-[0.7rem]" for="username">Användarnamn*</label>
             <input
               class="w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none"
               type="text"
@@ -46,8 +42,13 @@
               required
             />
 
-            <label class="block text-[0.7rem] mb-2" for="password">Lösenord*</label>
-            <div class="relative w-full mb-8">
+             <p id="usernameError" class="text-[#FA453E] text-[0.7rem] hidden -mt-6 mb-4">
+                 Fältet kan inte vara tomt.
+             </p>
+   
+
+            <label class="block text-[0.7rem]" for="password">Lösenord*</label>
+            <div class="relative w-full mb-2">
               <input
                 type="password"
                 id="password"
@@ -58,6 +59,10 @@
                 class="w-full h-10 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text-pri caret-brand-text-pri px-4 pr-12 placeholder:text-[0.7rem] focus:outline-none autofill:shadow-[inset_0_0_0_1000px_#080B10] autofill:[-webkit-text-fill-color:#F5F7FA!]"
               />
 
+                <p id="passwordError" class="text-[#FA453E] text-[0.7rem] hidden -mt-6 mb-4">
+                   Fältet kan inte vara tomt.
+                </p>
+               
               <!-- Valfritt: visa/dölj lösenord (samma upplägg som signup om ni vill) -->
               <button
                 type="button"
@@ -84,13 +89,21 @@
             />
           </form>
 
-          <a
-            href="/signup"
-            class="block text-[#9f9fa3] underline text-center my-8 text-[0.75rem] pb-10"
-          >
-            Bli medlem
-          </a>
-        </div>
+          <input
+            type="button"
+            value="Bli medlem"
+             onclick="location.href='/signup'"
+             class="mt-4 bg-bakgrund text-brand-text font-subheader font-bold text-[0.7rem] h-10 w-full border border-gray-400 rounded-[10px] cursor-pointer transition-colors"
+          />
+            </div>
+
+            <a
+              href="/"
+              class="block text-[#9f9fa3] underline text-center my-8 text-[0.75rem] pb-10"
+              >
+              Fortsätt som gäst
+            </a>
+
       </section>
     </main>
 
