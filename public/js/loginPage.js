@@ -15,6 +15,17 @@ window.addEventListener("DOMContentLoaded", () => {
     !passwordError
   ) return;
 
+  const togglePassword = document.getElementById("togglePassword");
+  const eyeIcon = document.getElementById("eyeIcon");
+
+  togglePassword.addEventListener("click", () => {
+  const isPassword = passwordInput.getAttribute("type") === "password";
+
+  passwordInput.setAttribute("type", isPassword ? "text" : "password");
+
+  eyeIcon.src = isPassword ? "./img/hide.png" : "./img/view.png";
+});
+
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
