@@ -47,21 +47,28 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    const matchedUser = users.find(
-      (user) => user.username === username && user.password === password
+        const matchedUser = users.find(
+      (user) => user.username.toLowerCase() === username.toLowerCase()
     );
 
-    if (matchedUser) {
-      localStorage.setItem("currentUser", JSON.stringify(matchedUser));
-      loginMessage.textContent = "Inloggningen lyckades!";
-      loginMessage.style.color = "green";
-
-      setTimeout(() => {
-        window.location.href = "/profile";
-      }, 800);
-    } else {
-      loginMessage.textContent = "Fel användarnamn eller lösenord.";
-      loginMessage.style.color = "red";
+    if (!matchedUser) {
+      usernameError.textContent = "Användarnamnet finns ej.";
+      usernameError.classList.remove("hidden");
+      usernameInput.classList.add("border-[#FA453E]");
+      return;
     }
-  });
+
+    if (matchedUser.password !== password) {
+      passwordError.textContent = "Lösenordet stämmer ej.";
+      passwordError.classList.remove("hidden");
+      passwordInput.classList.add("border-[#FA453E]");
+      return;
+    }
+
+    localStorage.setItem("currentUser", JSON.stringify(matchedUser));
+
+    setTimeout(() => {
+      window.location.href = "/profile";
+    }, 800);
+    });
 });

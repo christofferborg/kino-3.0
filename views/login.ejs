@@ -33,16 +33,15 @@
           <form id="loginForm" class="grid grid-cols-1 gap-[0.2rem] w-full">
             <label class="block text-[0.7rem]" for="username">Användarnamn*</label>
             <input
-              class="w-full h-10 mb-8 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none"
+              class="w-full h-10 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none"
               type="text"
               id="username"
               name="username"
               placeholder="Användarnamn"
               autocomplete="username"
-              required
             />
 
-             <p id="usernameError" class="text-[#FA453E] text-[0.7rem] hidden -mt-6 mb-4">
+             <p id="usernameError" class="text-[#FA453E] text-[0.7rem] font-semibold hidden -mt-6 mb-4">
                  Fältet kan inte vara tomt.
              </p>
    
@@ -55,15 +54,15 @@
                 name="password"
                 placeholder="Lösenord"
                 autocomplete="current-password"
-                required
                 class="w-full h-10 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text-pri caret-brand-text-pri px-4 pr-12 placeholder:text-[0.7rem] focus:outline-none autofill:shadow-[inset_0_0_0_1000px_#080B10] autofill:[-webkit-text-fill-color:#F5F7FA!]"
               />
 
-                <p id="passwordError" class="text-[#FA453E] text-[0.7rem] hidden -mt-6 mb-4">
+                <p id="passwordError" class="text-[#FA453E] text-[0.7rem] font-semibold hidden -mt-6 mb-4">
                    Fältet kan inte vara tomt.
                 </p>
                
-              <!-- Valfritt: visa/dölj lösenord (samma upplägg som signup om ni vill) -->
+                <p id="loginMessage" class="hidden"></p>
+
               <button
                 type="button"
                 id="togglePassword"
@@ -78,9 +77,6 @@
                 />
               </button>
             </div>
-
-            <!-- Här visas lyckad/misslyckad -->
-            <p id="loginMessage" class="text-center text-[0.75rem] -mt-4 mb-6"></p>
 
             <input
               type="submit"
@@ -107,7 +103,7 @@
       </section>
     </main>
 
-    <!-- Samma scripts-upplägg som signup -->
+
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/loginPage.js"></script>
   </body>
