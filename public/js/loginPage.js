@@ -78,8 +78,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("currentUser", JSON.stringify(matchedUser));
 
+     const popup = document.getElementById("loginSuccessPopup");
+     popup.classList.remove("hidden");
+
     setTimeout(() => {
       window.location.href = "/profile";
-    }, 800);
+    }, 1500);
+
     });
 });

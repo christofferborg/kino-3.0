@@ -19,6 +19,31 @@
     <title>Logga in</title>
   </head>
 
+  <div id="loginSuccessPopup" class="hidden fixed inset-0 z-[9999] bg-black/40">
+
+  <div
+    style="
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #10141C;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      z-index: 99999;
+      text-align: center;
+    "
+  >
+    <img
+      src="/img/login-success.png"
+      alt="Du loggas in"
+      style="width: 260px;"
+    />
+  </div>
+
+</div>
+
   <body>
     <main class="font-brand">
       <div class="header-container"><%- include('partials/header') %></div>
@@ -99,7 +124,7 @@
               >
               Fortsätt som gäst
             </a>
-
+   
       </section>
     </main>
 
