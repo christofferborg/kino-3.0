@@ -246,6 +246,9 @@
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
   }
@@ -513,6 +516,24 @@
     &:is(:where(.peer\/email):focus ~ *) {
       &:is(:where(.peer\/email):invalid ~ *) {
         &:is(:where(.peer\/email):not(*:placeholder-shown) ~ *) {
+          display: block;
+        }
+      }
+    }
+  }
+  .peer-focus\/email\:peer-invalid\/username\:peer-not-placeholder-shown\/email\:block {
+    &:is(:where(.peer\/email):focus ~ *) {
+      &:is(:where(.peer\/username):invalid ~ *) {
+        &:is(:where(.peer\/email):not(*:placeholder-shown) ~ *) {
+          display: block;
+        }
+      }
+    }
+  }
+  .peer-focus\/email\:peer-invalid\/username\:peer-not-placeholder-shown\/username\:block {
+    &:is(:where(.peer\/email):focus ~ *) {
+      &:is(:where(.peer\/username):invalid ~ *) {
+        &:is(:where(.peer\/username):not(*:placeholder-shown) ~ *) {
           display: block;
         }
       }
