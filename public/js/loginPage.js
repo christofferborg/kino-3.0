@@ -56,9 +56,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     if (hasError) return;
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const allUsers = JSON.parse(localStorage.getItem("allUsers") || "[]");
 
-        const matchedUser = users.find(
+        const matchedUser = allUsers.find(
       (user) => user.username.toLowerCase() === username.toLowerCase()
     );
 
