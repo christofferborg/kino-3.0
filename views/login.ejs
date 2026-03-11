@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/tailwind-member.css" />
+    <title>Logga in</title>
+  </head>
+
+  <div id="loginSuccessPopup" class="hidden fixed inset-0 z-[9999] bg-black/40">
+
+  <div
+    style="
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #10141C;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      z-index: 99999;
+      text-align: center;
+    "
+  >
+    <img
+      src="/img/login-success.png"
+      alt="Du loggas in"
+      style="width: 260px;"
+    />
+  </div>
+
+</div>
+
+  <body>
+    <main class="font-brand">
+      <div class="header-container"><%- include('partials/header') %></div>
+      <nav class="nav-bar"></nav>
+
+      <section class="mx-auto bg-bakgrund mt-6 max-w-md">
+        <div class="mx-6">
+           <h1 class="text-center pt-12 mb-16 text-2xl text-brand-text font-bold"> 
+            Logga in 
+           </h1>
+
+          <form id="loginForm" class="grid grid-cols-1 gap-[0.2rem] w-full">
+            <label class="block text-[0.7rem]" for="username">Användarnamn*</label>
+            <input
+              class="w-full h-10 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text caret-brand-text px-4 placeholder:text-[0.7rem] focus:outline-none"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Användarnamn"
+              autocomplete="username"
+            />
+
+             <p id="usernameError" class="text-[#FA453E] text-[0.7rem] font-semibold hidden -mt-6 mb-4">
+                 Fältet kan inte vara tomt.
+             </p>
+   
+
+            <label class="block text-[0.7rem] mt-6 " for="password">Lösenord*</label>
+            <div class="relative w-full mb-2">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Lösenord"
+                autocomplete="current-password"
+                class="w-full h-10 bg-brand-bg rounded-[6px] border border-gray-400 text-brand-text-pri caret-brand-text-pri px-4 pr-12 placeholder:text-[0.7rem] focus:outline-none autofill:shadow-[inset_0_0_0_1000px_#080B10] autofill:[-webkit-text-fill-color:#F5F7FA!]"
+              />
+
+                <p id="passwordError" class="text-[#FA453E] text-[0.7rem] font-semibold hidden -mt-6 mb-4">
+                   Fältet kan inte vara tomt.
+                </p>
+               
+                <p id="loginMessage" class="hidden"></p>
+
+              <button
+                type="button"
+                id="togglePassword"
+                class="absolute right-4 top-5 -translate-y-1/2 cursor-pointer focus:outline-none"
+                aria-label="Visa/Dölj lösenord"
+              >
+                <img
+                  src="./img/view.png"
+                  alt="Visa lösenord"
+                  id="eyeIcon"
+                  class="w-5 h-5 object-contain invert"
+                />
+              </button>
+            </div>
+
+            <input
+              type="submit"
+              value="Logga in"
+              class="mt-6 bg-brand-orange text-brand-bg font-subheader font-bold text-[0.7rem] h-10 w-full border border-brand-bg rounded-[10px] cursor-pointer hover:bg-brand-orange-hover transition-colors"
+            />
+          </form>
+
+          <input
+            type="button"
+            value="Bli medlem"
+             onclick="location.href='/signup'"
+             class="mt-4 bg-bakgrund text-brand-text font-subheader font-bold text-[0.7rem] h-10 w-full border border-gray-400 rounded-[10px] cursor-pointer transition-colors"
+          />
+            </div>
+
+            <a
+              href="/"
+              class="block text-[#9f9fa3] underline text-center my-8 text-[0.75rem] pb-10"
+              >
+              Fortsätt som gäst
+            </a>
+   
+      </section>
+    </main>
+
+
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/loginPage.js"></script>
+  </body>
+</html>
