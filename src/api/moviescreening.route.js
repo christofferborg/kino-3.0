@@ -11,7 +11,7 @@ router.get("/movies/:movieId/screenings", async (req, res, next) => {
 
     const screenings = cmsResult.data;
 
-    const now = new Date();
+    const now = new Date("2025-03-16T00:00:00");
 
     const upcoming = screenings
       .filter(s => s.attributes?.movie?.data?.id === movieId)
