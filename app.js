@@ -16,13 +16,17 @@ app.use(express.json());
 app.use(movieRating);
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-app.use("/api/auth", authRouter);  
+app.use("/api/auth", authRouter);
 app.use("/api/reviews", reviewRouter);
 app.use("/api", popularMoviesRouter);
 app.use("/api", movieScreeningsRouter);
 app.use("/", viewReviewsRouter);
 
-
+//DET SOM LADES TILL
+app.get("/profile", (req, res) => {
+  res.render("profile");
+});
+//DET SOM LADES TILL
 
 app.get("/", async (req, res) => {
   try {
@@ -201,7 +205,6 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
-
 app.get("/skriv-recension", (req, res) => {
   res.render("reviews");
 });
@@ -209,9 +212,7 @@ app.get("/reviews", (req, res) => {
   res.render("reviews"); // renderar views/reviews.ejs
 });
 
-
 //import reviewsRouter from "./src/api/reviews-api.js";
-
 
 // Koppla backend
 
