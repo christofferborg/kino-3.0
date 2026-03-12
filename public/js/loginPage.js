@@ -1,3 +1,13 @@
+//det som jag la till
+if (window.location.pathname === "/login") {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (currentUser) {
+    window.location.href = "/profile";
+  }
+}
+//end
+
 window.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");
   const loginMessage = document.getElementById("loginMessage");
@@ -13,18 +23,19 @@ window.addEventListener("DOMContentLoaded", () => {
     !passwordInput ||
     !usernameError ||
     !passwordError
-  ) return;
+  )
+    return;
 
   const togglePassword = document.getElementById("togglePassword");
   const eyeIcon = document.getElementById("eyeIcon");
 
   togglePassword.addEventListener("click", () => {
-  const isPassword = passwordInput.getAttribute("type") === "password";
+    const isPassword = passwordInput.getAttribute("type") === "password";
 
-  passwordInput.setAttribute("type", isPassword ? "text" : "password");
+    passwordInput.setAttribute("type", isPassword ? "text" : "password");
 
-  eyeIcon.src = isPassword ? "./img/hide.png" : "./img/view.png";
-});
+    eyeIcon.src = isPassword ? "./img/hide.png" : "./img/view.png";
+  });
 
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -58,8 +69,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const allUsers = JSON.parse(localStorage.getItem("allUsers") || "[]");
 
-        const matchedUser = allUsers.find(
-      (user) => user.username.toLowerCase() === username.toLowerCase()
+    const matchedUser = allUsers.find(
+      (user) => user.username.toLowerCase() === username.toLowerCase(),
     );
 
     if (!matchedUser) {
@@ -78,12 +89,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("currentUser", JSON.stringify(matchedUser));
 
-     const popup = document.getElementById("loginSuccessPopup");
-     popup.classList.remove("hidden");
+    const popup = document.getElementById("loginSuccessPopup");
+    popup.classList.remove("hidden");
 
     setTimeout(() => {
       window.location.href = "/profile";
     }, 1500);
-
-    });
+  });
 });
