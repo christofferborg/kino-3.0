@@ -22,12 +22,6 @@ app.use("/api", popularMoviesRouter);
 app.use("/api", movieScreeningsRouter);
 app.use("/", viewReviewsRouter);
 
-//DET SOM LADES TILL
-app.get("/profile", (req, res) => {
-  res.render("profile");
-});
-//DET SOM LADES TILL
-
 app.get("/", async (req, res) => {
   try {
     const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=sv-SE`;
@@ -203,6 +197,10 @@ app.get("/richards-filmer/:id", async (req, res) => {
 
 app.get("/login", (req, res) => {
   res.render("login");
+});
+
+app.get("/profile", (req, res) => {
+  res.render("profile");
 });
 
 app.get("/skriv-recension", (req, res) => {

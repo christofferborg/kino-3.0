@@ -1,4 +1,3 @@
-//det som jag la till
 if (window.location.pathname === "/login") {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -6,7 +5,6 @@ if (window.location.pathname === "/login") {
     window.location.href = "/profile";
   }
 }
-//end
 
 window.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");

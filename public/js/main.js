@@ -2,9 +2,7 @@ import { initCarousel } from "./Features/carousel.js";
 import { getRatingFromBackend } from "./Features/rating.js";
 import { initStartpageScreenings } from "./Features/startpageScreenings.js";
 import "./login.js";
-//det som lades till
 import "./authNavbar.js";
-//det som lades till
 
 getRatingFromBackend();
 initStartpageScreenings();
