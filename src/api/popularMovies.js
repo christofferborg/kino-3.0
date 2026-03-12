@@ -2,7 +2,7 @@ import express from "express";
 import { getReviewsByMovieId } from "../cms/cms.client.js";
 
 const router = express.Router();
-const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30;
+const THIRTY_DAYS = 1000 * 60 * 60 * 24 * 30 *10;
 
 router.get("/popularMovies", async (req, res) => {
   try {
