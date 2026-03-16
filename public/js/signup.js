@@ -62,5 +62,5 @@ signupForm.addEventListener("submit", (event) => {
   allUsers.push(newUser);
   localStorage.setItem("allUsers", JSON.stringify(allUsers));
   console.log("Användare sparad!", newUser);
-  window.location.href = "./minsida";
+  window.location.href = "./login";
 });
